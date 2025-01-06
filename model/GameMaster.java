@@ -1,12 +1,12 @@
 package model;
 
-import java.util.LinkedList;
+import util.CircularLinkedList;
 
 public class GameMaster
 {
     private Player currentPlayer;
     private Board board;
-    private LinkedList<Player> players; // TODO: Use CircularLinkedList laterrr
+    private CircularLinkedList<Player> players;
 
     public void movePiece(Cell fromCell, Cell toCell, Player player)
     {
