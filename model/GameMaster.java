@@ -22,11 +22,11 @@ public class GameMaster
 
     public Player getCurrentPlayer()
     {
-        throw new UnsupportedOperationException();
+        return this.currentPlayer;
     }
 
     public void advanceTurn()
     {
-        throw new UnsupportedOperationException();
+        this.currentPlayer = this.players.iterator().next();
     }
 }
