@@ -4,13 +4,13 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Optional;
 
-public class Board
+public abstract class Board
 {
     private ArrayList<ArrayList<Cell>> cells;
 
     public Board()
     {
-        this.cells = new ArrayList<ArrayList<Cell>>();
+        this.cells = this.populateCells();
     }
 
     public Optional<Piece> getPieceAt(CellPosition cellPos)
@@ -42,4 +42,8 @@ public class Board
     {
         throw new UnsupportedOperationException();
     }
+
+    protected abstract ArrayList<ArrayList<Cell>> populateCells();
+
+    protected abstract ArrayList<ArrayList<Cell>> populateCells();
 }
