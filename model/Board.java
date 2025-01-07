@@ -21,10 +21,10 @@ public abstract class Board
 
     public void movePiece(CellPosition fromPos, CellPosition toPos)
     {
-        Cell fromCell = this.cells.get(fromPos.row()).get(fromPos.column());
+        Cell fromCell = this.getCell(fromPos);
         Piece piece = fromCell.getPiece().orElseThrow();
-        fromCell.setPiece(null);
-        Cell toCell = this.cells.get(toPos.row()).get(toPos.column());
+        this.removePiece(fromPos);
+        Cell toCell = this.getCell(toPos);
         toCell.setPiece(piece);
     }
 
