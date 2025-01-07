@@ -30,7 +30,7 @@ public abstract class Board
 
     public void removePiece(CellPosition cellPos)
     {
-        Cell cell = this.cells.get(cellPos.row()).get(cellPos.column());
+        Cell cell = this.getCell(cellPos);
         cell.setPiece(null);
     }
 
