@@ -36,7 +36,7 @@ public abstract class Board
 
     public boolean isCellOccupied(CellPosition cellPos)
     {
-        throw new UnsupportedOperationException();
+        return this.getPieceAt(cellPos).isPresent();
     }
 
     public boolean isPathObstructed(LinkedList<CellPosition> path)
@@ -46,7 +46,8 @@ public abstract class Board
 
     public boolean hasEnemyPieceAt(CellPosition cellPos, Player player)
     {
-        throw new UnsupportedOperationException();
+        Optional<Piece> piece = this.getPieceAt(cellPos);
+        return piece.isPresent() && piece.get().getOwner() != player;
     }
 
     protected abstract ArrayList<ArrayList<Cell>> populateCells();
