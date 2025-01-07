@@ -35,7 +35,8 @@ public class GameMaster
         LinkedList<CellPosition> path = piece.getPotentialPath(toCellPos)
                 .orElseThrow(PieceMoveException::new);
 
-        if (!piece.canJump() && this.board.isPathObstructed(path))
+        if (!piece.canJump() && (this.board.isPathObstructed(path)
+                || !this.board.isCellOccupied(path.getLast())))
         {
             throw new PieceMoveException();
         }
