@@ -15,7 +15,8 @@ public abstract class Board
 
     public Optional<Piece> getPieceAt(CellPosition cellPos)
     {
-        throw new UnsupportedOperationException();
+        Cell cell = this.cells.get(cellPos.row()).get(cellPos.column());
+        return cell.getPiece();
     }
 
     public void movePiece(CellPosition fromPos, CellPosition toPos)
@@ -42,8 +43,6 @@ public abstract class Board
     {
         throw new UnsupportedOperationException();
     }
-
-    protected abstract ArrayList<ArrayList<Cell>> populateCells();
 
     protected abstract ArrayList<ArrayList<Cell>> populateCells();
 }
