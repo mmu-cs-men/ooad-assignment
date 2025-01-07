@@ -22,7 +22,14 @@ public abstract class Board
     public void movePiece(CellPosition fromPos, CellPosition toPos)
     {
         Cell fromCell = this.getCell(fromPos);
-        Piece piece = fromCell.getPiece().orElseThrow();
+        Optional<Piece> pieceOptional = fromCell.getPiece();
+        if (pieceOptional.isEmpty())
+        {
+            throw new IllegalStateException(
+                    "Attempted to call movePiece with an empty cell.");
+        }
+        Piece piece = pieceOptional.get();
+
         this.removePiece(fromPos);
         Cell toCell = this.getCell(toPos);
         toCell.setPiece(piece);
@@ -61,6 +68,19 @@ public abstract class Board
 
     private Cell getCell(CellPosition cellPos)
     {
+        if (!isCellWithinBounds(cellPos))
+        {
+            throw new IllegalArgumentException(
+                    "Attempted to call getCell with out-of-bounds cell position.");
+        }
         return this.cells.get(cellPos.row()).get(cellPos.column());
+    }
+
+    private boolean isCellWithinBounds(CellPosition pos)
+    {
+        int row = pos.row();
+        int col = pos.column();
+        return row >= 0 && row < this.cells.size() && col >= 0
+                && col < this.cells.get(row).size();
     }
 }
