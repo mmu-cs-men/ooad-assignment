@@ -13,9 +13,8 @@ public class CircularLinkedList<T> extends LinkedList<T>
         {
             throw new IndexOutOfBoundsException("List is empty");
         }
-        int size = size();
-        int modIndex = ((index % size) + size) % size;
-        return super.get(modIndex);
+
+        return super.get(index % size());
     }
 
     @Override
