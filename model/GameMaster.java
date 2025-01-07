@@ -32,7 +32,8 @@ public class GameMaster
             throw new NotYourPieceException();
         }
 
-        LinkedList<CellPosition> path = piece.getPotentialPath(toCellPos)
+        LinkedList<CellPosition> path = piece
+                .getPotentialPath(fromCellPos, toCellPos)
                 .orElseThrow(PieceMoveException::new);
 
         if (!piece.canJump() && (this.board.isPathObstructed(path)

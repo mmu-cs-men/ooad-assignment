@@ -23,5 +23,5 @@ public abstract class Piece
     public abstract boolean canJump();
 
     public abstract Optional<LinkedList<CellPosition>> getPotentialPath(
-            CellPosition toCellPos);
+            CellPosition fromCellPos, CellPosition toCellPos);
 }
