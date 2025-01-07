@@ -41,7 +41,14 @@ public abstract class Board
 
     public boolean isPathObstructed(LinkedList<CellPosition> path)
     {
-        throw new UnsupportedOperationException();
+        for (CellPosition cellPos : path)
+        {
+            if (this.isCellOccupied(cellPos))
+            {
+                return true;
+            }
+        }
+        return false;
     }
 
     public boolean hasEnemyPieceAt(CellPosition cellPos, Player player)
