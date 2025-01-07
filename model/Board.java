@@ -50,4 +50,9 @@ public abstract class Board
     }
 
     protected abstract ArrayList<ArrayList<Cell>> populateCells();
+
+    private Cell getCell(CellPosition cellPos)
+    {
+        return this.cells.get(cellPos.row()).get(cellPos.column());
+    }
 }
