@@ -2,6 +2,7 @@ package model;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.Optional;
 
 public class Board
 {
@@ -12,7 +13,7 @@ public class Board
         this.cells = new ArrayList<ArrayList<Cell>>();
     }
 
-    public Piece getPieceAt(CellPosition cellPos)
+    public Optional<Piece> getPieceAt(CellPosition cellPos)
     {
         throw new UnsupportedOperationException();
     }

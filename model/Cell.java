@@ -1,5 +1,7 @@
 package model;
 
+import java.util.Optional;
+
 public class Cell
 {
     private Piece piece = null;
@@ -14,9 +16,9 @@ public class Cell
         this.piece = piece;
     }
 
-    public Piece getPiece()
+    public Optional<Piece> getPiece()
     {
-        return piece;
+        return Optional.ofNullable(piece);
     }
 
     public void setPiece(Piece piece)

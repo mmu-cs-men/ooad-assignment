@@ -1,6 +1,7 @@
 package model;
 
 import java.util.LinkedList;
+import java.util.Optional;
 
 public abstract class Piece
 {
@@ -18,6 +19,6 @@ public abstract class Piece
 
     public abstract boolean canJump();
 
-    public abstract LinkedList<CellPosition> getPotentialPath(
+    public abstract Optional<LinkedList<CellPosition>> getPotentialPath(
             CellPosition toCellPos);
 }
