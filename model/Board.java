@@ -21,7 +21,11 @@ public abstract class Board
 
     public void movePiece(CellPosition fromPos, CellPosition toPos)
     {
-        throw new UnsupportedOperationException();
+        Cell fromCell = this.cells.get(fromPos.row()).get(fromPos.column());
+        Piece piece = fromCell.getPiece().orElseThrow();
+        fromCell.setPiece(null);
+        Cell toCell = this.cells.get(toPos.row()).get(toPos.column());
+        toCell.setPiece(piece);
     }
 
     public void removePiece(CellPosition cellPos)
