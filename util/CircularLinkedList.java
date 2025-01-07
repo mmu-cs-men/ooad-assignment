@@ -4,10 +4,10 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.NoSuchElementException;
 
-public class CircularLinkedList<E> extends LinkedList<E>
+public class CircularLinkedList<T> extends LinkedList<T>
 {
     @Override
-    public E get(int index)
+    public T get(int index)
     {
         if (isEmpty())
         {
@@ -19,12 +19,12 @@ public class CircularLinkedList<E> extends LinkedList<E>
     }
 
     @Override
-    public Iterator<E> iterator()
+    public Iterator<T> iterator()
     {
         return new CircularIterator();
     }
 
-    private class CircularIterator implements Iterator<E>
+    private class CircularIterator implements Iterator<T>
     {
         private int currentIndex = 0;
 
@@ -35,13 +35,13 @@ public class CircularLinkedList<E> extends LinkedList<E>
         }
 
         @Override
-        public E next()
+        public T next()
         {
             if (isEmpty())
             {
                 throw new NoSuchElementException();
             }
-            E element = get(currentIndex);
+            T element = get(currentIndex);
             currentIndex = (currentIndex + 1) % size();
             return element;
         }
