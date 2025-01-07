@@ -1,8 +1,6 @@
 package model;
 
-import java.awt.Color;
-
-public record Player(Color color)
+public record Player(String id)
 {
 
 }
