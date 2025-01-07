@@ -15,7 +15,7 @@ public class GameMaster
         this.currentPlayer = players.getFirst();
     }
 
-    public void movePiece(CellPosition fromCell, CellPosition toCell,
+    public void movePiece(CellPosition fromCellPos, CellPosition toCellPos,
             Player player)
     {
         throw new UnsupportedOperationException();
