@@ -2,6 +2,8 @@ package model;
 
 import java.util.Optional;
 
+import model.pieces.Piece;
+
 public class Cell
 {
     private Piece piece = null;

@@ -2,9 +2,11 @@ package model;
 
 import java.util.LinkedList;
 
+import model.boards.Board;
 import model.exceptions.NoPieceException;
 import model.exceptions.NotYourPieceException;
 import model.exceptions.PieceMoveException;
+import model.pieces.Piece;
 import util.CircularLinkedList;
 
 public class GameMaster

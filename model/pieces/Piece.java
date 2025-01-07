@@ -1,7 +1,10 @@
-package model;
+package model.pieces;
 
 import java.util.LinkedList;
 import java.util.Optional;
+
+import model.CellPosition;
+import model.Player;
 
 public abstract class Piece
 {

@@ -1,10 +1,14 @@
-package model;
+package model.boards;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Optional;
 
+import model.Cell;
+import model.CellPosition;
+import model.Player;
 import model.exceptions.PieceMoveException;
+import model.pieces.Piece;
 
 public abstract class Board
 {
