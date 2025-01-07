@@ -1,5 +1,10 @@
 package model;
 
+import java.util.LinkedList;
+
+import model.exceptions.NoPieceException;
+import model.exceptions.NotYourPieceException;
+import model.exceptions.PieceMoveException;
 import util.CircularLinkedList;
 
 public class GameMaster
@@ -17,7 +22,23 @@ public class GameMaster
 
     public void movePiece(CellPosition fromCellPos, CellPosition toCellPos)
     {
-        throw new UnsupportedOperationException();
+        Piece piece = this.board.getPieceAt(fromCellPos)
+                .orElseThrow(NoPieceException::new);
+
+        if (piece.getOwner() != this.currentPlayer)
+        {
+            throw new NotYourPieceException();
+        }
+
+        LinkedList<CellPosition> path = piece.getPotentialPath(toCellPos)
+                .orElseThrow(PieceMoveException::new);
+
+        if (!piece.canJump() && this.board.isPathObstructed(path))
+        {
+            throw new PieceMoveException();
+        }
+
+        this.board.movePiece(fromCellPos, toCellPos);
     }
 
     public Player getCurrentPlayer()
