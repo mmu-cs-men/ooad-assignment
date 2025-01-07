@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Optional;
 
+import model.exceptions.PieceMoveException;
+
 public abstract class Board
 {
     private ArrayList<ArrayList<Cell>> cells;
@@ -22,14 +24,7 @@ public abstract class Board
     public void movePiece(CellPosition fromPos, CellPosition toPos)
     {
         Cell fromCell = this.getCell(fromPos);
-        Optional<Piece> pieceOptional = fromCell.getPiece();
-        if (pieceOptional.isEmpty())
-        {
-            throw new IllegalStateException(
-                    "Attempted to call movePiece with an empty cell.");
-        }
-        Piece piece = pieceOptional.get();
-
+        Piece piece = fromCell.getPiece().orElseThrow(PieceMoveException::new);
         this.removePiece(fromPos);
         Cell toCell = this.getCell(toPos);
         toCell.setPiece(piece);
