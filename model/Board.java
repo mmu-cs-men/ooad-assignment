@@ -12,32 +12,32 @@ public class Board
         grid = new ArrayList<ArrayList<Cell>>();
     }
 
-    public Piece getPieceAt(Cell cell)
+    public Piece getPieceAt(CellPosition cell)
     {
         throw new UnsupportedOperationException();
     }
 
-    public void movePiece(Cell fromCell, Cell toCell)
+    public void movePiece(CellPosition fromCell, Cell toCell)
     {
         throw new UnsupportedOperationException();
     }
 
-    public void removePiece(Cell cell)
+    public void removePiece(CellPosition cell)
     {
         throw new UnsupportedOperationException();
     }
 
-    public boolean isCellOccupied(Cell cell)
+    public boolean isCellOccupied(CellPosition cell)
     {
         throw new UnsupportedOperationException();
     }
 
-    public boolean isPathObstructed(LinkedList<Cell> path)
+    public boolean isPathObstructed(LinkedList<CellPosition> path)
     {
         throw new UnsupportedOperationException();
     }
 
-    public boolean hasEnemyPieceAt(Cell cell, Player player)
+    public boolean hasEnemyPieceAt(CellPosition cell, Player player)
     {
         throw new UnsupportedOperationException();
     }

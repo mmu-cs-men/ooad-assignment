@@ -16,9 +16,10 @@ public abstract class Piece
         return owner;
     }
 
-    public abstract boolean canMoveTo(Cell toCell, Board board);
+    public abstract boolean canMoveTo(CellPosition toCell, Board board);
 
     public abstract boolean canJump();
 
-    public abstract LinkedList<Cell> getPotentialPath(Cell toCell);
+    public abstract LinkedList<CellPosition> getPotentialPath(
+            CellPosition toCell);
 }
