@@ -4,7 +4,7 @@ import java.util.LinkedList;
 
 public abstract class Piece
 {
-    private Player owner;
+    private final Player owner;
 
     public Piece(Player owner)
     {

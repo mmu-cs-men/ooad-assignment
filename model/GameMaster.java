@@ -5,8 +5,8 @@ import util.CircularLinkedList;
 public class GameMaster
 {
     private Player currentPlayer;
-    private Board board;
-    private CircularLinkedList<Player> players;
+    private final Board board;
+    private final CircularLinkedList<Player> players;
 
     public GameMaster(Board board, CircularLinkedList<Player> players)
     {
