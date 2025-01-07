@@ -9,7 +9,7 @@ public class Board
 
     public Board()
     {
-        cells = new ArrayList<ArrayList<Cell>>();
+        this.cells = new ArrayList<ArrayList<Cell>>();
     }
 
     public Piece getPieceAt(CellPosition cellPos)
