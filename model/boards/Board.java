@@ -21,7 +21,7 @@ public abstract class Board
 
     public Optional<Piece> getPieceAt(CellPosition cellPos)
     {
-        Cell cell = this.cells.get(cellPos.row()).get(cellPos.column());
+        Cell cell = this.getCell(cellPos);
         return cell.getPiece();
     }
 
