@@ -30,7 +30,8 @@ public abstract class Board
 
     public void removePiece(CellPosition cellPos)
     {
-        throw new UnsupportedOperationException();
+        Cell cell = this.cells.get(cellPos.row()).get(cellPos.column());
+        cell.setPiece(null);
     }
 
     public boolean isCellOccupied(CellPosition cellPos)
