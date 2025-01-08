@@ -9,6 +9,7 @@ import model.Player;
 public abstract class Piece
 {
     private final Player owner;
+    private boolean keyPiece;
 
     public Piece(Player owner)
     {
@@ -18,6 +19,16 @@ public abstract class Piece
     public Player getOwner()
     {
         return owner;
+    }
+
+    public boolean isKeyPiece()
+    {
+        return keyPiece;
+    }
+
+    public void setKeyPiece(boolean keyPiece)
+    {
+        this.keyPiece = keyPiece;
     }
 
     public abstract boolean canJump();
