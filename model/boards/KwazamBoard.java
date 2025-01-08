@@ -6,6 +6,7 @@ import java.util.List;
 import model.Cell;
 import model.Player;
 import model.pieces.Biz;
+import model.pieces.Piece;
 import model.pieces.Ram;
 import model.pieces.Sau;
 import model.pieces.Tor;
@@ -34,7 +35,11 @@ public class KwazamBoard extends Board
 
         cells.get(0).get(0).setPiece(new Tor(players.get(0)));
         cells.get(0).get(1).setPiece(new Biz(players.get(0)));
-        cells.get(0).get(2).setPiece(new Sau(players.get(0)));
+
+        Piece redSau = new Sau(players.get(0));
+        redSau.setCriticalPiece(true);
+        cells.get(0).get(2).setPiece(redSau);
+
         cells.get(0).get(3).setPiece(new Biz(players.get(0)));
         cells.get(0).get(4).setPiece(new Xor(players.get(0)));
         for (int column = 0; column < getBoardColumns(); column++)
@@ -48,7 +53,11 @@ public class KwazamBoard extends Board
         }
         cells.get(7).get(0).setPiece(new Xor(players.get(1)));
         cells.get(7).get(1).setPiece(new Biz(players.get(1)));
-        cells.get(7).get(2).setPiece(new Sau(players.get(1)));
+
+        Piece blueSau = new Sau(players.get(1));
+        blueSau.setCriticalPiece(true);
+        cells.get(0).get(2).setPiece(blueSau);
+
         cells.get(7).get(3).setPiece(new Biz(players.get(1)));
         cells.get(7).get(4).setPiece(new Tor(players.get(1)));
 
