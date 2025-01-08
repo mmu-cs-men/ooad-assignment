@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Optional;
 
 import model.BoardVerticalEdgeListener;
+import model.CaptureListener;
 import model.Cell;
 import model.CellPosition;
 import model.Player;
@@ -16,6 +17,7 @@ public abstract class Board
 {
     private ArrayList<ArrayList<Cell>> cells;
     private ArrayList<BoardVerticalEdgeListener> verticalEdgeListeners;
+    private ArrayList<CaptureListener> captureListeners;
     protected List<Player> players;
 
     public Board(List<Player> players)
@@ -34,6 +36,8 @@ public abstract class Board
     {
         Cell fromCell = this.getCell(fromPos);
         Piece piece = fromCell.getPiece().orElseThrow(PieceMoveException::new);
+        Optional<Piece> existingPiece = this.getPieceAt(toPos);
+        existingPiece.ifPresent(this::notifyCaptureListeners);
         this.removePiece(fromPos);
         Cell toCell = this.getCell(toPos);
         toCell.setPiece(piece);
@@ -50,6 +54,14 @@ public abstract class Board
         for (BoardVerticalEdgeListener listener : this.verticalEdgeListeners)
         {
             listener.onBoardVerticalEdgeReached(piece);
+        }
+    }
+
+    private void notifyCaptureListeners(Piece piece)
+    {
+        for (CaptureListener listener : this.captureListeners)
+        {
+            listener.onCapture(piece);
         }
     }
 
@@ -85,6 +97,11 @@ public abstract class Board
     public void registerVerticalEdgeListener(BoardVerticalEdgeListener listener)
     {
         this.verticalEdgeListeners.add(listener);
+    }
+
+    public void registerCaptureListener(CaptureListener listener)
+    {
+        this.captureListeners.add(listener);
     }
 
     protected abstract ArrayList<ArrayList<Cell>> populateCells();
