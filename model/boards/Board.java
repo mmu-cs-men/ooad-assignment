@@ -14,7 +14,7 @@ import model.pieces.Piece;
 public abstract class Board
 {
     private ArrayList<ArrayList<Cell>> cells;
-    private List<Player> players;
+    protected List<Player> players;
 
     public Board(List<Player> players)
     {
