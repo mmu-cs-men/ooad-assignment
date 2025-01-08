@@ -9,7 +9,7 @@ import model.Player;
 public abstract class Piece
 {
     private final Player owner;
-    private boolean criticalPiece;
+    private boolean criticalPiece = false;
 
     public Piece(Player owner)
     {
