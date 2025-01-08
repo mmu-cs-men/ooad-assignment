@@ -3,9 +3,9 @@ package model.pieces;
 import java.util.LinkedList;
 import java.util.Optional;
 
-import model.BoardVerticalEdgeListener;
-import model.CellPosition;
-import model.Player;
+import model.board.CellPosition;
+import model.game.Player;
+import model.listeners.BoardVerticalEdgeListener;
 
 public class Ram extends Piece implements BoardVerticalEdgeListener
 {

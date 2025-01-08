@@ -1,4 +1,6 @@
-package model;
+package model.listeners;
+
+import model.game.Player;
 
 public interface WinListener
 {

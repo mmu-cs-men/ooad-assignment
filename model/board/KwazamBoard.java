@@ -1,10 +1,9 @@
-package model.boards;
+package model.board;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import model.Cell;
-import model.Player;
+import model.game.Player;
 import model.pieces.Biz;
 import model.pieces.Piece;
 import model.pieces.Ram;

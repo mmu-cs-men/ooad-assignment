@@ -3,8 +3,8 @@ package model.pieces;
 import java.util.LinkedList;
 import java.util.Optional;
 
-import model.CellPosition;
-import model.Player;
+import model.board.CellPosition;
+import model.game.Player;
 
 public abstract class Piece
 {

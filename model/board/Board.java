@@ -1,16 +1,14 @@
-package model.boards;
+package model.board;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 
-import model.BoardVerticalEdgeListener;
-import model.CaptureListener;
-import model.Cell;
-import model.CellPosition;
-import model.Player;
 import model.exceptions.PieceMoveException;
+import model.game.Player;
+import model.listeners.BoardVerticalEdgeListener;
+import model.listeners.CaptureListener;
 import model.pieces.Piece;
 
 public abstract class Board

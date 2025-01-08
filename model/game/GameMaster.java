@@ -1,14 +1,17 @@
-package model;
+package model.game;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
 
-import model.boards.Board;
+import model.board.Board;
+import model.board.CellPosition;
 import model.exceptions.NoPieceException;
 import model.exceptions.NotYourPieceException;
 import model.exceptions.PieceMoveException;
+import model.listeners.CaptureListener;
+import model.listeners.WinListener;
 import model.pieces.Piece;
-import util.CircularLinkedList;
+import utils.CircularLinkedList;
 
 public class GameMaster implements CaptureListener
 {

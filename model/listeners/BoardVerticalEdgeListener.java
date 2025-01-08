@@ -1,4 +1,4 @@
-package model;
+package model.listeners;
 
 import model.pieces.Piece;
 
