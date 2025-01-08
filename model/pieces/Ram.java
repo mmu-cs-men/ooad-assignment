@@ -37,7 +37,8 @@ public class Ram extends Piece implements BoardVerticalEdgeListener
             return Optional.empty();
         }
 
-        int rowDifference = Math.abs(fromCellPos.row() - toCellPos.row());
+        int rowDifference = facingUp ? fromCellPos.row() - toCellPos.row()
+                : toCellPos.row() - fromCellPos.row();
 
         if (rowDifference == 1)
         {
