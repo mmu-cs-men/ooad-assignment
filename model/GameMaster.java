@@ -52,6 +52,8 @@ public class GameMaster
 
     public void advanceTurn()
     {
-        this.currentPlayer = this.players.iterator().next();
+        this.currentPlayer = this.players.circularIterator().next();
+    }
+
     }
 }

@@ -17,8 +17,7 @@ public class CircularLinkedList<T> extends LinkedList<T>
         return super.get(index % size());
     }
 
-    @Override
-    public Iterator<T> iterator()
+    public Iterator<T> circularIterator()
     {
         return new CircularIterator();
     }
