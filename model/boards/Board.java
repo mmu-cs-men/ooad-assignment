@@ -2,6 +2,7 @@ package model.boards;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Optional;
 
 import model.Cell;
@@ -13,9 +14,11 @@ import model.pieces.Piece;
 public abstract class Board
 {
     private ArrayList<ArrayList<Cell>> cells;
+    private List<Player> players;
 
-    public Board()
+    public Board(List<Player> players)
     {
+        this.players = players;
         this.cells = this.populateCells();
     }
 
