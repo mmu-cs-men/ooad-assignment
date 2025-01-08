@@ -16,12 +16,6 @@ public abstract class Piece
         this.owner = owner;
     }
 
-    public Piece(Player owner, boolean criticalPiece)
-    {
-        this.owner = owner;
-        this.criticalPiece = criticalPiece;
-    }
-
     public Player getOwner()
     {
         return owner;
