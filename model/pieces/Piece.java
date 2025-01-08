@@ -26,9 +26,9 @@ public abstract class Piece
         return criticalPiece;
     }
 
-    public void setCriticalPiece(boolean keyPiece)
+    public void setCriticalPiece(boolean criticalPiece)
     {
-        this.criticalPiece = keyPiece;
+        this.criticalPiece = criticalPiece;
     }
 
     public abstract boolean canJump();
