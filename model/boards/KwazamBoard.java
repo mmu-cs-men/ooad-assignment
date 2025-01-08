@@ -44,13 +44,13 @@ public class KwazamBoard extends Board
 
         for (int column = 0; column < getBoardColumns(); column++)
         {
-            cells.get(6).get(column).setPiece(new Ram(players.get(0), true));
+            cells.get(6).get(column).setPiece(new Ram(players.get(1), true));
         }
-        cells.get(7).get(0).setPiece(new Xor(players.get(0)));
-        cells.get(7).get(1).setPiece(new Biz(players.get(0)));
-        cells.get(7).get(2).setPiece(new Sau(players.get(0)));
-        cells.get(7).get(3).setPiece(new Biz(players.get(0)));
-        cells.get(7).get(4).setPiece(new Tor(players.get(0)));
+        cells.get(7).get(0).setPiece(new Xor(players.get(1)));
+        cells.get(7).get(1).setPiece(new Biz(players.get(1)));
+        cells.get(7).get(2).setPiece(new Sau(players.get(1)));
+        cells.get(7).get(3).setPiece(new Biz(players.get(1)));
+        cells.get(7).get(4).setPiece(new Tor(players.get(1)));
 
         return cells;
     }
