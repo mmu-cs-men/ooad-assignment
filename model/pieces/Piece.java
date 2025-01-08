@@ -9,7 +9,7 @@ import model.Player;
 public abstract class Piece
 {
     private final Player owner;
-    private boolean keyPiece;
+    private boolean criticalPiece;
 
     public Piece(Player owner)
     {
@@ -21,14 +21,14 @@ public abstract class Piece
         return owner;
     }
 
-    public boolean isKeyPiece()
+    public boolean isCriticalPiece()
     {
-        return keyPiece;
+        return criticalPiece;
     }
 
-    public void setKeyPiece(boolean keyPiece)
+    public void setCriticalPiece(boolean keyPiece)
     {
-        this.keyPiece = keyPiece;
+        this.criticalPiece = keyPiece;
     }
 
     public abstract boolean canJump();

@@ -75,7 +75,7 @@ public class GameMaster implements CaptureListener
     @Override
     public void onCapture(Piece piece)
     {
-        if (!piece.isKeyPiece())
+        if (!piece.isCriticalPiece())
         {
             return;
         }
