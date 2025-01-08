@@ -1,5 +1,6 @@
 package model;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 
 import model.boards.Board;
@@ -9,17 +10,20 @@ import model.exceptions.PieceMoveException;
 import model.pieces.Piece;
 import util.CircularLinkedList;
 
-public class GameMaster
+public class GameMaster implements CaptureListener
 {
     private Player currentPlayer;
     private final Board board;
     private final CircularLinkedList<Player> players;
+    private ArrayList<WinListener> winListeners = new ArrayList<>();
 
     public GameMaster(Board board, CircularLinkedList<Player> players)
     {
         this.board = board;
         this.players = players;
         this.currentPlayer = players.getFirst();
+
+        this.board.registerCaptureListener(this);
     }
 
     public void movePiece(CellPosition fromCellPos, CellPosition toCellPos)
@@ -55,5 +59,39 @@ public class GameMaster
         this.currentPlayer = this.players.circularIterator().next();
     }
 
+    public void registerWinListener(WinListener listener)
+    {
+        this.winListeners.add(listener);
+    }
+
+    public void notifyWinListeners(Player player)
+    {
+        for (WinListener listener : this.winListeners)
+        {
+            listener.onWin(player);
+        }
+    }
+
+    @Override
+    public void onCapture(Piece piece)
+    {
+        if (!piece.isKeyPiece())
+        {
+            return;
+        }
+
+        for (Player player : this.players)
+        {
+            if (piece.getOwner() == player)
+            {
+                this.players.remove(player);
+                break;
+            }
+        }
+
+        if (this.players.size() == 1)
+        {
+            this.notifyWinListeners(this.players.getFirst());
+        }
     }
 }
