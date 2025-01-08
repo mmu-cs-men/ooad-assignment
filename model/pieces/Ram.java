@@ -50,8 +50,13 @@ public class Ram extends Piece implements BoardVerticalEdgeListener
     }
 
     @Override
-    public void onBoardVerticalEdgeReached()
+    public void onBoardVerticalEdgeReached(Piece piece)
     {
+        if (piece != this)
+        {
+            return;
+        }
+
         facingUp = !facingUp;
     }
 
