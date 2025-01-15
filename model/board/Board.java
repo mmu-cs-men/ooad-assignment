@@ -92,6 +92,12 @@ public abstract class Board
         return piece.isPresent() && piece.get().getOwner() != player;
     }
 
+    public boolean hasFriendlyPieceAt(CellPosition cellPos, Player player)
+    {
+        Optional<Piece> piece = this.getPieceAt(cellPos);
+        return piece.isPresent() && piece.get().getOwner() == player;
+    }
+
     public void registerVerticalEdgeListener(BoardVerticalEdgeListener listener)
     {
         this.verticalEdgeListeners.add(listener);
