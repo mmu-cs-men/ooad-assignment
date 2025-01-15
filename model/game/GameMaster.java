@@ -43,8 +43,10 @@ public class GameMaster implements CaptureListener
                 .getPotentialPath(fromCellPos, toCellPos)
                 .orElseThrow(PieceMoveException::new);
 
-        if (!piece.canJump() && (this.board.isPathObstructed(path)
-                || !this.board.isCellOccupied(path.getLast())))
+        CellPosition lastPos = path.removeLast();
+
+        if (!piece.canJump() && this.board.isPathObstructed(path)
+                || this.board.hasFriendlyPieceAt(lastPos, currentPlayer))
         {
             throw new PieceMoveException();
         }
