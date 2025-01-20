@@ -17,6 +17,7 @@ import java.util.LinkedList;
 public class GameMaster implements CaptureListener
 {
     private Player currentPlayer;
+    private Iterator<Player> playerIterator;
     private final Board board;
     private final CircularLinkedList<Player> players;
     private ArrayList<WinListener> winListeners = new ArrayList<>();
@@ -26,6 +27,7 @@ public class GameMaster implements CaptureListener
         this.board = board;
         this.players = players;
         this.currentPlayer = players.getFirst();
+        this.playerIterator = players.circularIterator();
 
         this.board.registerCaptureListener(this);
     }
@@ -62,7 +64,7 @@ public class GameMaster implements CaptureListener
 
     public void advanceTurn()
     {
-        this.currentPlayer = this.players.circularIterator().next();
+        this.currentPlayer = this.playerIterator.next();
     }
 
     public void registerWinListener(WinListener listener)
