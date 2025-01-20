@@ -158,16 +158,9 @@ public class KwazamGUI extends JFrame
 
     }
 
-
     public void setCellClickListener(CellClickListener listener)
     {
         this.cellClickListener = listener;
-    }
-
-    // Flip the board (placeholder for flipping logic)
-    public void flipBoard()
-    {
-        // Implement flipping logic here
     }
 
     // Getter for initial piece starting positions
