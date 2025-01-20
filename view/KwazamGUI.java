@@ -175,9 +175,4 @@ public class KwazamGUI extends JFrame
     {
         return initialPieceStartingPositions;
     }
-
-    public static void main(String[] args)
-    {
-        new KwazamGUI();
-    }
 }

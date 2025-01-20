@@ -61,15 +61,4 @@ public class GameController implements CellClickListener
     {
         //TODO - Implement things here
     }
-
-
-
-
-    public static void main(String[] args)
-    {
-        // Entry point for the program
-        KwazamGUI gui = new KwazamGUI();
-        new GameController(gui); // Initialize the Controller and start the
-        // application
-    }
 }
