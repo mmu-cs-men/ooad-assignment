@@ -134,7 +134,7 @@ public class KwazamGUI extends JFrame
     private void handleCellClick(int row, int col)
     {
 
-        if (prevColClicked != -1 && prevColClicked != -1)
+        if (prevRowClicked != -1 && prevColClicked != -1)
         {
             boardCells[prevRowClicked][prevColClicked]
                     .setBorder(new LineBorder(Color.BLACK, 2));
