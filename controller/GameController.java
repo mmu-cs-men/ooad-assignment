@@ -11,10 +11,10 @@ public class GameController implements CellClickListener
     private int selectedCol = -1;
     private boolean isPieceSelected = false;
 
-    public GameController()
+    public GameController(KwazamGUI gui)
     {
         // Initialize the GUI
-        gui = new KwazamGUI();
+        this.gui = gui;
 
         // Register this Controller as the listener for cell clicks
         gui.setCellClickListener(this);
@@ -68,7 +68,8 @@ public class GameController implements CellClickListener
     public static void main(String[] args)
     {
         // Entry point for the program
-        new GameController(); // Initialize the Controller and start the
-                              // application
+        KwazamGUI gui = new KwazamGUI();
+        new GameController(gui); // Initialize the Controller and start the
+        // application
     }
 }
