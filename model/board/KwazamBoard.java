@@ -54,7 +54,7 @@ public class KwazamBoard extends Board
 
         Piece blueSau = new Sau(players.get(0));
         blueSau.setCriticalPiece(true);
-        cells.get(0).get(2).setPiece(blueSau);
+        cells.get(7).get(2).setPiece(blueSau);
 
         cells.get(7).get(3).setPiece(new Biz(players.get(0)));
         cells.get(7).get(4).setPiece(new Tor(players.get(0)));
