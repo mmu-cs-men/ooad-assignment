@@ -89,7 +89,8 @@ public class KwazamGUI extends JFrame
 
                 if (piece != null)
                 {
-                    String imagePath = "assets/" + piece + ".png";
+                    // TODO something seems off about this. Relative paths scare me.
+                    String imagePath = "src/assets/" + piece + ".png";
                     int cellWidth = cell.getWidth();
                     int cellHeight = cell.getHeight();
 

@@ -1,14 +1,14 @@
 package model.pieces;
 
-import java.util.LinkedList;
-import java.util.Optional;
-
 import model.board.CellPosition;
 import model.game.Player;
 
-public class Sau extends Piece
+import java.util.LinkedList;
+import java.util.Optional;
+
+public class Xor extends Piece
 {
-    public Sau(Player player)
+    public Xor(Player player)
     {
         super(player);
     }
@@ -26,13 +26,25 @@ public class Sau extends Piece
         int rowDifference = toCellPos.row() - fromCellPos.row();
         int columnDifference = toCellPos.column() - fromCellPos.column();
 
-        if (Math.abs(rowDifference) > 1 || Math.abs(columnDifference) > 1)
+        if (Math.abs(rowDifference) != Math.abs(columnDifference))
         {
             return Optional.empty();
         }
 
         LinkedList<CellPosition> path = new LinkedList<>();
-        path.add(toCellPos);
+        int rowStep = Integer.signum(rowDifference);
+        int columnStep = Integer.signum(columnDifference);
+
+        int row = fromCellPos.row();
+        int column = fromCellPos.column();
+
+        while (row != toCellPos.row() || column != toCellPos.column())
+        {
+            row += rowStep;
+            column += columnStep;
+            path.add(new CellPosition(row, column));
+        }
+
         return Optional.of(path);
     }
 

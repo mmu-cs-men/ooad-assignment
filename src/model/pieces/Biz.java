@@ -1,10 +1,10 @@
 package model.pieces;
 
-import java.util.LinkedList;
-import java.util.Optional;
-
 import model.board.CellPosition;
 import model.game.Player;
+
+import java.util.LinkedList;
+import java.util.Optional;
 
 public class Biz extends Piece
 {
@@ -23,7 +23,7 @@ public class Biz extends Piece
     {
         return (Math.abs(rowDifference) == 2 && Math.abs(columnDifference) == 1)
                 || (Math.abs(rowDifference) == 1
-                        && Math.abs(columnDifference) == 2);
+                && Math.abs(columnDifference) == 2);
     }
 
     @Override
