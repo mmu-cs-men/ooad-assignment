@@ -1,20 +1,24 @@
 package controller;
 
+import model.board.CellPosition;
+import model.game.GameMaster;
 import view.CellClickListener;
 import view.KwazamGUI;
 
 public class GameController implements CellClickListener
 {
     private KwazamGUI gui;
+    private GameMaster gameMaster;
 
     private int selectedRow = -1;
     private int selectedCol = -1;
     private boolean isPieceSelected = false;
 
-    public GameController(KwazamGUI gui)
+    public GameController(KwazamGUI gui, GameMaster gameMaster)
     {
         // Initialize the GUI
         this.gui = gui;
+        this.gameMaster = gameMaster;
 
         // Register this Controller as the listener for cell clicks
         this.gui.setCellClickListener(this);
@@ -38,9 +42,11 @@ public class GameController implements CellClickListener
             }
         }
         else
-        {   
-            // Second click: Move the selected piece to the destination cell
-            functionNamedByHarrisLater(); //TODO For Mr Harris Ltr
+        {
+            CellPosition fromCellPos = new CellPosition(selectedRow, selectedCol);
+            CellPosition toCellPos = new CellPosition(row, col);
+
+            movePieceBackend(fromCellPos, toCellPos);
 
             // Perform the movement
             board[row][col] = board[selectedRow][selectedCol]; // Move the piece
@@ -57,8 +63,9 @@ public class GameController implements CellClickListener
         }
     }
 
-    private void functionNamedByHarrisLater()
+    private void movePieceBackend(CellPosition fromCellPos, CellPosition toCellPos)
     {
-        //TODO - Implement things here
+        gameMaster.advanceTurn();
+        gameMaster.movePiece(fromCellPos, toCellPos);
     }
 }
