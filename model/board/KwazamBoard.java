@@ -1,15 +1,10 @@
 package model.board;
 
+import model.game.Player;
+import model.pieces.*;
+
 import java.util.ArrayList;
 import java.util.List;
-
-import model.game.Player;
-import model.pieces.Biz;
-import model.pieces.Piece;
-import model.pieces.Ram;
-import model.pieces.Sau;
-import model.pieces.Tor;
-import model.pieces.Xor;
 
 public class KwazamBoard extends Board
 {

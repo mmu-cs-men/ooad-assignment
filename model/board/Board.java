@@ -1,15 +1,15 @@
 package model.board;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Optional;
-
 import model.exceptions.PieceMoveException;
 import model.game.Player;
 import model.listeners.BoardVerticalEdgeListener;
 import model.listeners.CaptureListener;
 import model.pieces.Piece;
+
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Optional;
 
 public abstract class Board
 {

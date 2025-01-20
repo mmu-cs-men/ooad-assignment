@@ -1,8 +1,5 @@
 package model.game;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-
 import model.board.Board;
 import model.board.CellPosition;
 import model.exceptions.NoPieceException;
@@ -12,6 +9,10 @@ import model.listeners.CaptureListener;
 import model.listeners.WinListener;
 import model.pieces.Piece;
 import utils.CircularLinkedList;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.LinkedList;
 
 public class GameMaster implements CaptureListener
 {
