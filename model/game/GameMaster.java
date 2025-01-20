@@ -17,10 +17,10 @@ import java.util.LinkedList;
 public class GameMaster implements CaptureListener
 {
     private Player currentPlayer;
-    private Iterator<Player> playerIterator;
+    private final Iterator<Player> playerIterator;
     private final Board board;
     private final CircularLinkedList<Player> players;
-    private ArrayList<WinListener> winListeners = new ArrayList<>();
+    private final ArrayList<WinListener> winListeners = new ArrayList<>();
 
     public GameMaster(Board board, CircularLinkedList<Player> players)
     {

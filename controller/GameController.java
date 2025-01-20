@@ -7,8 +7,8 @@ import view.KwazamGUI;
 
 public class GameController implements CellClickListener
 {
-    private KwazamGUI gui;
-    private GameMaster gameMaster;
+    private final KwazamGUI gui;
+    private final GameMaster gameMaster;
 
     private int selectedRow = -1;
     private int selectedCol = -1;

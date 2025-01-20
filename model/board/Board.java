@@ -13,7 +13,7 @@ import java.util.Optional;
 
 public abstract class Board
 {
-    private ArrayList<ArrayList<Cell>> cells;
+    private final ArrayList<ArrayList<Cell>> cells;
     private final ArrayList<BoardVerticalEdgeListener> verticalEdgeListeners = new ArrayList<>();
     private final ArrayList<CaptureListener> captureListeners = new ArrayList<>();
     protected List<Player> players;
