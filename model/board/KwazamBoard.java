@@ -38,12 +38,16 @@ public class KwazamBoard extends Board
         cells.get(0).get(4).setPiece(new Xor(players.get(1)));
         for (int column = 0; column < getBoardColumns(); column++)
         {
-            cells.get(1).get(column).setPiece(new Ram(players.get(1), false));
+            Ram ram = new Ram(players.get(1), false);
+            this.registerVerticalEdgeListener(ram);
+            cells.get(1).get(column).setPiece(ram);
         }
 
         for (int column = 0; column < getBoardColumns(); column++)
         {
-            cells.get(6).get(column).setPiece(new Ram(players.get(0), true));
+            Ram ram = new Ram(players.get(0), true);
+            this.registerVerticalEdgeListener(ram);
+            cells.get(6).get(column).setPiece(ram);
         }
         cells.get(7).get(0).setPiece(new Xor(players.get(0)));
         cells.get(7).get(1).setPiece(new Biz(players.get(0)));
