@@ -27,33 +27,33 @@ public class KwazamBoard extends Board
             cells.add(rowCells);
         }
 
-        cells.get(0).get(0).setPiece(new Tor(players.get(0)));
-        cells.get(0).get(1).setPiece(new Biz(players.get(0)));
+        cells.get(0).get(0).setPiece(new Tor(players.get(1)));
+        cells.get(0).get(1).setPiece(new Biz(players.get(1)));
 
-        Piece redSau = new Sau(players.get(0));
+        Piece redSau = new Sau(players.get(1));
         redSau.setCriticalPiece(true);
         cells.get(0).get(2).setPiece(redSau);
 
-        cells.get(0).get(3).setPiece(new Biz(players.get(0)));
-        cells.get(0).get(4).setPiece(new Xor(players.get(0)));
+        cells.get(0).get(3).setPiece(new Biz(players.get(1)));
+        cells.get(0).get(4).setPiece(new Xor(players.get(1)));
         for (int column = 0; column < getBoardColumns(); column++)
         {
-            cells.get(1).get(column).setPiece(new Ram(players.get(0), false));
+            cells.get(1).get(column).setPiece(new Ram(players.get(1), false));
         }
 
         for (int column = 0; column < getBoardColumns(); column++)
         {
-            cells.get(6).get(column).setPiece(new Ram(players.get(1), true));
+            cells.get(6).get(column).setPiece(new Ram(players.get(0), true));
         }
-        cells.get(7).get(0).setPiece(new Xor(players.get(1)));
-        cells.get(7).get(1).setPiece(new Biz(players.get(1)));
+        cells.get(7).get(0).setPiece(new Xor(players.get(0)));
+        cells.get(7).get(1).setPiece(new Biz(players.get(0)));
 
-        Piece blueSau = new Sau(players.get(1));
+        Piece blueSau = new Sau(players.get(0));
         blueSau.setCriticalPiece(true);
         cells.get(0).get(2).setPiece(blueSau);
 
-        cells.get(7).get(3).setPiece(new Biz(players.get(1)));
-        cells.get(7).get(4).setPiece(new Tor(players.get(1)));
+        cells.get(7).get(3).setPiece(new Biz(players.get(0)));
+        cells.get(7).get(4).setPiece(new Tor(players.get(0)));
 
         return cells;
     }
