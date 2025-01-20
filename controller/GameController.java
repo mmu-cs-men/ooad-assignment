@@ -17,7 +17,7 @@ public class GameController implements CellClickListener
         this.gui = gui;
 
         // Register this Controller as the listener for cell clicks
-        gui.setCellClickListener(this);
+        this.gui.setCellClickListener(this);
 
     }
 
@@ -45,7 +45,7 @@ public class GameController implements CellClickListener
             // Perform the movement
             board[row][col] = board[selectedRow][selectedCol]; // Move the piece
             board[selectedRow][selectedCol] = null; // Clear the original
-                                                    // position
+            // position
 
             // Update the View
             gui.renderPieceToBoard(board);

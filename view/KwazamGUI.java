@@ -14,20 +14,20 @@ public class KwazamGUI extends JFrame
     private CellClickListener cellClickListener;
 
     private final String[][] initialPieceStartingPositions =
-    {
-            {"Tor_red", "Biz_red", "Sau_red", "Biz_red", "Xor_red"}, // Row
-                                                                     // 1
-            {"Ram_red", "Ram_red", "Ram_red", "Ram_red", "Ram_red"}, // Row
-                                                                     // 2
-            {null, null, null, null, null}, // Row 3
-            {null, null, null, null, null}, // Row 4
-            {null, null, null, null, null}, // Row 5
-            {null, null, null, null, null}, // Row 6
-            {"Ram_blue", "Ram_blue", "Ram_blue", "Ram_blue", "Ram_blue"}, // Row
-                                                                          // 7
-            {"Xor_blue", "Biz_blue", "Sau_blue", "Biz_blue", "Tor_blue"} // Row
-                                                                         // 8
-    };
+            {
+                    {"Tor_red", "Biz_red", "Sau_red", "Biz_red", "Xor_red"}, // Row
+                    // 1
+                    {"Ram_red", "Ram_red", "Ram_red", "Ram_red", "Ram_red"}, // Row
+                    // 2
+                    {null, null, null, null, null}, // Row 3
+                    {null, null, null, null, null}, // Row 4
+                    {null, null, null, null, null}, // Row 5
+                    {null, null, null, null, null}, // Row 6
+                    {"Ram_blue", "Ram_blue", "Ram_blue", "Ram_blue", "Ram_blue"}, // Row
+                    // 7
+                    {"Xor_blue", "Biz_blue", "Sau_blue", "Biz_blue", "Tor_blue"} // Row
+                    // 8
+            };
 
     public KwazamGUI()
     {
@@ -107,7 +107,7 @@ public class KwazamGUI extends JFrame
      * Returns null if the path is null or if width/height <= 0.
      */
     private ImageIcon loadScaledToCellIcon(String imagePath, int width,
-            int height)
+                                           int height)
     {
         if (imagePath == null || width <= 0 || height <= 0)
         {
@@ -158,7 +158,7 @@ public class KwazamGUI extends JFrame
 
     }
 
-    
+
     public void setCellClickListener(CellClickListener listener)
     {
         this.cellClickListener = listener;
