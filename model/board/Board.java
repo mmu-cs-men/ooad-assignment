@@ -16,7 +16,7 @@ public abstract class Board
     private final ArrayList<ArrayList<Cell>> cells;
     private final ArrayList<BoardVerticalEdgeListener> verticalEdgeListeners = new ArrayList<>();
     private final ArrayList<CaptureListener> captureListeners = new ArrayList<>();
-    protected List<Player> players;
+    protected final List<Player> players;
 
     public Board(List<Player> players)
     {

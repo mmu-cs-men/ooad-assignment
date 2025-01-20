@@ -8,8 +8,7 @@ import java.awt.*;
 public class KwazamGUI extends JFrame
 {
 
-    private JButton[][] boardCells = new JButton[8][5]; // 8x5 grid of cells
-    private JPanel boardPanel;
+    private final JButton[][] boardCells = new JButton[8][5]; // 8x5 grid of cells
     private int prevRowClicked = -1, prevColClicked = -1;
     private CellClickListener cellClickListener;
 
@@ -36,7 +35,7 @@ public class KwazamGUI extends JFrame
         setLayout(new BorderLayout());
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        boardPanel = new JPanel(new GridLayout(8, 5));
+        JPanel boardPanel = new JPanel(new GridLayout(8, 5));
         boardPanel.setBorder(new EmptyBorder(50, 50, 50, 50));
 
         // Initialize the cells
@@ -44,20 +43,7 @@ public class KwazamGUI extends JFrame
         {
             for (int col = 0; col < 5; col++)
             {
-                JButton cell = new JButton();
-                cell.setOpaque(true);
-                cell.setBackground(Color.white);
-                cell.setBorder(new LineBorder(Color.black, 2));
-                cell.setFocusable(false);
-
-                // center the icon in the label
-                cell.setHorizontalAlignment(SwingConstants.CENTER);
-                cell.setVerticalAlignment(SwingConstants.CENTER);
-
-                int rowclicked = row;
-                int colclicked = col;
-                cell.addActionListener(
-                        e -> handleCellClick(rowclicked, colclicked));
+                JButton cell = createCellButton(row, col);
 
                 boardPanel.add(cell);
                 boardCells[row][col] = cell;
@@ -69,6 +55,25 @@ public class KwazamGUI extends JFrame
 
         renderPieceToBoard(initialPieceStartingPositions);
 
+    }
+
+    private JButton createCellButton(int row, int col)
+    {
+        JButton cell = new JButton();
+        cell.setOpaque(true);
+        cell.setBackground(Color.white);
+        cell.setBorder(new LineBorder(Color.black, 2));
+        cell.setFocusable(false);
+
+        // center the icon in the label
+        cell.setHorizontalAlignment(SwingConstants.CENTER);
+        cell.setVerticalAlignment(SwingConstants.CENTER);
+
+        int rowclicked = row;
+        int colclicked = col;
+        cell.addActionListener(
+                e -> handleCellClick(rowclicked, colclicked));
+        return cell;
     }
 
     // Dynamically render pieces on the board based on the given positions array
