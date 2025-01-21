@@ -67,9 +67,6 @@ public class GameController implements CellClickListener
             board[selectedRow][selectedCol] = null; // Clear the original
             // position
 
-            // Check and flip Ram orientation after movement
-            checkRamOrientation(toCellPos);
-
             // Update the View
             gui.renderPieceToBoard(board);
 
@@ -77,8 +74,6 @@ public class GameController implements CellClickListener
             selectedRow = -1;
             selectedCol = -1;
             isPieceSelected = false;
-
-
         }
     }
 
@@ -87,24 +82,6 @@ public class GameController implements CellClickListener
         gameMaster.advanceTurn();
         gameMaster.movePiece(fromCellPos, toCellPos);
     }
-
-    private void checkRamOrientation(CellPosition toCellPos)
-    {
-        String[][] board = gui.getInitialPieceStartingPositions();
-        String piece = board[toCellPos.row()][toCellPos.column()];
-
-        if (piece != null && piece.startsWith("Ram"))
-        {
-            boolean isAtTopEdge = toCellPos.row() == 0;
-            boolean isAtBottomEdge = toCellPos.row() == board.length - 1;
-
-            if (isAtTopEdge || isAtBottomEdge)
-            {
-                gui.flipRamPiece(toCellPos.row(), toCellPos.column());
-            }
-        }
-    }
-
 
     private void handleWin(Player winner)
     {
