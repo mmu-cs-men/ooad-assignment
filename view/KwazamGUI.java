@@ -179,4 +179,11 @@ public class KwazamGUI extends JFrame
     {
         return initialPieceStartingPositions;
     }
+
+    public void displayWinMessage(String winner)
+    {
+        JOptionPane.showMessageDialog(this, "Game Over! " + winner + " wins!", "Game Over", JOptionPane.INFORMATION_MESSAGE);
+        gameOver = true;
+    }
+
 }
