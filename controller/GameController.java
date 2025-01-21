@@ -35,6 +35,13 @@ public class GameController implements CellClickListener
     {
         String[][] board = gui.getInitialPieceStartingPositions();
 
+
+        if (gameOver)
+        {
+            return;
+        }
+
+
         if (!isPieceSelected)
         {
             // First click: Select a piece
