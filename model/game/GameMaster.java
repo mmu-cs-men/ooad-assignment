@@ -80,6 +80,12 @@ public class GameMaster implements CaptureListener
         }
     }
 
+    public void setWinListener(WinListener listener)
+    {
+        this.winListeners.add(listener);
+    }
+
+
     @Override
     public void onCapture(Piece piece)
     {
