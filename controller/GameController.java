@@ -68,7 +68,7 @@ public class GameController implements CellClickListener
             // position
 
             // Checking if Ram has reached the board's edge and flip it
-            if (row == 0 || row == 7)
+            if ((row == 0 || row == 7) && board[row][col] != null && board[row][col].startsWith("Ram"))
             {
                 gui.flipRamPiece(row, col);
             }
