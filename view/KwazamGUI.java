@@ -208,10 +208,12 @@ public class KwazamGUI extends JFrame
 
         if (piece != null && piece.startsWith("Ram"))
         {
-            // Use the flipped images
-            String flippedPieceImage = piece + "_flipped";
-            String imagePath = "assets/" + flippedPieceImage + ".png";
+            // Check current orientation and flip accordingly
+            String flippedPiece = piece.endsWith("_flipped")
+                    ? piece.replace("_flipped", "")  // Switch back to normal
+                    : piece + "_flipped";  // Switch to flipped
 
+            String imagePath = "assets/" + flippedPiece + ".png";
             int cellWidth = cell.getWidth();
             int cellHeight = cell.getHeight();
 
@@ -220,13 +222,15 @@ public class KwazamGUI extends JFrame
             if (flippedIcon != null)
             {
                 cell.setIcon(flippedIcon);
+                initialPieceStartingPositions[row][col] = flippedPiece;  // Update board state
             }
             else
             {
-                System.err.println("Error: Flipped image not found for " + flippedPieceImage);
+                System.err.println("Error: Could not load image: " + imagePath);
             }
         }
     }
+
 
 
 
