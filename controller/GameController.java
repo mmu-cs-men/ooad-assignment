@@ -86,7 +86,7 @@ public class GameController implements CellClickListener
     private void handleWin(Player winner)
     {
         gameOver = true;
-        gui.displayWinMessage(winner);
+        gui.displayWinMessage(winner.id());
         gui.disableBoard();
     }
 
