@@ -86,6 +86,11 @@ public class GameController implements CellClickListener
     private void handleWin(Player winner)
     {
         gameOver = true;
+
+        // Infer color based on player ID (assuming 1 = Red, 2 = Blue)
+        String color = winner.id().equals("1") ? "Red" : "Blue";
+        String message = "Player " + winner.id() + " (" + color + ")";
+
         gui.displayWinMessage(winner.id());
         gui.disableBoard();
     }
