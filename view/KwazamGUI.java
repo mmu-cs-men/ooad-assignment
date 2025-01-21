@@ -25,6 +25,8 @@ public class KwazamGUI extends JFrame
                     // 8
             };
     private int prevRowClicked = -1, prevColClicked = -1;
+    private boolean gameOver = false;
+
     private CellClickListener cellClickListener;
 
     public KwazamGUI()
