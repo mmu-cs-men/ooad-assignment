@@ -1,8 +1,8 @@
 package model.board;
 
-import java.util.Optional;
-
 import model.pieces.Piece;
+
+import java.util.Optional;
 
 public class Cell
 {

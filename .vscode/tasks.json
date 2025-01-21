@@ -1,32 +1,32 @@
 {
-    "version": "2.0.0",
-    "tasks": [
-        {
-            "label": "build Main",
-            "type": "shell",
-            "command": "javac",
-            "args": [
-                "-d",
-                "build",
-                "Main.java"
-            ],
-            "group": {
-                "kind": "build",
-                "isDefault": true
-            },
-            "problemMatcher": {
-                "owner": "javac",
-                "fileLocation": [
-                    "relative",
-                    "${workspaceFolder}"
-                ],
-                "pattern": {
-                    "regexp": "^(.*\\.java):(\\d+):\\s+(.*)$",
-                    "file": 1,
-                    "line": 2,
-                    "message": 3
-                }
-            }
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "build Main",
+      "type": "shell",
+      "command": "javac",
+      "args": [
+        "-d",
+        "build",
+        "Main.java"
+      ],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "problemMatcher": {
+        "owner": "javac",
+        "fileLocation": [
+          "relative",
+          "${workspaceFolder}"
+        ],
+        "pattern": {
+          "regexp": "^(.*\\.java):(\\d+):\\s+(.*)$",
+          "file": 1,
+          "line": 2,
+          "message": 3
         }
-    ]
+      }
+    }
+  ]
 }

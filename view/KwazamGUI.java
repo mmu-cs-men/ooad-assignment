@@ -9,9 +9,6 @@ public class KwazamGUI extends JFrame
 {
 
     private final JButton[][] boardCells = new JButton[8][5]; // 8x5 grid of cells
-    private int prevRowClicked = -1, prevColClicked = -1;
-    private CellClickListener cellClickListener;
-
     private final String[][] initialPieceStartingPositions =
             {
                     {"Tor_red", "Biz_red", "Sau_red", "Biz_red", "Xor_red"}, // Row
@@ -27,6 +24,8 @@ public class KwazamGUI extends JFrame
                     {"Xor_blue", "Biz_blue", "Sau_blue", "Biz_blue", "Tor_blue"} // Row
                     // 8
             };
+    private int prevRowClicked = -1, prevColClicked = -1;
+    private CellClickListener cellClickListener;
 
     public KwazamGUI()
     {

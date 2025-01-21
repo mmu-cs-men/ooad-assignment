@@ -16,11 +16,11 @@ import java.util.LinkedList;
 
 public class GameMaster implements CaptureListener
 {
-    private Player currentPlayer;
     private final Iterator<Player> playerIterator;
     private final Board board;
     private final CircularLinkedList<Player> players;
     private final ArrayList<WinListener> winListeners = new ArrayList<>();
+    private Player currentPlayer;
 
     public GameMaster(Board board, CircularLinkedList<Player> players)
     {
