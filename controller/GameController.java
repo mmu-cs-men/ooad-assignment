@@ -91,7 +91,7 @@ public class GameController implements CellClickListener
     private void checkRamOrientation(CellPosition toCellPos)
     {
         String[][] board = gui.getInitialPieceStartingPositions();
-        String piece = board[toCellPos.row()][toCellPos.col()];
+        String piece = board[toCellPos.row()][toCellPos.column()];
 
         if (piece != null && piece.startsWith("Ram"))
         {
@@ -100,7 +100,7 @@ public class GameController implements CellClickListener
 
             if (isAtTopEdge || isAtBottomEdge)
             {
-                gui.flipRamIcon(toCellPos.row(), toCellPos.col(), isAtTopEdge);
+                gui.flipRamPiece(toCellPos.row(), toCellPos.column());
             }
         }
     }
