@@ -80,4 +80,12 @@ public class GameController implements CellClickListener
         gameMaster.advanceTurn();
         gameMaster.movePiece(fromCellPos, toCellPos);
     }
+
+    private void handleWin(String winner)
+    {
+        gameOver = true;
+        gui.displayWinMessage(winner);
+        gui.disableBoard();
+    }
+
 }
