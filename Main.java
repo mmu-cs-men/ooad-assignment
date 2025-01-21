@@ -15,7 +15,7 @@ public class Main
         players.add(new Player("2")); // TODO placeholder
 
         Board board = new KwazamBoard(players);
-
+        
         GameMaster gameMaster = new GameMaster(board, players);
         KwazamGUI gui = new KwazamGUI();
         new GameController(gui, gameMaster);

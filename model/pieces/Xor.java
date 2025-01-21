@@ -1,14 +1,14 @@
 package model.pieces;
 
-import model.board.CellPosition;
-import model.game.Player;
-
 import java.util.LinkedList;
 import java.util.Optional;
 
-public class Tor extends Piece
+import model.board.CellPosition;
+import model.game.Player;
+
+public class Xor extends Piece
 {
-    public Tor(Player player)
+    public Xor(Player player)
     {
         super(player);
     }
@@ -26,7 +26,7 @@ public class Tor extends Piece
         int rowDifference = toCellPos.row() - fromCellPos.row();
         int columnDifference = toCellPos.column() - fromCellPos.column();
 
-        if (rowDifference != 0 && columnDifference != 0)
+        if (Math.abs(rowDifference) != Math.abs(columnDifference))
         {
             return Optional.empty();
         }
