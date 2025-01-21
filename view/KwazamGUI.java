@@ -201,5 +201,34 @@ public class KwazamGUI extends JFrame
         }
     }
 
+    public void flipRamPiece(int row, int col)
+    {
+        JButton cell = boardCells[row][col];
+        String piece = initialPieceStartingPositions[row][col];
+
+        if (piece != null && piece.startsWith("Ram"))
+        {
+            ImageIcon currentIcon = (ImageIcon) cell.getIcon();
+            if (currentIcon != null)
+            {
+                Image image = currentIcon.getImage();
+                ImageIcon flippedIcon = new ImageIcon(
+                        new ImageIcon(image).getImage()
+                                .getScaledInstance(cell.getWidth(), cell.getHeight(), Image.SCALE_SMOOTH)
+                );
+
+                // Rotate by 180 degrees by flipping vertically
+                flippedIcon = new ImageIcon(
+                        new ImageIcon(image)
+                                .getImage()
+                                .getScaledInstance(-cell.getWidth(), cell.getHeight(), Image.SCALE_SMOOTH)
+                );
+
+                cell.setIcon(flippedIcon);
+            }
+        }
+    }
+
+
 
 }
