@@ -4,6 +4,8 @@ import model.board.CellPosition;
 import model.game.GameMaster;
 import view.CellClickListener;
 import view.KwazamGUI;
+import model.game.Player;
+
 
 public class GameController implements CellClickListener
 {
