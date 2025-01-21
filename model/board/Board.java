@@ -34,6 +34,13 @@ public abstract class Board
     {
         Cell fromCell = this.getCell(fromPos);
         Piece piece = fromCell.getPiece().orElseThrow(PieceMoveException::new);
+
+        Player currentPlayer = piece.getOwner();
+        if (this.hasFriendlyPieceAt(toPos, currentPlayer))
+        {
+            throw new PieceMoveException();
+        }
+
         Optional<Piece> existingPiece = this.getPieceAt(toPos);
         existingPiece.ifPresent(this::notifyCaptureListeners);
         this.removePiece(fromPos);
