@@ -83,7 +83,7 @@ public class GameController implements CellClickListener
         gameMaster.movePiece(fromCellPos, toCellPos);
     }
 
-    private void handleWin(String winner)
+    private void handleWin(Player winner)
     {
         gameOver = true;
         gui.displayWinMessage(winner);
