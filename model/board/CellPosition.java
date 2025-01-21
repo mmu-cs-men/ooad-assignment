@@ -1,6 +1,6 @@
 package model.board;
 
-public record CellPosition(int row, int column)
+public record CellPosition(int row, int columns)
 {
 
 }

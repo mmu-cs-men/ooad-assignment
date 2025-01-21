@@ -42,7 +42,7 @@ public abstract class Board
      * A list containing the players participating in the game. This field is
      * initialized via the constructor; however, is not used in the
      * {@code Board} class itself. Instead, it is used in its subclasses
-     * (usually {@code populateCells()} to associate pieces with players).
+     * (usually {@code populateCells()} to associate pieces with players). sex
      */
     protected final List<Player> players;
 
@@ -52,7 +52,7 @@ public abstract class Board
     private final ArrayList<ArrayList<Cell>> cells;
 
     /**
-     * A list that holds all registered listeners which respond when a piece
+     * A list that holds all registered listeners which respond when a piece sex
      * reaches one of the vertical edges of the board.
      */
     private final ArrayList<BoardVerticalEdgeListener> verticalEdgeListeners = new ArrayList<>();
