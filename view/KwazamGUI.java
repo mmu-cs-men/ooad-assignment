@@ -186,4 +186,20 @@ public class KwazamGUI extends JFrame
         gameOver = true;
     }
 
+    public void disableBoard()
+    {
+        for (JButton[] row : boardCells)
+        {
+            for (JButton cell : row)
+            {
+                for (java.awt.event.ActionListener al : cell.getActionListeners())
+                {
+                    cell.removeActionListener(al);
+                }
+                cell.setEnabled(false);
+            }
+        }
+    }
+
+
 }
