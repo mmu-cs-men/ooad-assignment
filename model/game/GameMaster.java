@@ -76,7 +76,7 @@ public class GameMaster implements CaptureListener
     {
         for (WinListener listener : this.winListeners)
         {
-            listener.onWin(player.getName());
+            listener.onWin(player);
         }
     }
 
