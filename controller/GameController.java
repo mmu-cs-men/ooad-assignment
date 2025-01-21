@@ -67,6 +67,9 @@ public class GameController implements CellClickListener
             board[selectedRow][selectedCol] = null; // Clear the original
             // position
 
+            // Check and flip Ram orientation after movement
+            checkRamOrientation(toCellPos);
+
             // Update the View
             gui.renderPieceToBoard(board);
 
@@ -74,6 +77,8 @@ public class GameController implements CellClickListener
             selectedRow = -1;
             selectedCol = -1;
             isPieceSelected = false;
+
+
         }
     }
 
