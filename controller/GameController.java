@@ -25,6 +25,9 @@ public class GameController implements CellClickListener
         // Register this Controller as the listener for cell clicks
         this.gui.setCellClickListener(this);
 
+        // Register win listener to handle game-over scenario
+        this.gameMaster.setWinListener(this::handleWin);
+
     }
 
     @Override
