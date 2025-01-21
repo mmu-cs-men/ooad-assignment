@@ -208,23 +208,22 @@ public class KwazamGUI extends JFrame
 
         if (piece != null && piece.startsWith("Ram"))
         {
-            ImageIcon currentIcon = (ImageIcon) cell.getIcon();
-            if (currentIcon != null)
+            // Use the flipped image version
+            String flippedPieceImage = piece + "_flipped"; // Assuming filenames like "Ram_red_flipped.png"
+            String imagePath = "assets/" + flippedPieceImage + ".png";
+
+            int cellWidth = cell.getWidth();
+            int cellHeight = cell.getHeight();
+
+            ImageIcon flippedIcon = loadScaledToCellIcon(imagePath, cellWidth, cellHeight);
+
+            if (flippedIcon != null)
             {
-                Image image = currentIcon.getImage();
-                ImageIcon flippedIcon = new ImageIcon(
-                        new ImageIcon(image).getImage()
-                                .getScaledInstance(cell.getWidth(), cell.getHeight(), Image.SCALE_SMOOTH)
-                );
-
-                // Rotate by 180 degrees by flipping vertically
-                flippedIcon = new ImageIcon(
-                        new ImageIcon(image)
-                                .getImage()
-                                .getScaledInstance(-cell.getWidth(), cell.getHeight(), Image.SCALE_SMOOTH)
-                );
-
                 cell.setIcon(flippedIcon);
+            }
+            else
+            {
+                System.err.println("Error: Flipped image not found for " + flippedPieceImage);
             }
         }
     }
