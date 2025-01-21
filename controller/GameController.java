@@ -67,7 +67,13 @@ public class GameController implements CellClickListener
             board[selectedRow][selectedCol] = null; // Clear the original
             // position
 
-            // Update the View
+            // Checking if Ram has reached the board's edge and flip it
+            if (row == 0 || row == 7)
+            {
+                gui.flipRamPiece(row, col);
+            }
+
+                // Update the View
             gui.renderPieceToBoard(board);
 
             // Reset the selection
