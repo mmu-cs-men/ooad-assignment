@@ -91,7 +91,7 @@ public class GameController implements CellClickListener
         String color = winner.id().equals("1") ? "Red" : "Blue";
         String message = "Player " + winner.id() + " (" + color + ")";
 
-        gui.displayWinMessage(winner.id());
+        gui.displayWinMessage(message);
         gui.disableBoard();
     }
 
