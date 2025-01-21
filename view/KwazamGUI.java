@@ -139,6 +139,11 @@ public class KwazamGUI extends JFrame
 
     private void handleCellClick(int row, int col)
     {
+        if (gameOver)
+        {
+            JOptionPane.showMessageDialog(this, "Game Over! No further moves allowed.");
+            return;
+        }
 
         if (prevRowClicked != -1 && prevColClicked != -1)
         {
