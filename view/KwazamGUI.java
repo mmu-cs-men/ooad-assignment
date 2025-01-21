@@ -208,8 +208,8 @@ public class KwazamGUI extends JFrame
 
         if (piece != null && piece.startsWith("Ram"))
         {
-            // Use the flipped image version
-            String flippedPieceImage = piece + "_flipped"; // Assuming filenames like "Ram_red_flipped.png"
+            // Use the flipped images
+            String flippedPieceImage = piece + "_flipped";
             String imagePath = "assets/" + flippedPieceImage + ".png";
 
             int cellWidth = cell.getWidth();
