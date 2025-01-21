@@ -13,6 +13,8 @@ public class GameController implements CellClickListener
     private int selectedRow = -1;
     private int selectedCol = -1;
     private boolean isPieceSelected = false;
+    private boolean gameOver = false;
+
 
     public GameController(KwazamGUI gui, GameMaster gameMaster)
     {
