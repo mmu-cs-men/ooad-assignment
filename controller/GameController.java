@@ -83,6 +83,24 @@ public class GameController implements CellClickListener
         gameMaster.movePiece(fromCellPos, toCellPos);
     }
 
+    private void checkRamOrientation(CellPosition toCellPos)
+    {
+        String[][] board = gui.getInitialPieceStartingPositions();
+        String piece = board[toCellPos.row()][toCellPos.col()];
+
+        if (piece != null && piece.startsWith("Ram"))
+        {
+            boolean isAtTopEdge = toCellPos.row() == 0;
+            boolean isAtBottomEdge = toCellPos.row() == board.length - 1;
+
+            if (isAtTopEdge || isAtBottomEdge)
+            {
+                gui.flipRamIcon(toCellPos.row(), toCellPos.col(), isAtTopEdge);
+            }
+        }
+    }
+
+
     private void handleWin(Player winner)
     {
         gameOver = true;
