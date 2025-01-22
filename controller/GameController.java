@@ -42,6 +42,8 @@ public class GameController implements CellClickListener
         // Let the GUI forward all user clicks to us
         this.gui.setCellClickListener(this);
 
+        // Render the initial board arrangement on the GUI
+        gui.renderPieceToBoard(this.boardState);
     }
 
     @Override
