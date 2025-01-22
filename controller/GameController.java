@@ -36,7 +36,10 @@ public class GameController implements CellClickListener
         this.gui = gui;
         this.gameMaster = gameMaster;
 
-        // Register this Controller as the listener for cell clicks
+        // Grab the initial piece icons from the View and store them.
+        this.boardState = gui.getInitialPieceStartingPositions();
+
+        // Let the GUI forward all user clicks to us
         this.gui.setCellClickListener(this);
 
     }
