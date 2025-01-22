@@ -77,13 +77,24 @@ public class GameController implements CellClickListener
             // Clear the “old” spot in our local 2D array
             boardState[selectedRow][selectedCol] = null;
 
-            // Perform the movement
-            board[row][col] = board[selectedRow][selectedCol]; // Move the piece
-            board[selectedRow][selectedCol] = null; // Clear the original
-            // position
+            // Figure out which piece now sits at the new position (in the Model)
+            Piece pieceJustMoved = gameMaster.getBoard()
+                    .getPieceAt(toPos)
+                    .orElse(null);
 
-            // Update the View
-            gui.renderPieceToBoard(board);
+            if (pieceJustMoved instanceof Ram ram)
+            {
+                // We differentiate red vs. blue by the Player's id().
+                // For example, Player("1") = "blue", Player("2") = "red"
+                // (Adjust if your game assigns colors differently.)
+                String iconName = getString(ram, pieceJustMoved);
+                boardState[row][col] = iconName;
+            }
+            else
+            {
+                // If it isn’t a Ram, just copy over the old icon name
+                boardState[row][col] = boardState[fromPos.row()][fromPos.column()];
+            }
 
             // Reset the selection
             selectedRow = -1;
