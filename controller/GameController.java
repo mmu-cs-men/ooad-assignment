@@ -46,6 +46,11 @@ public class GameController implements CellClickListener
         gui.renderPieceToBoard(this.boardState);
     }
 
+    /**
+     * Called by the View every time a user clicks one cell on the board.
+     * @param row the row index of the clicked cell
+     * @param col the column index of the clicked cell
+     */
     @Override
     public void onCellClicked(int row, int col)
     {
