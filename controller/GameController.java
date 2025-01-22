@@ -85,8 +85,6 @@ public class GameController implements CellClickListener
             if (pieceJustMoved instanceof Ram ram)
             {
                 // We differentiate red vs. blue by the Player's id().
-                // For example, Player("1") = "blue", Player("2") = "red"
-                // (Adjust if your game assigns colors differently.)
                 String iconName = getString(ram, pieceJustMoved);
                 boardState[row][col] = iconName;
             }
