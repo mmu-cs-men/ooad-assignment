@@ -7,6 +7,12 @@ import model.pieces.Ram;
 import view.CellClickListener;
 import view.KwazamGUI;
 
+/**
+ * Controller that mediates between the GUI (View) and the GameMaster/Board (Model).
+ * <p>
+ * Uses MVC: The View never accesses the Model directly.
+ * All game logic is inside the Model; the Controller merely orchestrates the data flow.
+ */
 public class GameController implements CellClickListener
 {
     private final KwazamGUI gui;
