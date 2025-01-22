@@ -62,7 +62,6 @@ public class GameController implements CellClickListener
                 selectedRow = row;
                 selectedCol = col;
                 isPieceSelected = true;
-
             }
         }
         else
