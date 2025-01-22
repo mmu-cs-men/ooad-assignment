@@ -94,10 +94,13 @@ public class GameController implements CellClickListener
                 boardState[row][col] = boardState[fromPos.row()][fromPos.column()];
             }
 
-            // Reset the selection
+            // Redraw with the updated piece icons
+            gui.renderPieceToBoard(boardState);
+
+            // Reset selection
+            isPieceSelected = false;
             selectedRow = -1;
             selectedCol = -1;
-            isPieceSelected = false;
         }
     }
 
