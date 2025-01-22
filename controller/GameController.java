@@ -23,6 +23,14 @@ public class GameController implements CellClickListener
     private int selectedCol = -1;
     private boolean isPieceSelected = false;
 
+    // Keep a local copy of the piece-icon layout (strings) for the View.
+    private final String[][] boardState;
+
+    /**
+     * Constructs a new GameController, wires itself to the GUI, and initializes the piece layout.
+     * @param gui The KwazamGUI (View)
+     * @param gameMaster The GameMaster (Model), which handles piece movement and turn order
+     */
     public GameController(KwazamGUI gui, GameMaster gameMaster)
     {
         // Initialize the GUI
