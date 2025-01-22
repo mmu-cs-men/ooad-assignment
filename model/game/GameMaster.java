@@ -31,7 +31,6 @@ public class GameMaster implements CaptureListener
         this.players = players;
         this.currentPlayer = players.getFirst();
         this.playerIterator = players.circularIterator();
-
         this.board.registerCaptureListener(this);
     }
 
