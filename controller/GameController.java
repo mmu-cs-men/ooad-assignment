@@ -33,7 +33,6 @@ public class GameController implements CellClickListener
      */
     public GameController(KwazamGUI gui, GameMaster gameMaster)
     {
-        // Initialize the GUI
         this.gui = gui;
         this.gameMaster = gameMaster;
 
