@@ -66,10 +66,16 @@ public class GameController implements CellClickListener
         }
         else
         {
-            CellPosition fromCellPos = new CellPosition(selectedRow, selectedCol);
-            CellPosition toCellPos = new CellPosition(row, col);
+            // Second click: user is trying to move from (selectedRow,selectedCol) to (row,col)
+            CellPosition fromPos = new CellPosition(selectedRow, selectedCol);
+            CellPosition toPos   = new CellPosition(row, col);
 
-            movePieceBackend(fromCellPos, toCellPos);
+            // Advance turn in the Model and move the piece
+            gameMaster.advanceTurn();
+            gameMaster.movePiece(fromPos, toPos);
+
+            // Clear the “old” spot in our local 2D array
+            boardState[selectedRow][selectedCol] = null;
 
             // Perform the movement
             board[row][col] = board[selectedRow][selectedCol]; // Move the piece
