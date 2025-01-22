@@ -2,6 +2,8 @@ package controller;
 
 import model.board.CellPosition;
 import model.game.GameMaster;
+import model.pieces.Piece;
+import model.pieces.Ram;
 import view.CellClickListener;
 import view.KwazamGUI;
 
