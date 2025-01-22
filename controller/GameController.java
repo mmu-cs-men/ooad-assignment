@@ -18,6 +18,7 @@ public class GameController implements CellClickListener
     private final KwazamGUI gui;
     private final GameMaster gameMaster;
 
+    // Track which cell is currently “selected” by the player.
     private int selectedRow = -1;
     private int selectedCol = -1;
     private boolean isPieceSelected = false;
