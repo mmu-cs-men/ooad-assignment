@@ -56,8 +56,8 @@ public class GameController implements CellClickListener
     {
         if (!isPieceSelected)
         {
-            // First click: Select a piece
-            if (board[row][col] != null)
+            // First click: select a piece if non-empty
+            if (boardState[row][col] != null)
             {
                 selectedRow = row;
                 selectedCol = col;
