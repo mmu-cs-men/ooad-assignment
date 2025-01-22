@@ -104,9 +104,31 @@ public class GameController implements CellClickListener
         }
     }
 
-    private void movePieceBackend(CellPosition fromCellPos, CellPosition toCellPos)
-    {
-        gameMaster.advanceTurn();
-        gameMaster.movePiece(fromCellPos, toCellPos);
+    private static String getString(Ram ram, Piece pieceJustMoved) {
+        String color = pieceJustMoved.getOwner().id().equals("1")
+                ? "blue"
+                : "red";
+
+        // If isFacingUp is false => normal icon. If true => “_flipped”.
+        // BUT the red pieces start out with isFacingUp=false (which we want to show as "Ram_red").
+        // The moment they hit the far edge, facingUp toggles to true => "Ram_red_flipped".
+        // Blue pieces do the opposite because in KwazamBoard they start isFacingUp=true.
+        // That means the default “Ram_blue” is displayed when facingUp=true,
+        // and “Ram_blue_flipped” when false, etc.
+
+        boolean facingUp = ram.isFacingUp();
+        String iconName;
+
+        if (color.equals("red"))
+        {
+            // Red Rams => normal icon if facingUp==false, flipped if true
+            iconName = facingUp ? "Ram_red_flipped" : "Ram_red";
+        }
+        else
+        {
+            // Blue Rams => normal icon if facingUp==true, flipped if false
+            iconName = facingUp ? "Ram_blue" : "Ram_blue_flipped";
+        }
+        return iconName;
     }
 }
