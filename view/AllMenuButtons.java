@@ -7,6 +7,8 @@ import java.awt.*;
  * The AllMenuButtons class represents a panel containing the menu buttons for
  * the game. It includes buttons for saving the game, loading a game, and
  * starting a new game.
+ * 
+ * @author Sivananthan Seliyan
  */
 
 public class AllMenuButtons extends JPanel
