@@ -36,6 +36,7 @@ public class KwazamGUI extends JFrame
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         AllMenuButtons menuButtons = new AllMenuButtons();
+        // Set the Button Position on top of the Kwazam Chess game
         add(menuButtons, BorderLayout.NORTH);
 
         JPanel boardPanel = new JPanel(new GridLayout(8, 5));
