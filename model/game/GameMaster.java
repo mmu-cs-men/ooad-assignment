@@ -14,6 +14,9 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
 
+/**
+ * Manages turn order, piece movements, and winning conditions.
+ */
 public class GameMaster implements CaptureListener
 {
     private final Iterator<Player> playerIterator;
