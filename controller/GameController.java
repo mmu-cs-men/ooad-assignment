@@ -12,6 +12,8 @@ import view.KwazamGUI;
  * <p>
  * Uses MVC: The View never accesses the Model directly.
  * All game logic is inside the Model; the Controller merely adapts the data flow.
+ *
+ * @author Abdullah Hawash
  */
 public class GameController implements CellClickListener
 {
