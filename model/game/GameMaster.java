@@ -89,7 +89,6 @@ public class GameMaster implements CaptureListener
         {
             return;
         }
-
         for (Player player : this.players)
         {
             if (piece.getOwner() == player)
@@ -98,7 +97,6 @@ public class GameMaster implements CaptureListener
                 break;
             }
         }
-
         if (this.players.size() == 1)
         {
             this.notifyWinListeners(this.players.getFirst());
