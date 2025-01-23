@@ -2,8 +2,11 @@ package controller;
 
 import model.board.CellPosition;
 import model.game.GameMaster;
+import model.game.Player;
+import model.listeners.WinListener;
 import view.CellClickListener;
 import view.KwazamGUI;
+import java.awt.Color;
 
 public class GameController implements CellClickListener
 {
