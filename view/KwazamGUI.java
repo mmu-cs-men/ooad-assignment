@@ -8,8 +8,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import java.awt.*;
 
-public class KwazamGUI extends JFrame implements WinListener
-{
+public class KwazamGUI extends JFrame {
 
     private final JButton[][] boardCells = new JButton[8][5]; // 8x5 grid of
                                                               // cells
@@ -94,10 +93,7 @@ public class KwazamGUI extends JFrame implements WinListener
         // center the icon in the label
         cell.setHorizontalAlignment(SwingConstants.CENTER);
         cell.setVerticalAlignment(SwingConstants.CENTER);
-
-        int rowclicked = row;
-        int colclicked = col;
-        cell.addActionListener(e -> handleCellClick(rowclicked, colclicked));
+        cell.addActionListener(e -> handleCellClick(row, col));
         return cell;
     }
 
