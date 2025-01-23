@@ -73,4 +73,11 @@ public class GameController implements CellClickListener, WinListener {
         gameMaster.advanceTurn();
         gameMaster.movePiece(fromCellPos, toCellPos);
     }
+
+    @Override
+    public void onWin(Player winner) {
+        gui.disableBoard();
+        gui.displayWinMessage(winner.id().equals("1") ? "Blue wins!!" : "Red wins!!",
+                winner.id().equals("1") ? Color.BLUE : Color.RED);
+    }
 }
