@@ -102,4 +102,12 @@ public class GameMaster implements CaptureListener
             this.notifyWinListeners(this.players.getFirst());
         }
     }
+
+    /**
+     * Allows the Controller to retrieve the Board for reading piece positions
+     */
+    public Board getBoard()
+    {
+        return this.board;
+    }
 }
