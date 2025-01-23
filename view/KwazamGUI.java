@@ -11,20 +11,23 @@ public class KwazamGUI extends JFrame
     private final JButton[][] boardCells = new JButton[8][5]; // 8x5 grid of
                                                               // cells
     private final String[][] initialPieceStartingPositions =
-    {
-            {"Tor_red", "Biz_red", "Sau_red", "Biz_red", "Xor_red"}, // Row
-            // 1
-            {"Ram_red", "Ram_red", "Ram_red", "Ram_red", "Ram_red"}, // Row
-            // 2
-            {null, null, null, null, null}, // Row 3
-            {null, null, null, null, null}, // Row 4
-            {null, null, null, null, null}, // Row 5
-            {null, null, null, null, null}, // Row 6
-            {"Ram_blue", "Ram_blue", "Ram_blue", "Ram_blue", "Ram_blue"}, // Row
-            // 7
-            {"Xor_blue", "Biz_blue", "Sau_blue", "Biz_blue", "Tor_blue"} // Row
-            // 8
-    };
+
+            {
+                    {"Tor_red_piece", "Biz_red_piece", "Sau_red_piece", "Biz_red_piece", "Xor_red_piece"}, // Row
+                    // 1
+                    {"Ram_red_piece", "Ram_red_piece", "Ram_red_piece", "Ram_red_piece", "Ram_red_piece"}, // Row
+                    // 2
+                    {null, null, null, null, null}, // Row 3
+                    {null, null, null, null, null}, // Row 4
+                    {null, null, null, null, null}, // Row 5
+                    {null, null, null, null, null}, // Row 6
+                    {"Ram_blue_piece", "Ram_blue_piece", "Ram_blue_piece", "Ram_blue_piece", "Ram_blue_piece"}, // Row
+                    // 7
+                    {"Xor_blue_piece", "Biz_blue_piece", "Sau_blue_piece", "Biz_blue_piece", "Tor_blue_piece"} // Row
+                    // 8
+            };
+
+
     private int prevRowClicked = -1, prevColClicked = -1;
     private CellClickListener cellClickListener;
 
