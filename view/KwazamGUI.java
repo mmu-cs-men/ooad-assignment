@@ -36,6 +36,7 @@ public class KwazamGUI extends JFrame implements WinListener
 
     private int prevRowClicked = -1, prevColClicked = -1;
     private CellClickListener cellClickListener;
+    private JLabel winLabel; // Label for displaying the win message
 
     public KwazamGUI()
     {
