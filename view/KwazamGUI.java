@@ -222,6 +222,9 @@ public class KwazamGUI extends JFrame {
         return initialPieceStartingPositions;
     }
 
+    /**
+     * @author Abdullah Hawash
+     */
     public void disableBoard() {
         for (JButton[] row : boardCells) {
             for (JButton cell : row) {
@@ -230,6 +233,11 @@ public class KwazamGUI extends JFrame {
         }
     }
 
+    /**
+     * @author Abdullah Hawash
+     * @param message
+     * @param color
+     */
     public void displayWinMessage(String message, Color color) {
         winLabel.setText(message);
         winLabel.setForeground(color);
