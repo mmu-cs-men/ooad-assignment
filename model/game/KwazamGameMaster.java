@@ -9,4 +9,15 @@ public class KwazamGameMaster extends GameMaster<KwazamBoard>
     {
         super(board, players);
     }
+
+    @Override
+    public void advanceTurn()
+    {
+        super.advanceTurn();
+
+        if (this.turnCount % 2 == 0)
+        {
+            this.board.switchTorXor();
+        }
+    }
 }
