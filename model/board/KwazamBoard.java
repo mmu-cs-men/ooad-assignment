@@ -62,6 +62,23 @@ public class KwazamBoard extends Board
         return cells;
     }
 
+    public void switchTorXor()
+    {
+        for (ArrayList<Cell> row : this.cells)
+        {
+            for (Cell cell : row)
+            {
+                cell.getPiece().ifPresent(piece -> {
+                    if (piece instanceof Switchable)
+                    {
+                        cell.setPiece((((Switchable) piece).getSwitchedPiece()));
+                    }
+                });
+            }
+
+        }
+    }
+
     @Override
     protected int getBoardRows()
     {

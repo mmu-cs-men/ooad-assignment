@@ -14,15 +14,16 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
 
-public class GameMaster implements CaptureListener
+public abstract class GameMaster<T extends Board> implements CaptureListener
 {
+    protected final T board;
     private final Iterator<Player> playerIterator;
-    private final Board board;
     private final CircularLinkedList<Player> players;
     private final ArrayList<WinListener> winListeners = new ArrayList<>();
+    protected int turnCount = 0;
     private Player currentPlayer;
 
-    public GameMaster(Board board, CircularLinkedList<Player> players)
+    public GameMaster(T board, CircularLinkedList<Player> players)
     {
         this.board = board;
         this.players = players;
@@ -65,6 +66,7 @@ public class GameMaster implements CaptureListener
     public void advanceTurn()
     {
         this.currentPlayer = this.playerIterator.next();
+        this.turnCount++;
     }
 
     public void registerWinListener(WinListener listener)
