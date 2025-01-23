@@ -8,22 +8,23 @@ import java.awt.*;
 public class KwazamGUI extends JFrame
 {
 
-    private final JButton[][] boardCells = new JButton[8][5]; // 8x5 grid of cells
+    private final JButton[][] boardCells = new JButton[8][5]; // 8x5 grid of
+                                                              // cells
     private final String[][] initialPieceStartingPositions =
-            {
-                    {"Tor_red", "Biz_red", "Sau_red", "Biz_red", "Xor_red"}, // Row
-                    // 1
-                    {"Ram_red", "Ram_red", "Ram_red", "Ram_red", "Ram_red"}, // Row
-                    // 2
-                    {null, null, null, null, null}, // Row 3
-                    {null, null, null, null, null}, // Row 4
-                    {null, null, null, null, null}, // Row 5
-                    {null, null, null, null, null}, // Row 6
-                    {"Ram_blue", "Ram_blue", "Ram_blue", "Ram_blue", "Ram_blue"}, // Row
-                    // 7
-                    {"Xor_blue", "Biz_blue", "Sau_blue", "Biz_blue", "Tor_blue"} // Row
-                    // 8
-            };
+    {
+            {"Tor_red", "Biz_red", "Sau_red", "Biz_red", "Xor_red"}, // Row
+            // 1
+            {"Ram_red", "Ram_red", "Ram_red", "Ram_red", "Ram_red"}, // Row
+            // 2
+            {null, null, null, null, null}, // Row 3
+            {null, null, null, null, null}, // Row 4
+            {null, null, null, null, null}, // Row 5
+            {null, null, null, null, null}, // Row 6
+            {"Ram_blue", "Ram_blue", "Ram_blue", "Ram_blue", "Ram_blue"}, // Row
+            // 7
+            {"Xor_blue", "Biz_blue", "Sau_blue", "Biz_blue", "Tor_blue"} // Row
+            // 8
+    };
     private int prevRowClicked = -1, prevColClicked = -1;
     private CellClickListener cellClickListener;
 
@@ -34,8 +35,12 @@ public class KwazamGUI extends JFrame
         setLayout(new BorderLayout());
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
+        AllMenuButtons menuButtons = new AllMenuButtons();
+        // Set the Button Position on top of the Kwazam Chess game
+        add(menuButtons, BorderLayout.NORTH);
+
         JPanel boardPanel = new JPanel(new GridLayout(8, 5));
-        boardPanel.setBorder(new EmptyBorder(50, 50, 50, 50));
+        boardPanel.setBorder(new EmptyBorder(1, 50, 50, 50));
 
         // Initialize the cells
         for (int row = 0; row < 8; row++)
@@ -70,8 +75,7 @@ public class KwazamGUI extends JFrame
 
         int rowclicked = row;
         int colclicked = col;
-        cell.addActionListener(
-                e -> handleCellClick(rowclicked, colclicked));
+        cell.addActionListener(e -> handleCellClick(rowclicked, colclicked));
         return cell;
     }
 
@@ -111,7 +115,7 @@ public class KwazamGUI extends JFrame
      * Returns null if the path is null or if width/height <= 0.
      */
     private ImageIcon loadScaledToCellIcon(String imagePath, int width,
-                                           int height)
+            int height)
     {
         if (imagePath == null || width <= 0 || height <= 0)
         {
