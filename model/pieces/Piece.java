@@ -35,4 +35,18 @@ public abstract class Piece
 
     public abstract Optional<LinkedList<CellPosition>> getPotentialPath(
             CellPosition fromCellPos, CellPosition toCellPos);
+
+    /**
+     * returns the icon name (without .png) for this piece
+     * default implementation just returns <ClassName>_<color>
+     * Subclasses can override
+     */
+    public String getIconName()
+    {
+        // Player("1") is Blue, Player("2") is Red:
+        String color = owner.id().equals("1") ? "blue" : "red";
+        // Use the class name (e.g. "sau", "biz") plus "_blue" or "_red"
+        // This means sau blue and biz red and etc
+        return this.getClass().getSimpleName() + "_" + color;
+    }
 }
