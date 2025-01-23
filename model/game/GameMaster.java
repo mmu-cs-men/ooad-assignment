@@ -16,12 +16,12 @@ import java.util.LinkedList;
 
 public abstract class GameMaster<T extends Board> implements CaptureListener
 {
+    protected final T board;
     private final Iterator<Player> playerIterator;
-    private final T board;
     private final CircularLinkedList<Player> players;
     private final ArrayList<WinListener> winListeners = new ArrayList<>();
+    protected int turnCount = 0;
     private Player currentPlayer;
-    private int turnCount = 0;
 
     public GameMaster(T board, CircularLinkedList<Player> players)
     {
