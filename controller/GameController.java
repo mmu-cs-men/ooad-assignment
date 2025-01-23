@@ -8,8 +8,8 @@ import view.CellClickListener;
 import view.KwazamGUI;
 import java.awt.Color;
 
-public class GameController implements CellClickListener
-{
+public class GameController implements CellClickListener, WinListener {
+
     private final KwazamGUI gui;
     private final GameMaster gameMaster;
 
