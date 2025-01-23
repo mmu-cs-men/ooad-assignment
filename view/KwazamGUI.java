@@ -67,6 +67,11 @@ public class KwazamGUI extends JFrame implements WinListener
         add(boardPanel, BorderLayout.CENTER);
         setVisible(true);
 
+        // Add label for win message at the bottom
+        winLabel = new JLabel("", SwingConstants.CENTER);
+        winLabel.setFont(new Font("Arial", Font.BOLD, 20));
+        add(winLabel, BorderLayout.SOUTH);
+
         renderPieceToBoard(initialPieceStartingPositions);
 
     }
