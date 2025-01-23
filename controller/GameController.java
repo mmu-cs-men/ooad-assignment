@@ -60,9 +60,39 @@ public class GameController implements CellClickListener
         }
     }
 
-    private void movePieceBackend(CellPosition fromCellPos, CellPosition toCellPos)
+    private void movePieceBackend(CellPosition fromCellPos, CellPosition toCellPos, String[][] board)
     {
-        gameMaster.advanceTurn();
-        gameMaster.movePiece(fromCellPos, toCellPos);
+        try
+        {
+            gameMaster.advanceTurn();
+            gameMaster.movePiece(fromCellPos, toCellPos);
+
+            // If the move was successful, let's find which piece ended up at 'toCellPos'
+            Piece pieceJustMoved = gameMaster.getBoard()
+                    .getPieceAt(toCellPos)
+                    .orElse(null);
+
+            // 1) Clear the old slot
+            board[fromCellPos.row()][fromCellPos.column()] = null;
+
+            // 2) Put the new icon in the new slot
+            if (pieceJustMoved != null)
+            {
+                String iconName = pieceJustMoved.getIconName();
+                board[toCellPos.row()][toCellPos.column()] = iconName;
+            }
+            else
+            {
+                board[toCellPos.row()][toCellPos.column()] = null;
+            }
+        }
+        catch (NoPieceException | NotYourPieceException | PieceMoveException e)
+        {
+            System.err.println("Invalid move: " + e.getMessage());
+            // If the move fails, do nothing to the board array.
+        }
+
+        // Re-render after either success or failure
+        gui.renderPieceToBoard(board);
     }
 }
