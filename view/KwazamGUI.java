@@ -72,7 +72,14 @@ public class KwazamGUI extends JFrame
     {
         JButton cell = new JButton();
         cell.setOpaque(true);
-        cell.setBackground(Color.white);
+
+        Color evenColour = new Color(112, 128, 144); 
+        Color oddColour = new Color( 245, 245, 245);   
+
+        // Alternate colors based on (row + col) parity
+        boolean colour = (row + col) % 2 == 0;
+        cell.setBackground(colour ? evenColour : oddColour);
+
         cell.setBorder(new LineBorder(Color.black, 2));
         cell.setFocusable(false);
 
