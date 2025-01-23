@@ -228,4 +228,44 @@ public class KwazamGUI extends JFrame implements WinListener
         return initialPieceStartingPositions;
     }
 
+
+    // Handle win event by disabling the board and displaying a win message
+    /**@author Abdullah Hawash
+     *
+     * @param winner
+     */
+    @Override
+    public void onWin(Player winner)
+    {
+        disableBoard();
+        displayWinMessage(winner);
+    }
+
+    /**@author Abdullah Hawash
+     *
+     */
+    private void disableBoard()
+    {
+        for (JButton[] row : boardCells)
+        {
+            for (JButton cell : row)
+            {
+                cell.setEnabled(false);
+            }
+        }
+    }
+
+    /**@author Abdullah Hawash
+     *
+     * @param winner
+     */
+    private void displayWinMessage(Player winner)
+    {
+        String message = winner.id().equals("1") ? "Blue wins!!" : "Red wins!!";
+        Color messageColor = winner.id().equals("1") ? Color.BLUE : Color.RED;
+        winLabel.setText(message);
+        winLabel.setForeground(messageColor);
+        winLabel.setVisible(true);
+    }
+
 }
