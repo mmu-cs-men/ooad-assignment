@@ -21,6 +21,7 @@ public abstract class GameMaster<T extends Board> implements CaptureListener
     private final CircularLinkedList<Player> players;
     private final ArrayList<WinListener> winListeners = new ArrayList<>();
     private Player currentPlayer;
+    private int turnCount = 0;
 
     public GameMaster(T board, CircularLinkedList<Player> players)
     {
@@ -65,6 +66,7 @@ public abstract class GameMaster<T extends Board> implements CaptureListener
     public void advanceTurn()
     {
         this.currentPlayer = this.playerIterator.next();
+        this.turnCount++;
     }
 
     public void registerWinListener(WinListener listener)
