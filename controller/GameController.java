@@ -74,6 +74,10 @@ public class GameController implements CellClickListener, WinListener {
         gameMaster.movePiece(fromCellPos, toCellPos);
     }
 
+    /**
+     * @author Abdullah Hawash
+     * @param winner
+     */
     @Override
     public void onWin(Player winner) {
         gui.disableBoard();
