@@ -1,5 +1,6 @@
 package view;
 
+import java.awt.image.BufferedImage;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
@@ -12,21 +13,24 @@ public class KwazamGUI extends JFrame
                                                               // cells
     private final String[][] initialPieceStartingPositions =
 
-            {
-                    {"Tor_red_piece", "Biz_red_piece", "Sau_red_piece", "Biz_red_piece", "Xor_red_piece"}, // Row
-                    // 1
-                    {"Ram_red_piece", "Ram_red_piece", "Ram_red_piece", "Ram_red_piece", "Ram_red_piece"}, // Row
-                    // 2
-                    {null, null, null, null, null}, // Row 3
-                    {null, null, null, null, null}, // Row 4
-                    {null, null, null, null, null}, // Row 5
-                    {null, null, null, null, null}, // Row 6
-                    {"Ram_blue_piece", "Ram_blue_piece", "Ram_blue_piece", "Ram_blue_piece", "Ram_blue_piece"}, // Row
-                    // 7
-                    {"Xor_blue_piece", "Biz_blue_piece", "Sau_blue_piece", "Biz_blue_piece", "Tor_blue_piece"} // Row
-                    // 8
-            };
-
+    {
+            {"Tor_red_piece", "Biz_red_piece", "Sau_red_piece", "Biz_red_piece",
+                    "Xor_red_piece"}, // Row
+            // 1
+            {"Ram_red_piece", "Ram_red_piece", "Ram_red_piece", "Ram_red_piece",
+                    "Ram_red_piece"}, // Row
+            // 2
+            {null, null, null, null, null}, // Row 3
+            {null, null, null, null, null}, // Row 4
+            {null, null, null, null, null}, // Row 5
+            {null, null, null, null, null}, // Row 6
+            {"Ram_blue_piece", "Ram_blue_piece", "Ram_blue_piece",
+                    "Ram_blue_piece", "Ram_blue_piece"}, // Row
+            // 7
+            {"Xor_blue_piece", "Biz_blue_piece", "Sau_blue_piece",
+                    "Biz_blue_piece", "Tor_blue_piece"} // Row
+            // 8
+    };
 
     private int prevRowClicked = -1, prevColClicked = -1;
     private CellClickListener cellClickListener;
@@ -34,7 +38,7 @@ public class KwazamGUI extends JFrame
     public KwazamGUI()
     {
         setTitle("Kwazam Chess Game");
-        setSize(600, 800);
+        setSize(550, 800);
         setLayout(new BorderLayout());
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -113,27 +117,63 @@ public class KwazamGUI extends JFrame
         }
     }
 
-    /**
-     * Loads an image from disk and scales it to the given width and height.
-     * Returns null if the path is null or if width/height <= 0.
+    /*
+     * Image Scaling Logic: This section calculates the dimensions to scale the
+     * original image such that: 1. The image fits within the padded target
+     * area(cell dimensions minus padding). 2. The aspect ratio (width-to-height
+     * proportion) is preserved to avoid distortion. Steps taken first we get
+     * the original image's width and height. Using that we calculate
+     * width/height ratios between the padded target area and original image. We
+     * then wse the SMALLER ratio to scale the image, ensuring it fits entirely
+     * within both the target width and height constraints and finally we derive
+     * the final scaled width/height using this ratio.
      */
-    private ImageIcon loadScaledToCellIcon(String imagePath, int width,
-            int height)
+
+    private ImageIcon loadScaledToCellIcon(String imagePath, int targetWidth,
+            int targetHeight)
     {
-        if (imagePath == null || width <= 0 || height <= 0)
+        if (imagePath == null || targetWidth <= 0 || targetHeight <= 0)
         {
             return null;
         }
         try
         {
             ImageIcon rawIcon = new ImageIcon(imagePath);
+            Image rawImage = rawIcon.getImage();
 
-            width = (int) Math.floor(width / 1.12);
-            height = (int) Math.floor(height / 1.12);
+            // Handling Padding
+            int padding = 3;
+            int paddedTargetWidth = targetWidth - 2 * padding;
+            int paddedTargetHeight = targetHeight - 2 * padding;
 
-            Image scaled = rawIcon.getImage().getScaledInstance(width, height,
-                    Image.SCALE_SMOOTH);
-            return new ImageIcon(scaled);
+            // Scalling Calculations
+            int originalWidth = rawImage.getWidth(null);
+            int originalHeight = rawImage.getHeight(null);
+            double widthRatio = (double) paddedTargetWidth / originalWidth;
+            double heightRatio = (double) paddedTargetHeight / originalHeight;
+            double scale = Math.min(widthRatio, heightRatio);
+
+            int scaledWidth = (int) (originalWidth * scale);
+            int scaledHeight = (int) (originalHeight * scale);
+
+            // Create a transparent canvas to hold the chess piece icon This
+            // ensures the icon is centered and doesn't stretch.
+            BufferedImage paddedImage = new BufferedImage(targetWidth,
+                    targetHeight, BufferedImage.TYPE_INT_ARGB);
+
+            // Enable smooth scaling for the icon (avoids pixelation)
+            // Bilinear interpolation blends pixels for a smoother appearance.
+            Graphics2D g2d = paddedImage.createGraphics();
+            g2d.setRenderingHint(RenderingHints.KEY_INTERPOLATION,
+                    RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+
+            // Center the scaled image
+            int x = (targetWidth - scaledWidth) / 2;
+            int y = (targetHeight - scaledHeight) / 2;
+            g2d.drawImage(rawImage, x, y, scaledWidth, scaledHeight, null);
+            g2d.dispose();
+
+            return new ImageIcon(paddedImage);
         }
         catch (Exception e)
         {
@@ -179,4 +219,5 @@ public class KwazamGUI extends JFrame
     {
         return initialPieceStartingPositions;
     }
+
 }
