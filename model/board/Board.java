@@ -49,7 +49,7 @@ public abstract class Board
     /**
      * A two-dimensional matrix of cells representing the game board.
      */
-    private final ArrayList<ArrayList<Cell>> cells;
+    protected final ArrayList<ArrayList<Cell>> cells;
 
     /**
      * A list that holds all registered listeners which respond when a piece
