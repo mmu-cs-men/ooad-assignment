@@ -23,6 +23,10 @@ public class GameController implements CellClickListener
         // Register this Controller as the listener for cell clicks
         this.gui.setCellClickListener(this);
 
+        // Register GUI as a listener to display the win message when a win occurs
+        this.gameMaster.registerWinListener(gui);
+
+
     }
 
     @Override
