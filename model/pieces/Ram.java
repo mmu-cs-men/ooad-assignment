@@ -61,4 +61,24 @@ public class Ram extends Piece implements BoardVerticalEdgeListener
         facingUp = !facingUp;
     }
 
+    /**
+     * Override the default icon name with flipping logic:
+     */
+    @Override
+    public String getIconName()
+    {
+        String baseColor = getOwner().id().equals("1") ? "blue" : "red";
+
+        // "red" piece: if facingUp==true => we use "_flipped", else normal
+        // "blue" piece: if facingUp==true => normal, else "_flipped"
+        // Adjust if our initial orientation is reversed
+        if (baseColor.equals("red"))
+        {
+            return facingUp ? "ram_red_piece_flipped" : "ram_red_piece";
+        }
+        else
+        {
+            return facingUp ? "ram_blue_piece" : "ram_blue_piece_flipped";
+        }
+    }
 }
