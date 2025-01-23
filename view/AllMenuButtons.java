@@ -67,7 +67,7 @@ public class AllMenuButtons extends JPanel
         button.setPreferredSize(new Dimension(120, 40)); // Set the fixed button size
         button.setBackground(backgroundColor); // Set the background colour
         button.setForeground(foregroundColor); // Set the text color
-        button.setFont(new Font("Montserrat", Font.BOLD, 14)); // Set the custom font style 
+        button.setFont(button.getFont().deriveFont(Font.BOLD, 14));
         button.setOpaque(true); // Ensure the background colour is visible
         button.setBorderPainted(false); // Remove the button border
         button.setFocusPainted(false); // Disable the focus outline on click
