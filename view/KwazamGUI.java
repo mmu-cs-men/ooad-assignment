@@ -230,14 +230,7 @@ public class KwazamGUI extends JFrame {
         }
     }
 
-    /**@author Abdullah Hawash
-     *
-     * @param winner
-     */
-    private void displayWinMessage(Player winner)
-    {
-        String message = winner.id().equals("1") ? "Blue wins!!" : "Red wins!!";
-        Color messageColor = winner.id().equals("1") ? Color.BLUE : Color.RED;
+    public void displayWinMessage(String message, Color color) {
         winLabel.setText(message);
         winLabel.setForeground(messageColor);
         winLabel.setVisible(true);
