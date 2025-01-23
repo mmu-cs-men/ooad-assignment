@@ -14,15 +14,15 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
 
-public class GameMaster implements CaptureListener
+public abstract class GameMaster<T extends Board> implements CaptureListener
 {
     private final Iterator<Player> playerIterator;
-    private final Board board;
+    private final T board;
     private final CircularLinkedList<Player> players;
     private final ArrayList<WinListener> winListeners = new ArrayList<>();
     private Player currentPlayer;
 
-    public GameMaster(Board board, CircularLinkedList<Player> players)
+    public GameMaster(T board, CircularLinkedList<Player> players)
     {
         this.board = board;
         this.players = players;

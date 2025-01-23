@@ -1,7 +1,6 @@
 import controller.GameController;
-import model.board.Board;
 import model.board.KwazamBoard;
-import model.game.GameMaster;
+import model.game.KwazamGameMaster;
 import model.game.Player;
 import utils.CircularLinkedList;
 import view.KwazamGUI;
@@ -14,9 +13,9 @@ public class Main
         players.add(new Player("1")); // TODO placeholder
         players.add(new Player("2")); // TODO placeholder
 
-        Board board = new KwazamBoard(players);
+        KwazamBoard board = new KwazamBoard(players);
 
-        GameMaster gameMaster = new GameMaster(board, players);
+        KwazamGameMaster gameMaster = new KwazamGameMaster(board, players);
         KwazamGUI gui = new KwazamGUI();
         new GameController(gui, gameMaster);
     }
