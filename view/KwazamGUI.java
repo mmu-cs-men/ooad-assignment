@@ -222,28 +222,9 @@ public class KwazamGUI extends JFrame {
         return initialPieceStartingPositions;
     }
 
-
-    // Handle win event by disabling the board and displaying a win message
-    /**@author Abdullah Hawash
-     *
-     * @param winner
-     */
-    @Override
-    public void onWin(Player winner)
-    {
-        disableBoard();
-        displayWinMessage(winner);
-    }
-
-    /**@author Abdullah Hawash
-     *
-     */
-    private void disableBoard()
-    {
-        for (JButton[] row : boardCells)
-        {
-            for (JButton cell : row)
-            {
+    public void disableBoard() {
+        for (JButton[] row : boardCells) {
+            for (JButton cell : row) {
                 cell.setEnabled(false);
             }
         }
