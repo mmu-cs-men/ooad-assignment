@@ -46,15 +46,8 @@ public class GameController implements CellClickListener
             CellPosition fromCellPos = new CellPosition(selectedRow, selectedCol);
             CellPosition toCellPos = new CellPosition(row, col);
 
-            movePieceBackend(fromCellPos, toCellPos);
-
-            // Perform the movement
-            board[row][col] = board[selectedRow][selectedCol]; // Move the piece
-            board[selectedRow][selectedCol] = null; // Clear the original
-            // position
-
-            // Update the View
-            gui.renderPieceToBoard(board);
+            // Moved into a helper method
+            movePieceBackend(fromCellPos, toCellPos, board);
 
             // Reset the selection
             selectedRow = -1;
