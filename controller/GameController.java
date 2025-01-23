@@ -1,7 +1,11 @@
 package controller;
 
 import model.board.CellPosition;
+import model.exceptions.NoPieceException;
+import model.exceptions.NotYourPieceException;
+import model.exceptions.PieceMoveException;
 import model.game.GameMaster;
+import model.pieces.Piece;
 import view.CellClickListener;
 import view.KwazamGUI;
 
