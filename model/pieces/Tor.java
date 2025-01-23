@@ -6,7 +6,7 @@ import model.game.Player;
 import java.util.LinkedList;
 import java.util.Optional;
 
-public class Tor extends Piece
+public class Tor extends Piece implements Switchable
 {
     public Tor(Player player)
     {
@@ -48,4 +48,9 @@ public class Tor extends Piece
         return Optional.of(path);
     }
 
+    @Override
+    public Piece getSwitchedPiece()
+    {
+        return new Xor(this.getOwner());
+    }
 }
