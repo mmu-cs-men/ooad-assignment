@@ -8,7 +8,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import java.awt.*;
 
-public class KwazamGUI extends JFrame
+public class KwazamGUI extends JFrame implements WinListener
 {
 
     private final JButton[][] boardCells = new JButton[8][5]; // 8x5 grid of
