@@ -239,7 +239,7 @@ public class KwazamGUI extends JFrame {
 
     public void displayWinMessage(String message, Color color) {
         winLabel.setText(message);
-        winLabel.setForeground(messageColor);
+        winLabel.setForeground(color);
         winLabel.setVisible(true);
     }
 
