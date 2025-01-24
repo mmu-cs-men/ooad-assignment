@@ -234,6 +234,11 @@ public class KwazamGUI extends JFrame {
 
     /**
      * @author Abdullah Hawash
+     * Disables all cells on the board, stopping further user interaction
+     * <p>
+     * This method is invoked at the end of the game or when input
+     * should be restricted to prevent further moves
+     * </p>
      */
     public void disableBoard() {
         for (JButton[] row : boardCells) {
@@ -245,8 +250,15 @@ public class KwazamGUI extends JFrame {
 
     /**
      * @author Abdullah Hawash
-     * @param message
-     * @param color
+     * Displays a message indicating the game has been won by updating the win label.
+     * The message is shown in the specified color and is made visible on the screen.
+     * <p>
+     * This method called when a player wins the game to provide
+     * visual feedback to the user (a game win message below the board)
+     * </p>
+     *
+     * @param message the text message to be displayed; cannot be {@code null}
+     * @param color the color of the displayed message; cannot be {@code null}
      */
     public void displayWinMessage(String message, Color color) {
         winLabel.setText(message);
