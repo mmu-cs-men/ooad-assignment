@@ -131,18 +131,6 @@ public class KwazamGUI extends JFrame
         return cell;
     }
 
-    /*
-     * Image Scaling Logic: This section calculates the dimensions to scale the
-     * original image such that: 1. The image fits within the padded target
-     * area(cell dimensions minus padding). 2. The aspect ratio (width-to-height
-     * proportion) is preserved to avoid distortion. Steps taken first we get
-     * the original image's width and height. Using that we calculate
-     * width/height ratios between the padded target area and original image. We
-     * then wse the SMALLER ratio to scale the image, ensuring it fits entirely
-     * within both the target width and height constraints and finally we derive
-     * the final scaled width/height using this ratio.
-     */
-
     // Dynamically render pieces on the board based on the given positions array
     public void renderPieceToBoard(String[][] positions)
     {
@@ -174,6 +162,17 @@ public class KwazamGUI extends JFrame
         }
     }
 
+    /*
+     * Image Scaling Logic: This section calculates the dimensions to scale the
+     * original image such that: 1. The image fits within the padded target
+     * area(cell dimensions minus padding). 2. The aspect ratio (width-to-height
+     * proportion) is preserved to avoid distortion. Steps taken first we get
+     * the original image's width and height. Using that we calculate
+     * width/height ratios between the padded target area and original image. We
+     * then wse the SMALLER ratio to scale the image, ensuring it fits entirely
+     * within both the target width and height constraints and finally we derive
+     * the final scaled width/height using this ratio.
+     */
     private ImageIcon loadScaledToCellIcon(String imagePath, int targetWidth,
                                            int targetHeight)
     {
