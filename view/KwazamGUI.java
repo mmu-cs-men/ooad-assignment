@@ -318,11 +318,6 @@ public class KwazamGUI extends JFrame
      */
     public void flashCellRed(int row, int col)
     {
-        if (row < 0 || row >= boardCells.length || col < 0 || col >= boardCells[row].length)
-        {
-            return; // Guard: out of bounds
-        }
-
         JButton cell = boardCells[row][col];
 
         // get the cell's true default color (stored at creation)
