@@ -58,7 +58,7 @@ public class GameController implements CellClickListener, WinListener
 
             try
             {
-                movePieceBackend(fromCellPos, toCellPos);
+                gameMaster.movePiece(fromCellPos, toCellPos);
 
                 // Perform the movement
                 board[row][col] = board[selectedRow][selectedCol]; // Move the piece
@@ -90,11 +90,6 @@ public class GameController implements CellClickListener, WinListener
 
             gameMaster.advanceTurn();
         }
-    }
-
-    private void movePieceBackend(CellPosition fromCellPos, CellPosition toCellPos)
-    {
-        gameMaster.movePiece(fromCellPos, toCellPos);
     }
 
     /**
