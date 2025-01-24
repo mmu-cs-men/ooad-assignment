@@ -79,18 +79,6 @@ public class GameController implements CellClickListener, WinListener
                 gui.flashCellRed(selectedRow, selectedCol);
                 return;
             }
-            catch (NotYourPieceException e)
-            {
-                // FLASH RED because we tried to move an enemy piece
-                gui.flashCellRed(selectedRow, selectedCol);
-                return;
-            }
-            catch (PieceMoveException e)
-            {
-                // FLASH RED for an invalid move (blocked path, wrong direction, etc.)
-                gui.flashCellRed(row, col);
-                return;
-            }
             finally
             {
                 // Reset selection whether the move was successful or not
