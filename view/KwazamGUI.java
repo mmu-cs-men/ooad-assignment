@@ -252,4 +252,31 @@ public class KwazamGUI extends JFrame {
         winLabel.setBorder(BorderFactory.createEmptyBorder(0, 0, 20, 0));
     }
 
+    public void flipRamPiece(int row, int col) {
+        JButton cell = boardCells[row][col];
+        String piece = initialPieceStartingPositions[row][col];
+
+        if (piece != null && piece.startsWith("Ram")) {
+            // Check current orientation and flip accordingly
+            String flippedPiece = piece.endsWith("_flipped")
+                    ? piece.replace("_flipped", "")  // Switch back to normal
+                    : piece + "_flipped";  // Switch to flipped
+
+            String imagePath = "assets/" + flippedPiece + ".png";
+
+            int cellWidth = cell.getWidth();
+            int cellHeight = cell.getHeight();
+
+            ImageIcon flippedIcon = loadScaledToCellIcon(imagePath, cellWidth, cellHeight);
+
+            if (flippedIcon != null) {
+                cell.setIcon(flippedIcon);
+                initialPieceStartingPositions[row][col] = flippedPiece;
+            } else {
+                System.err.println("Error: Could not load image: " + imagePath);
+            }
+        }
+
+
+    }
 }
