@@ -213,25 +213,6 @@ public abstract class Board
         return false;
     }
 
-
-    /**
-     * TODO: Might remove this if not used.
-     * Checks if the specified cell is occupied by an piece belonging to a
-     * different player ("enemy").
-     *
-     * @param cellPos the position of the cell to be checked; must be within
-     *                bounds
-     * @param player  the player checking for an enemy piece
-     * @return {@code true} if the cell contains an enemy piece, {@code false}
-     * otherwise
-     * @throws IllegalArgumentException if {@code cellPos} is out of bounds.
-     */
-    public boolean hasEnemyPieceAt(CellPosition cellPos, Player player)
-    {
-        Optional<Piece> piece = this.getPieceAt(cellPos);
-        return piece.isPresent() && piece.get().getOwner() != player;
-    }
-
     /**
      * Checks if the specified cell is occupied by a piece belonging to the same
      * player ("friendly").
