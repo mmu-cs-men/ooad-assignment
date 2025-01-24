@@ -307,11 +307,10 @@ public class KwazamGUI extends JFrame {
         // so we can stop after 2 on/off cycles (4 toggles total basically)
         final int[] toggleCount = {0};
 
-        Color finalDefaultColor = defaultColor;
         flashTimer.addActionListener(e -> {
             // Toggle between default color and red
             if (cell.getBackground() == Color.RED) {
-                cell.setBackground(finalDefaultColor);
+                cell.setBackground(defaultColor);
             } else {
                 cell.setBackground(Color.RED);
             }
