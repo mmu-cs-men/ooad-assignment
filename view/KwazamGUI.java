@@ -31,7 +31,7 @@ public class KwazamGUI extends JFrame
                             "Biz_blue_piece", "Tor_blue_piece"} // Row
                     // 8
             };
-
+    private boolean flipped = false;
     private int prevRowClicked = -1, prevColClicked = -1;
     private CellClickListener cellClickListener;
     private JLabel winLabel; // Label for displaying the win message
@@ -234,9 +234,20 @@ public class KwazamGUI extends JFrame
             // Center the scaled image
             int x = (targetWidth - scaledWidth) / 2;
             int y = (targetHeight - scaledHeight) / 2;
-            g2d.drawImage(rawImage, x, y, scaledWidth, scaledHeight, null);
-            g2d.dispose();
 
+            if (this.flipped)
+            {
+                g2d.translate(x + scaledWidth, y + scaledHeight);
+                g2d.scale(-1, -1);
+                g2d.drawImage(rawImage, 0, 0, scaledWidth, scaledHeight, null);
+            }
+            else
+            {
+                // No flipping
+                g2d.drawImage(rawImage, x, y, scaledWidth, scaledHeight, null);
+            }
+
+            g2d.dispose();
             return new ImageIcon(paddedImage);
         }
         catch (Exception e)
@@ -409,5 +420,52 @@ public class KwazamGUI extends JFrame
         }
 
 
+    }
+
+    private void flipPiecesPosition()
+    {
+        // Reverse each row
+        for (String[] row : this.initialPieceStartingPositions)
+        {
+            if (row == null)
+            {
+                continue;
+            }
+            reverseRow(row);
+        }
+
+        // Reverse the order of the rows
+        int numRows = this.initialPieceStartingPositions.length;
+        for (int i = 0; i < numRows / 2; i++)
+        {
+            String[] temp = this.initialPieceStartingPositions[i];
+            this.initialPieceStartingPositions[i] = this.initialPieceStartingPositions[numRows - 1 - i];
+            this.initialPieceStartingPositions[numRows - 1 - i] = temp;
+        }
+    }
+
+    private void reverseRow(String[] row)
+    {
+        int start = 0;
+        int end = row.length - 1;
+        while (start < end)
+        {
+            String temp = row[start];
+            row[start] = row[end];
+            row[end] = temp;
+            start++;
+            end--;
+        }
+    }
+
+    public void flipBoard()
+    {
+        this.flipped = !this.flipped;
+        this.flipPiecesPosition();
+    }
+
+    public boolean isFlipped()
+    {
+        return flipped;
     }
 }
