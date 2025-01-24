@@ -80,6 +80,7 @@ public class KwazamGUI extends JFrame
 
         // This counter tracks how many times we've toggled
         // so we can stop after 2 on/off cycles (4 toggles total basically)
+        // array cuz lambdas don't support non-final variables
         final int[] toggleCount = {0};
 
         flashTimer.addActionListener(e -> {
