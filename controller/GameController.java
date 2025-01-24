@@ -55,20 +55,46 @@ public class GameController implements CellClickListener, WinListener {
             CellPosition fromCellPos = new CellPosition(selectedRow, selectedCol);
             CellPosition toCellPos = new CellPosition(row, col);
 
-            movePieceBackend(fromCellPos, toCellPos);
+            try
+            {
+                movePieceBackend(fromCellPos, toCellPos);
 
             // Perform the movement
             board[row][col] = board[selectedRow][selectedCol]; // Move the piece
             board[selectedRow][selectedCol] = null; // Clear the original
             // position
 
-            // Update the View
-            gui.renderPieceToBoard(board);
+                // Update the View
+                gui.renderPieceToBoard(board);
+            }
+            catch (NoPieceException e)
+            {
+                // FLASH RED for "no piece found at that cell"
+                gui.flashCellRed(selectedRow, selectedCol);
+                return;
+            }
+            catch (NotYourPieceException e)
+            {
+                // FLASH RED because we tried to move an enemy piece
+                gui.flashCellRed(selectedRow, selectedCol);
+                return;
+            }
+            catch (PieceMoveException e)
+            {
+                // FLASH RED for an invalid move (blocked path, wrong direction, etc.)
+                gui.flashCellRed(row, col);
+                return;
+            }
+            finally
+            {
+                // Reset selection whether the move was successful or not
+                selectedRow = -1;
+                selectedCol = -1;
+                isPieceSelected = false;
 
-            // Reset the selection
-            selectedRow = -1;
-            selectedCol = -1;
-            isPieceSelected = false;
+            }
+
+            gameMaster.advanceTurn();
         }
     }
 
