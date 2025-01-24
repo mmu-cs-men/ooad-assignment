@@ -267,4 +267,65 @@ public class KwazamGUI extends JFrame {
         winLabel.setBorder(BorderFactory.createEmptyBorder(0, 0, 20, 0));
     }
 
+    /**
+     * @author Abdullah Hawash
+     * Temporarily flashes the specified cell in red to indicate an error
+     * The cell's original color is restored after a smal period
+     * <p>
+     * This method is used to provide visual feedback for invalid moves
+     * or other incorrect actions
+     * </p>
+     *
+     * @param row the zero-based row index of the cell to be flashed; must be within the bounds of the board
+     * @param col the zero-based column index of the cell to be flashed; must be within the bounds of the board
+     *
+     */
+    public void flashCellRed(int row, int col) {
+        if (row < 0 || row >= boardCells.length || col < 0 || col >= boardCells[row].length) {
+            return; // Guard: out of bounds
+        }
+
+        JButton cell = boardCells[row][col];
+
+        // get the cell's true default color (stored at creation)
+        // this is to prevent the cell from permanently becoming red after spamming the invalid move
+        Color defaultColor = (Color) cell.getClientProperty("defaultBackground");
+        if (defaultColor == null) {
+            // Fallback in case client property isn't set
+            defaultColor = cell.getBackground();
+        }
+
+        final int flashInterval = 150;
+        final Timer flashTimer = getTimer(flashInterval, defaultColor, cell);
+
+        flashTimer.start();
+    }
+
+    private static Timer getTimer(int flashInterval, Color defaultColor, JButton cell) {
+        final Timer flashTimer = new Timer(flashInterval, null);
+
+        // This counter tracks how many times we've toggled
+        // so we can stop after 2 on/off cycles (4 toggles total basically)
+        final int[] toggleCount = {0};
+
+        Color finalDefaultColor = defaultColor;
+        flashTimer.addActionListener(e -> {
+            // Toggle between default color and red
+            if (cell.getBackground() == Color.RED) {
+                cell.setBackground(finalDefaultColor);
+            } else {
+                cell.setBackground(Color.RED);
+            }
+            toggleCount[0]++;
+
+            // After 4 toggles => 2 flashes completed
+            if (toggleCount[0] == 4) {
+                flashTimer.stop();
+                // Ensure we end on the default color
+                cell.setBackground(finalDefaultColor);
+            }
+        });
+        return flashTimer;
+    }
+
 }
