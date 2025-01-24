@@ -69,7 +69,13 @@ public class GameController implements CellClickListener, WinListener
                 // Update the View
                 gui.renderPieceToBoard(board);
             }
-            catch (NoPieceException e)
+            catch (PieceMoveException e)
+            {
+                // FLASH RED for an invalid move (blocked path, wrong direction, etc.)
+                gui.flashCellRed(row, col);
+                return;
+            }
+            catch (NoPieceException | NotYourPieceException e)
             {
                 // FLASH RED for "no piece found at that cell"
                 gui.flashCellRed(selectedRow, selectedCol);
