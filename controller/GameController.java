@@ -65,6 +65,11 @@ public class GameController implements CellClickListener, WinListener
                 board[selectedRow][selectedCol] = null; // Clear the original
                 // position
 
+                if ((row == 0 || row == 7) && board[row][col] != null && board[row][col].startsWith("Ram"))
+                {
+                    gui.flipRamPiece(row, col);
+                }
+
                 // Update the View
                 gui.renderPieceToBoard(board);
             }

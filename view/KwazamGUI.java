@@ -138,7 +138,7 @@ public class KwazamGUI extends JFrame
         cell.addActionListener(e -> handleCellClick(row, col));
         return cell;
     }
-    
+
     // Method to visually toggle Tor/Xor pieces after 2 turns
     public void toggleTorXorVisuals() {
         torXorSwitched = !torXorSwitched;
@@ -353,4 +353,52 @@ public class KwazamGUI extends JFrame
         flashTimer.start();
     }
 
+    /**
+     * Flips the orientation of a Ram piece at the specified board position.
+     * If the piece is in its default orientation, it will be flipped; if
+     * already flipped, it will revert to its original state.
+     * <p>
+     * This method updates the piece's visual representation and its internal
+     * tracking state. The piece must exist at the specified position and be of type "Ram".
+     * <p>
+     * Usage example:
+     * <pre>
+     *     board.flipRamPiece(2, 3);
+     * </pre>
+     * This call will flip the Ram piece at row 2, column 3 if present.
+     *
+     * @param row the row index of the target cell; must be within board bounds.
+     * @param col the column index of the target cell; must be within board bounds.
+     * @throws ArrayIndexOutOfBoundsException if the provided row or column exceeds board dimensions.
+     *
+     * @author Abdullah Hawash
+     * @see #loadScaledToCellIcon(String, int, int)
+     */
+    public void flipRamPiece(int row, int col) {
+        JButton cell = boardCells[row][col];
+        String piece = initialPieceStartingPositions[row][col];
+
+        if (piece != null && piece.startsWith("Ram")) {
+            // Check current orientation and flip accordingly
+            String flippedPiece = piece.endsWith("_flipped")
+                    ? piece.replace("_flipped", "")  // Switch back to normal
+                    : piece + "_flipped";  // Switch to flipped
+
+            String imagePath = "assets/" + flippedPiece + ".png";
+
+            int cellWidth = cell.getWidth();
+            int cellHeight = cell.getHeight();
+
+            ImageIcon flippedIcon = loadScaledToCellIcon(imagePath, cellWidth, cellHeight);
+
+            if (flippedIcon != null) {
+                cell.setIcon(flippedIcon);
+                initialPieceStartingPositions[row][col] = flippedPiece;
+            } else {
+                System.err.println("Error: Could not load image: " + imagePath);
+            }
+        }
+
+
+    }
 }
