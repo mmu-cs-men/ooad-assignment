@@ -320,7 +320,7 @@ public class KwazamGUI extends JFrame {
             if (toggleCount[0] == 4) {
                 flashTimer.stop();
                 // Ensure we end on the default color
-                cell.setBackground(finalDefaultColor);
+                cell.setBackground(defaultColor);
             }
         });
         return flashTimer;
