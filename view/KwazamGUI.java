@@ -6,8 +6,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import java.awt.*;
 
-public class KwazamGUI extends JFrame
-{
+public class KwazamGUI extends JFrame {
 
     private final JButton[][] boardCells = new JButton[8][5]; // 8x5 grid of
                                                               // cells
@@ -34,6 +33,7 @@ public class KwazamGUI extends JFrame
 
     private int prevRowClicked = -1, prevColClicked = -1;
     private CellClickListener cellClickListener;
+    private JLabel winLabel; // Label for displaying the win message
 
     public KwazamGUI()
     {
@@ -64,6 +64,11 @@ public class KwazamGUI extends JFrame
         add(boardPanel, BorderLayout.CENTER);
         setVisible(true);
 
+        // Add label for win message at the bottom
+        winLabel = new JLabel("", SwingConstants.CENTER);
+        winLabel.setFont(new Font("Arial", Font.BOLD, 20));
+        add(winLabel, BorderLayout.SOUTH);
+
         renderPieceToBoard(initialPieceStartingPositions);
 
     }
@@ -73,8 +78,8 @@ public class KwazamGUI extends JFrame
         JButton cell = new JButton();
         cell.setOpaque(true);
 
-        Color evenColour = new Color(112, 128, 144); 
-        Color oddColour = new Color( 245, 245, 245);   
+        Color evenColour = new Color(112, 128, 144);
+        Color oddColour = new Color( 245, 245, 245);
 
         // Alternate colors based on (row + col) parity
         boolean colour = (row + col) % 2 == 0;
@@ -86,10 +91,7 @@ public class KwazamGUI extends JFrame
         // center the icon in the label
         cell.setHorizontalAlignment(SwingConstants.CENTER);
         cell.setVerticalAlignment(SwingConstants.CENTER);
-
-        int rowclicked = row;
-        int colclicked = col;
-        cell.addActionListener(e -> handleCellClick(rowclicked, colclicked));
+        cell.addActionListener(e -> handleCellClick(row, col));
         return cell;
     }
 
@@ -225,6 +227,29 @@ public class KwazamGUI extends JFrame
     public String[][] getInitialPieceStartingPositions()
     {
         return initialPieceStartingPositions;
+    }
+
+    /**
+     * @author Abdullah Hawash
+     */
+    public void disableBoard() {
+        for (JButton[] row : boardCells) {
+            for (JButton cell : row) {
+                cell.setEnabled(false);
+            }
+        }
+    }
+
+    /**
+     * @author Abdullah Hawash
+     * @param message
+     * @param color
+     */
+    public void displayWinMessage(String message, Color color) {
+        winLabel.setText(message);
+        winLabel.setForeground(color);
+        winLabel.setVisible(true);
+        winLabel.setBorder(BorderFactory.createEmptyBorder(0, 0, 20, 0));
     }
 
 }
