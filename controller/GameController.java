@@ -105,7 +105,13 @@ public class GameController implements CellClickListener, WinListener {
 
     /**
      * @author Abdullah Hawash
-     * @param winner
+     * Handles the win event by disabling the board and displaying the winner's message
+     * <p>
+     * This method is triggered when a player wins the game, updating the user interface
+     * to reflect the winning player with an appropriate message and color
+     * </p>
+     *
+     * @param winner the player who won the game; must not be {@code null}
      */
     @Override
     public void onWin(Player winner) {
