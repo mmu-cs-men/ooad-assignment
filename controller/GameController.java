@@ -56,6 +56,12 @@ public class GameController implements CellClickListener, WinListener
             CellPosition fromCellPos = new CellPosition(selectedRow, selectedCol);
             CellPosition toCellPos = new CellPosition(row, col);
 
+            if (gui.isFlipped())
+            {
+                fromCellPos = this.flipCellPos(fromCellPos, 8, 5);
+                toCellPos = this.flipCellPos(toCellPos, 8, 5);
+            }
+
             try
             {
                 gameMaster.movePiece(fromCellPos, toCellPos);
@@ -70,6 +76,8 @@ public class GameController implements CellClickListener, WinListener
                     gui.flipRamPiece(row, col);
                 }
 
+                gui.flipBoard();
+                
                 // Update the View
                 gui.renderPieceToBoard(board);
             }
@@ -101,6 +109,11 @@ public class GameController implements CellClickListener, WinListener
                 gui.toggleTorXorVisuals();
             }
         }
+    }
+
+    private CellPosition flipCellPos(CellPosition cellPos, int boardRows, int boardColumns)
+    {
+        return new CellPosition(boardRows - 1 - cellPos.row(), boardColumns - 1 - cellPos.column());
     }
 
     /**
