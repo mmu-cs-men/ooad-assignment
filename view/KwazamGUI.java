@@ -67,6 +67,10 @@ public class KwazamGUI extends JFrame {
         // Add label for win message at the bottom
         winLabel = new JLabel("", SwingConstants.CENTER);
         winLabel.setFont(new Font("Arial", Font.BOLD, 20));
+
+        //Reserve space for the label from the start
+        winLabel.setPreferredSize(new Dimension(0, 50));
+
         add(winLabel, BorderLayout.SOUTH);
 
         renderPieceToBoard(initialPieceStartingPositions);
