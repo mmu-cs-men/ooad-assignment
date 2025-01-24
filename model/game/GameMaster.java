@@ -87,8 +87,8 @@ public abstract class GameMaster<T extends Board> implements CaptureListener
     {
         this.board = board;
         this.players = players;
-        this.currentPlayer = players.getFirst();
         this.playerIterator = players.circularIterator();
+        this.currentPlayer = this.playerIterator.next();
 
         this.board.registerCaptureListener(this);
     }
