@@ -58,11 +58,6 @@ public abstract class GameMaster<T extends Board> implements CaptureListener
         this.board.movePiece(fromCellPos, toCellPos);
     }
 
-    public Player getCurrentPlayer()
-    {
-        return this.currentPlayer;
-    }
-
     public void advanceTurn()
     {
         this.currentPlayer = this.playerIterator.next();
