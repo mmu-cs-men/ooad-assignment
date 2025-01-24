@@ -35,6 +35,7 @@ public class KwazamGUI extends JFrame
     private int prevRowClicked = -1, prevColClicked = -1;
     private CellClickListener cellClickListener;
     private JLabel winLabel; // Label for displaying the win message
+    private boolean torXorSwitched = false;
 
     public KwazamGUI()
     {
@@ -130,8 +131,13 @@ public class KwazamGUI extends JFrame
         cell.addActionListener(e -> handleCellClick(row, col));
         return cell;
     }
+    
+    // Method to visually toggle Tor/Xor pieces after 2 turns
+    public void toggleTorXorVisuals() {
+        torXorSwitched = !torXorSwitched;
+        renderPieceToBoard(initialPieceStartingPositions);
+    }
 
-    // Dynamically render pieces on the board based on the given positions array
     public void renderPieceToBoard(String[][] positions)
     {
         for (int row = 0; row < positions.length; row++)
@@ -139,23 +145,29 @@ public class KwazamGUI extends JFrame
             for (int col = 0; col < positions[row].length; col++)
             {
                 JButton cell = boardCells[row][col];
-
                 String piece = positions[row][col];
 
                 if (piece != null)
                 {
+                    // Swap Tor/Xor visually based on the toggle state
+                    if (torXorSwitched)
+                    {
+                        if (piece.startsWith("Tor"))
+                        {
+                            piece = piece.replace("Tor", "Xor");
+                        }
+                        else if (piece.startsWith("Xor"))
+                        {
+                            piece = piece.replace("Xor", "Tor");
+                        }
+                    }
                     String imagePath = "assets/" + piece + ".png";
-                    int cellWidth = cell.getWidth();
-                    int cellHeight = cell.getHeight();
-
-                    // Use the helper function
-                    ImageIcon icon = loadScaledToCellIcon(imagePath, cellWidth,
-                            cellHeight);
+                    ImageIcon icon = loadScaledToCellIcon(imagePath,
+                            cell.getWidth(), cell.getHeight());
                     cell.setIcon(icon);
                 }
                 else
                 {
-                    // empty cell
                     cell.setIcon(null);
                 }
             }

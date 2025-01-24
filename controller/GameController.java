@@ -89,6 +89,12 @@ public class GameController implements CellClickListener, WinListener
             }
 
             gameMaster.advanceTurn();
+
+            // Check if it's time to swap visuals
+            if (gameMaster.getTurnCount() % 2 == 0)
+            {
+                gui.toggleTorXorVisuals();
+            }
         }
     }
 
