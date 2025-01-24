@@ -48,6 +48,7 @@ public class GameController implements CellClickListener, WinListener {
                 isPieceSelected = true;
 
             }
+            // If it’s an empty cell, we simply do nothing (not an error)
         }
         else
         {
