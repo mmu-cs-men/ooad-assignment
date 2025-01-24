@@ -300,8 +300,8 @@ public class KwazamGUI extends JFrame {
         flashTimer.start();
     }
 
-    private static Timer getTimer(int flashInterval, Color defaultColor, JButton cell) {
-        final Timer flashTimer = new Timer(flashInterval, null);
+    private static Timer getTimer(Color defaultColor, JButton cell) {
+        final Timer flashTimer = new Timer(150, null);
 
         // This counter tracks how many times we've toggled
         // so we can stop after 2 on/off cycles (4 toggles total basically)
