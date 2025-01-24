@@ -5,6 +5,7 @@ import model.game.Player;
 import model.listeners.BoardVerticalEdgeListener;
 import model.listeners.CaptureListener;
 import model.pieces.Piece;
+import model.pieces.Switchable;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -213,25 +214,6 @@ public abstract class Board
         return false;
     }
 
-
-    /**
-     * TODO: Might remove this if not used.
-     * Checks if the specified cell is occupied by an piece belonging to a
-     * different player ("enemy").
-     *
-     * @param cellPos the position of the cell to be checked; must be within
-     *                bounds
-     * @param player  the player checking for an enemy piece
-     * @return {@code true} if the cell contains an enemy piece, {@code false}
-     * otherwise
-     * @throws IllegalArgumentException if {@code cellPos} is out of bounds.
-     */
-    public boolean hasEnemyPieceAt(CellPosition cellPos, Player player)
-    {
-        Optional<Piece> piece = this.getPieceAt(cellPos);
-        return piece.isPresent() && piece.get().getOwner() != player;
-    }
-
     /**
      * Checks if the specified cell is occupied by a piece belonging to the same
      * player ("friendly").
@@ -270,6 +252,32 @@ public abstract class Board
     public void registerCaptureListener(CaptureListener listener)
     {
         this.captureListeners.add(listener);
+    }
+
+    /**
+     * Replaces any piece that implements the {@link Switchable} interface with
+     * its corresponding switched piece.
+     * <p>
+     * This method is designed to be sufficiently generic and can be used for
+     * any game (not just Kwazam Chess) where pieces can switch.
+     *
+     * @see Switchable
+     */
+    public void switchPieces()
+    {
+        for (ArrayList<Cell> row : this.cells)
+        {
+            for (Cell cell : row)
+            {
+                cell.getPiece().ifPresent(piece -> {
+                    if (piece instanceof Switchable)
+                    {
+                        cell.setPiece((((Switchable) piece).getSwitchedPiece()));
+                    }
+                });
+            }
+
+        }
     }
 
     /**

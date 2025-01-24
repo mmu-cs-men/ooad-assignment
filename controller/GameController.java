@@ -1,14 +1,19 @@
 package controller;
 
 import model.board.CellPosition;
+import model.exceptions.NoPieceException;
+import model.exceptions.NotYourPieceException;
+import model.exceptions.PieceMoveException;
 import model.game.GameMaster;
 import model.game.Player;
 import model.listeners.WinListener;
 import view.CellClickListener;
 import view.KwazamGUI;
-import java.awt.Color;
 
-public class GameController implements CellClickListener, WinListener {
+import java.awt.*;
+
+public class GameController implements CellClickListener, WinListener
+{
 
     private final KwazamGUI gui;
     private final GameMaster gameMaster;
@@ -51,35 +56,61 @@ public class GameController implements CellClickListener, WinListener {
             CellPosition fromCellPos = new CellPosition(selectedRow, selectedCol);
             CellPosition toCellPos = new CellPosition(row, col);
 
-            movePieceBackend(fromCellPos, toCellPos);
+            try
+            {
+                gameMaster.movePiece(fromCellPos, toCellPos);
 
-            // Perform the movement
-            board[row][col] = board[selectedRow][selectedCol]; // Move the piece
-            board[selectedRow][selectedCol] = null; // Clear the original
-            // position
+                // Perform the movement
+                board[row][col] = board[selectedRow][selectedCol]; // Move the piece
+                board[selectedRow][selectedCol] = null; // Clear the original
+                // position
 
-            // Update the View
-            gui.renderPieceToBoard(board);
+                // Update the View
+                gui.renderPieceToBoard(board);
+            }
+            catch (PieceMoveException e)
+            {
+                // blocked path, wrong direction, etc.
+                gui.flashCellRed(row, col);
+                return;
+            }
+            catch (NoPieceException | NotYourPieceException e)
+            {
+                gui.flashCellRed(selectedRow, selectedCol);
+                return;
+            }
+            finally
+            {
+                // Reset selection whether the move was successful or not
+                selectedRow = -1;
+                selectedCol = -1;
+                isPieceSelected = false;
 
-            // Reset the selection
-            selectedRow = -1;
-            selectedCol = -1;
-            isPieceSelected = false;
+            }
+
+            gameMaster.advanceTurn();
+
+            // Check if it's time to swap visuals
+            if (gameMaster.getTurnCount() % 2 == 0)
+            {
+                gui.toggleTorXorVisuals();
+            }
         }
     }
 
-    private void movePieceBackend(CellPosition fromCellPos, CellPosition toCellPos)
-    {
-        gameMaster.advanceTurn();
-        gameMaster.movePiece(fromCellPos, toCellPos);
-    }
-
     /**
-     * @author Abdullah Hawash
-     * @param winner
+     * @param winner the player who won the game; must not be {@code null}
+     * @author Abdullah Hawash Handles the win event by disabling the board and
+     * displaying the winner's message
+     * <p>
+     * This method is triggered when a player wins the game, updating the user
+     * interface to reflect the winning player with an appropriate message and
+     * color
+     * </p>
      */
     @Override
-    public void onWin(Player winner) {
+    public void onWin(Player winner)
+    {
         gui.disableBoard();
         gui.displayWinMessage(winner.id().equals("1") ? "Blue wins!!" : "Red wins!!",
                 winner.id().equals("1") ? Color.BLUE : Color.RED);
