@@ -1,35 +1,36 @@
 package view;
 
-import java.awt.image.BufferedImage;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import java.awt.*;
+import java.awt.image.BufferedImage;
 
-public class KwazamGUI extends JFrame {
+public class KwazamGUI extends JFrame
+{
 
     private final JButton[][] boardCells = new JButton[8][5]; // 8x5 grid of
-                                                              // cells
+    // cells
     private final String[][] initialPieceStartingPositions =
 
-    {
-            {"Tor_red_piece", "Biz_red_piece", "Sau_red_piece", "Biz_red_piece",
-                    "Xor_red_piece"}, // Row
-            // 1
-            {"Ram_red_piece", "Ram_red_piece", "Ram_red_piece", "Ram_red_piece",
-                    "Ram_red_piece"}, // Row
-            // 2
-            {null, null, null, null, null}, // Row 3
-            {null, null, null, null, null}, // Row 4
-            {null, null, null, null, null}, // Row 5
-            {null, null, null, null, null}, // Row 6
-            {"Ram_blue_piece", "Ram_blue_piece", "Ram_blue_piece",
-                    "Ram_blue_piece", "Ram_blue_piece"}, // Row
-            // 7
-            {"Xor_blue_piece", "Biz_blue_piece", "Sau_blue_piece",
-                    "Biz_blue_piece", "Tor_blue_piece"} // Row
-            // 8
-    };
+            {
+                    {"Tor_red_piece", "Biz_red_piece", "Sau_red_piece", "Biz_red_piece",
+                            "Xor_red_piece"}, // Row
+                    // 1
+                    {"Ram_red_piece", "Ram_red_piece", "Ram_red_piece", "Ram_red_piece",
+                            "Ram_red_piece"}, // Row
+                    // 2
+                    {null, null, null, null, null}, // Row 3
+                    {null, null, null, null, null}, // Row 4
+                    {null, null, null, null, null}, // Row 5
+                    {null, null, null, null, null}, // Row 6
+                    {"Ram_blue_piece", "Ram_blue_piece", "Ram_blue_piece",
+                            "Ram_blue_piece", "Ram_blue_piece"}, // Row
+                    // 7
+                    {"Xor_blue_piece", "Biz_blue_piece", "Sau_blue_piece",
+                            "Biz_blue_piece", "Tor_blue_piece"} // Row
+                    // 8
+            };
 
     private int prevRowClicked = -1, prevColClicked = -1;
     private CellClickListener cellClickListener;
@@ -73,13 +74,44 @@ public class KwazamGUI extends JFrame {
 
     }
 
+    private static Timer getTimer(Color defaultColor, JButton cell)
+    {
+        final Timer flashTimer = new Timer(150, null);
+
+        // This counter tracks how many times we've toggled
+        // so we can stop after 2 on/off cycles (4 toggles total basically)
+        final int[] toggleCount = {0};
+
+        flashTimer.addActionListener(e -> {
+            // Toggle between default color and red
+            if (cell.getBackground() == Color.RED)
+            {
+                cell.setBackground(defaultColor);
+            }
+            else
+            {
+                cell.setBackground(Color.RED);
+            }
+            toggleCount[0]++;
+
+            // After 4 toggles => 2 flashes completed
+            if (toggleCount[0] == 4)
+            {
+                flashTimer.stop();
+                // Ensure we end on the default color
+                cell.setBackground(defaultColor);
+            }
+        });
+        return flashTimer;
+    }
+
     private JButton createCellButton(int row, int col)
     {
         JButton cell = new JButton();
         cell.setOpaque(true);
 
         Color evenColour = new Color(112, 128, 144);
-        Color oddColour = new Color( 245, 245, 245);
+        Color oddColour = new Color(245, 245, 245);
 
         // Alternate colors based on (row + col) parity
         boolean colour = (row + col) % 2 == 0;
@@ -97,6 +129,18 @@ public class KwazamGUI extends JFrame {
         cell.addActionListener(e -> handleCellClick(row, col));
         return cell;
     }
+
+    /*
+     * Image Scaling Logic: This section calculates the dimensions to scale the
+     * original image such that: 1. The image fits within the padded target
+     * area(cell dimensions minus padding). 2. The aspect ratio (width-to-height
+     * proportion) is preserved to avoid distortion. Steps taken first we get
+     * the original image's width and height. Using that we calculate
+     * width/height ratios between the padded target area and original image. We
+     * then wse the SMALLER ratio to scale the image, ensuring it fits entirely
+     * within both the target width and height constraints and finally we derive
+     * the final scaled width/height using this ratio.
+     */
 
     // Dynamically render pieces on the board based on the given positions array
     public void renderPieceToBoard(String[][] positions)
@@ -129,20 +173,8 @@ public class KwazamGUI extends JFrame {
         }
     }
 
-    /*
-     * Image Scaling Logic: This section calculates the dimensions to scale the
-     * original image such that: 1. The image fits within the padded target
-     * area(cell dimensions minus padding). 2. The aspect ratio (width-to-height
-     * proportion) is preserved to avoid distortion. Steps taken first we get
-     * the original image's width and height. Using that we calculate
-     * width/height ratios between the padded target area and original image. We
-     * then wse the SMALLER ratio to scale the image, ensuring it fits entirely
-     * within both the target width and height constraints and finally we derive
-     * the final scaled width/height using this ratio.
-     */
-
     private ImageIcon loadScaledToCellIcon(String imagePath, int targetWidth,
-            int targetHeight)
+                                           int targetHeight)
     {
         if (imagePath == null || targetWidth <= 0 || targetHeight <= 0)
         {
@@ -233,34 +265,38 @@ public class KwazamGUI extends JFrame {
     }
 
     /**
-     * @author Abdullah Hawash
-     * Disables all cells on the board, stopping further user interaction
+     * @author Abdullah Hawash Disables all cells on the board, stopping further
+     * user interaction
      * <p>
-     * This method is invoked at the end of the game or when input
-     * should be restricted to prevent further moves
+     * This method is invoked at the end of the game or when input should be
+     * restricted to prevent further moves
      * </p>
      */
-    public void disableBoard() {
-        for (JButton[] row : boardCells) {
-            for (JButton cell : row) {
+    public void disableBoard()
+    {
+        for (JButton[] row : boardCells)
+        {
+            for (JButton cell : row)
+            {
                 cell.setEnabled(false);
             }
         }
     }
 
     /**
-     * @author Abdullah Hawash
-     * Displays a message indicating the game has been won by updating the win label.
-     * The message is shown in the specified color and is made visible on the screen.
-     * <p>
-     * This method called when a player wins the game to provide
-     * visual feedback to the user (a game win message below the board)
-     * </p>
-     *
      * @param message the text message to be displayed; cannot be {@code null}
-     * @param color the color of the displayed message; cannot be {@code null}
+     * @param color   the color of the displayed message; cannot be
+     *                {@code null}
+     * @author Abdullah Hawash Displays a message indicating the game has been
+     * won by updating the win label. The message is shown in the specified
+     * color and is made visible on the screen.
+     * <p>
+     * This method called when a player wins the game to provide visual feedback
+     * to the user (a game win message below the board)
+     * </p>
      */
-    public void displayWinMessage(String message, Color color) {
+    public void displayWinMessage(String message, Color color)
+    {
         winLabel.setText(message);
         winLabel.setForeground(color);
         winLabel.setVisible(true);
@@ -268,20 +304,22 @@ public class KwazamGUI extends JFrame {
     }
 
     /**
-     * @author Abdullah Hawash
-     * Temporarily flashes the specified cell in red to indicate an error
-     * The cell's original color is restored after a smal period
+     * @param row the zero-based row index of the cell to be flashed; must be
+     *            within the bounds of the board
+     * @param col the zero-based column index of the cell to be flashed; must be
+     *            within the bounds of the board
+     * @author Abdullah Hawash Temporarily flashes the specified cell in red to
+     * indicate an error The cell's original color is restored after a smal
+     * period
      * <p>
-     * This method is used to provide visual feedback for invalid moves
-     * or other incorrect actions
+     * This method is used to provide visual feedback for invalid moves or other
+     * incorrect actions
      * </p>
-     *
-     * @param row the zero-based row index of the cell to be flashed; must be within the bounds of the board
-     * @param col the zero-based column index of the cell to be flashed; must be within the bounds of the board
-     *
      */
-    public void flashCellRed(int row, int col) {
-        if (row < 0 || row >= boardCells.length || col < 0 || col >= boardCells[row].length) {
+    public void flashCellRed(int row, int col)
+    {
+        if (row < 0 || row >= boardCells.length || col < 0 || col >= boardCells[row].length)
+        {
             return; // Guard: out of bounds
         }
 
@@ -290,7 +328,8 @@ public class KwazamGUI extends JFrame {
         // get the cell's true default color (stored at creation)
         // this is to prevent the cell from permanently becoming red after spamming the invalid move
         Color defaultColor = (Color) cell.getClientProperty("defaultBackground");
-        if (defaultColor == null) {
+        if (defaultColor == null)
+        {
             // Fallback in case client property isn't set
             defaultColor = cell.getBackground();
         }
@@ -298,32 +337,6 @@ public class KwazamGUI extends JFrame {
         final Timer flashTimer = getTimer(defaultColor, cell);
 
         flashTimer.start();
-    }
-
-    private static Timer getTimer(Color defaultColor, JButton cell) {
-        final Timer flashTimer = new Timer(150, null);
-
-        // This counter tracks how many times we've toggled
-        // so we can stop after 2 on/off cycles (4 toggles total basically)
-        final int[] toggleCount = {0};
-
-        flashTimer.addActionListener(e -> {
-            // Toggle between default color and red
-            if (cell.getBackground() == Color.RED) {
-                cell.setBackground(defaultColor);
-            } else {
-                cell.setBackground(Color.RED);
-            }
-            toggleCount[0]++;
-
-            // After 4 toggles => 2 flashes completed
-            if (toggleCount[0] == 4) {
-                flashTimer.stop();
-                // Ensure we end on the default color
-                cell.setBackground(defaultColor);
-            }
-        });
-        return flashTimer;
     }
 
 }
