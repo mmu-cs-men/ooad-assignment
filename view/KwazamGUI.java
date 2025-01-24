@@ -78,8 +78,6 @@ public class KwazamGUI extends JFrame {
 
         add(winLabel, BorderLayout.SOUTH);
 
-        renderPieceToBoard(initialPieceStartingPositions);
-
     }
 
     private JButton createCellButton(int row, int col)
