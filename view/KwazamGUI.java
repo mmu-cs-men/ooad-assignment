@@ -66,12 +66,19 @@ public class KwazamGUI extends JFrame
         add(boardPanel, BorderLayout.CENTER);
         setVisible(true);
 
+        // Now that the layout is done, re-render the board in the next event cycle
+        SwingUtilities.invokeLater(() -> {
+            renderPieceToBoard(initialPieceStartingPositions);
+        });
+
         // Add label for win message at the bottom
         winLabel = new JLabel("", SwingConstants.CENTER);
         winLabel.setFont(new Font("Arial", Font.BOLD, 20));
-        add(winLabel, BorderLayout.SOUTH);
 
-        renderPieceToBoard(initialPieceStartingPositions);
+        //Reserve space for the label from the start
+        winLabel.setPreferredSize(new Dimension(0, 50));
+
+        add(winLabel, BorderLayout.SOUTH);
 
     }
 
