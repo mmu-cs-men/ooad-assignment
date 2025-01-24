@@ -100,7 +100,6 @@ public class GameController implements CellClickListener, WinListener {
 
     private void movePieceBackend(CellPosition fromCellPos, CellPosition toCellPos)
     {
-        gameMaster.advanceTurn();
         gameMaster.movePiece(fromCellPos, toCellPos);
     }
 
