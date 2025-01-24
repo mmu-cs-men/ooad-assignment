@@ -249,6 +249,7 @@ public class KwazamGUI extends JFrame {
         winLabel.setText(message);
         winLabel.setForeground(color);
         winLabel.setVisible(true);
+        winLabel.setBorder(BorderFactory.createEmptyBorder(0, 0, 20, 0));
     }
 
 }
