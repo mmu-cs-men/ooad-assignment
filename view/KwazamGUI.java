@@ -295,8 +295,7 @@ public class KwazamGUI extends JFrame {
             defaultColor = cell.getBackground();
         }
 
-        final int flashInterval = 150;
-        final Timer flashTimer = getTimer(flashInterval, defaultColor, cell);
+        final Timer flashTimer = getTimer(defaultColor, cell);
 
         flashTimer.start();
     }
