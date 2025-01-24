@@ -53,6 +53,8 @@ public class AllMenuButtons extends JPanel {
     /**
      * Helper method to create and configure a JButton with the given parameters.
      * It sets the size, colours, font, and adds hover effects for visual feedback.
+     * 
+     * @author Sivananthan Seliyan
      *
      * @param text            The label of the button.
      * @param backgroundColor The background colour of the button.

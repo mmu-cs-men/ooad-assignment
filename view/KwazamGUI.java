@@ -4,6 +4,9 @@ import java.awt.image.BufferedImage;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
+import java.awt.geom.AffineTransform;
+import java.awt.image.AffineTransformOp;
+import java.awt.image.BufferedImage;
 import java.awt.*;
 
 public class KwazamGUI extends JFrame {
@@ -42,9 +45,15 @@ public class KwazamGUI extends JFrame {
         setLayout(new BorderLayout());
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
+        /** 
+         * @author Sivananthan Seliyan
+         */
         AllMenuButtons menuButtons = new AllMenuButtons();
         // Set the Button Position on top of the Kwazam Chess game
         add(menuButtons, BorderLayout.NORTH);
+
+
+
 
         JPanel boardPanel = new JPanel(new GridLayout(8, 5));
         boardPanel.setBorder(new EmptyBorder(1, 50, 50, 50));
@@ -216,6 +225,62 @@ public class KwazamGUI extends JFrame {
             cellClickListener.onCellClicked(row, col);
         }
 
+    }
+
+    /**
+     * @author Sivananthan Seliyan
+     */
+    public String[][] flipBoard() {
+        // Swap the piece positions in initialPieceStartingPositions
+        for (int row = 0; row < 4; row++) {
+            for (int col = 0; col < 5; col++) {
+                String tempPiece = initialPieceStartingPositions[row][col];
+                initialPieceStartingPositions[row][col] = 
+                    initialPieceStartingPositions[7 - row][col];
+                initialPieceStartingPositions[7 - row][col] = tempPiece;
+            }
+        }
+    
+        // Render the board with the swapped positions
+        renderPieceToBoard(initialPieceStartingPositions);
+    
+        // Repaint the board to reflect the changes
+        revalidate();
+        repaint();
+    
+        // Return the updated board state
+        return initialPieceStartingPositions;
+    }
+
+    /**
+     * @author Sivanathan Seliyan
+     */
+     // Helper method to rotate an image by a specified angle
+     private Image rotateImage(Image image, double angle) {
+        double radians = Math.toRadians(angle);
+        double sin = Math.abs(Math.sin(radians));
+        double cos = Math.abs(Math.cos(radians));
+    
+        int width = image.getWidth(null);
+        int height = image.getHeight(null);
+    
+        // Calculate the new dimensions of the rotated image
+        int newWidth = (int) Math.floor(width * cos + height * sin);
+        int newHeight = (int) Math.floor(height * cos + width * sin);
+    
+        // Create a new BufferedImage to hold the rotated image
+        BufferedImage rotatedImage = new BufferedImage(newWidth, newHeight, BufferedImage.TYPE_INT_ARGB);
+        Graphics2D g2d = rotatedImage.createGraphics();
+    
+        // Perform the rotation
+        AffineTransform transform = new AffineTransform();
+        transform.translate((newWidth - width) / 2.0, (newHeight - height) / 2.0);
+        transform.rotate(radians, width / 2.0, height / 2.0);
+        g2d.setTransform(transform);
+        g2d.drawImage(image, 0, 0, null);
+        g2d.dispose();
+    
+        return rotatedImage;
     }
 
     public void setCellClickListener(CellClickListener listener)

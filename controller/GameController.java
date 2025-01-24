@@ -60,6 +60,7 @@ public class GameController implements CellClickListener, WinListener {
 
             // Update the View
             gui.renderPieceToBoard(board);
+            board = gui.flipBoard();
 
             // Reset the selection
             selectedRow = -1;
