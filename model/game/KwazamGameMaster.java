@@ -17,7 +17,7 @@ public class KwazamGameMaster extends GameMaster<KwazamBoard>
 
         if (this.turnCount % 2 == 0)
         {
-            this.board.switchTorXor();
+            this.board.switchPieces();
         }
     }
 }

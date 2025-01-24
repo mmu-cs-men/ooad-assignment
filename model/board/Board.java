@@ -5,6 +5,7 @@ import model.game.Player;
 import model.listeners.BoardVerticalEdgeListener;
 import model.listeners.CaptureListener;
 import model.pieces.Piece;
+import model.pieces.Switchable;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -251,6 +252,32 @@ public abstract class Board
     public void registerCaptureListener(CaptureListener listener)
     {
         this.captureListeners.add(listener);
+    }
+
+    /**
+     * Replaces any piece that implements the {@link Switchable} interface with
+     * its corresponding switched piece.
+     * <p>
+     * This method is designed to be sufficiently generic and can be used for
+     * any game (not just Kwazam Chess) where pieces can switch.
+     *
+     * @see Switchable
+     */
+    public void switchPieces()
+    {
+        for (ArrayList<Cell> row : this.cells)
+        {
+            for (Cell cell : row)
+            {
+                cell.getPiece().ifPresent(piece -> {
+                    if (piece instanceof Switchable)
+                    {
+                        cell.setPiece((((Switchable) piece).getSwitchedPiece()));
+                    }
+                });
+            }
+
+        }
     }
 
     /**
