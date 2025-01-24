@@ -50,7 +50,6 @@ public class GameController implements CellClickListener, WinListener
                 isPieceSelected = true;
 
             }
-            // If it’s an empty cell, we simply do nothing (not an error)
         }
         else
         {
@@ -71,13 +70,12 @@ public class GameController implements CellClickListener, WinListener
             }
             catch (PieceMoveException e)
             {
-                // FLASH RED for an invalid move (blocked path, wrong direction, etc.)
+                // blocked path, wrong direction, etc.
                 gui.flashCellRed(row, col);
                 return;
             }
             catch (NoPieceException | NotYourPieceException e)
             {
-                // FLASH RED for "no piece found at that cell"
                 gui.flashCellRed(selectedRow, selectedCol);
                 return;
             }
