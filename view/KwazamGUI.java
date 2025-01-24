@@ -85,6 +85,9 @@ public class KwazamGUI extends JFrame {
         boolean colour = (row + col) % 2 == 0;
         cell.setBackground(colour ? evenColour : oddColour);
 
+        // store this original color in the buttons client property
+        cell.putClientProperty("defaultBackground", cell.getBackground());
+
         cell.setBorder(new LineBorder(Color.black, 2));
         cell.setFocusable(false);
 
