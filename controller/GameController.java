@@ -1,5 +1,6 @@
 package controller;
 
+import model.persistence.PersistenceManager;
 import model.board.CellPosition;
 import model.exceptions.NoPieceException;
 import model.exceptions.NotYourPieceException;
@@ -16,23 +17,86 @@ public class GameController implements CellClickListener, WinListener
 {
 
     private final KwazamGUI gui;
-    private final GameMaster gameMaster;
+    private final GameMaster<?> gameMaster;
+    private final PersistenceManager persistenceManager;
 
     private int selectedRow = -1;
     private int selectedCol = -1;
     private boolean isPieceSelected = false;
 
-    public GameController(KwazamGUI gui, GameMaster gameMaster)
+    public GameController(KwazamGUI gui, GameMaster<?> gameMaster)
     {
         // Initialize the GUI
         this.gui = gui;
         this.gameMaster = gameMaster;
+        this.persistenceManager = new PersistenceManager(gameMaster);
 
         // Register this Controller as the listener for cell clicks
         this.gui.setCellClickListener(this);
 
+        // Register save/load button listeners
+        this.gui.addSaveButtonListener(e -> saveGame());
+        this.gui.addLoadButtonListener(e -> loadGame());
+
         // Register GUI as a listener to display the win message when a win occurs
         this.gameMaster.registerWinListener(this);
+    }
+
+    private void loadGame() {
+        System.out.println("Loading game...");
+        persistenceManager.loadGame();
+
+        // Synchronize the GUI with the loaded board state
+        String[][] updatedBoardState = convertBoardTo2DArray();
+        gui.updatePieceStartingPositions(updatedBoardState);
+        gui.renderPieceToBoard(updatedBoardState);
+
+        // Reset piece selection to avoid leftover state
+        selectedRow = -1;
+        selectedCol = -1;
+        isPieceSelected = false;
+
+        System.out.println("Game loaded successfully and ready to play.");
+    }
+
+    private void updateGuiBoard() {
+        String[][] updatedBoardState = convertBoardTo2DArray();
+
+        System.out.println("Updated Board State (after loading):");
+        for (int i = 0; i < updatedBoardState.length; i++) {
+            System.out.println(java.util.Arrays.toString(updatedBoardState[i]));
+        }
+
+        gui.renderPieceToBoard(updatedBoardState);
+        System.out.println("Board updated successfully after loading.");
+    }
+
+    /**
+     * Converts the board state into a 2D array for the GUI.
+     * Extracts the data from the model and maps it to the visual representation.
+     */
+    private String[][] convertBoardTo2DArray() {
+        String[][] boardState = new String[8][5];
+
+        for (int row = 0; row < boardState.length; row++) {
+            for (int col = 0; col < boardState[row].length; col++) {
+                int finalRow = row;
+                int finalCol = col;
+                gameMaster.getBoard().getPieceAt(new CellPosition(row, col))
+                        .ifPresent(piece -> {
+                            String pieceType = piece.getClass().getSimpleName().toLowerCase();
+                            String color = piece.getOwner().id().equals("1") ? "blue" : "red";
+                            boardState[finalRow][finalCol] = pieceType + "_" + color + "_piece";
+                        });
+            }
+        }
+        return boardState;
+    }
+
+
+    private void saveGame() {
+        System.out.println("Saving game...");
+        persistenceManager.saveGame();
     }
 
     @Override

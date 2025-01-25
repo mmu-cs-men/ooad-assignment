@@ -16,6 +16,10 @@ import java.awt.*;
 
 public class AllMenuButtons extends JPanel {
 
+    private final JButton saveGameButton;
+    private final JButton loadGameButton;
+
+
     /**
      * Constructor to initialize the AllMenuButtons panel with the necessary buttons.
      * It sets up the layout, creates buttons, and adds them to the panel with
@@ -30,8 +34,8 @@ public class AllMenuButtons extends JPanel {
         gbc.gridy = 0; // Place all buttons in the same row
 
         // Create and configure buttons with their respective labels and colours
-        JButton saveGameButton = createButton("SAVE GAME", new Color(255, 0, 0), Color.WHITE);
-        JButton loadGameButton = createButton("LOAD GAME", new Color(0, 128, 0), Color.WHITE);
+        saveGameButton = createButton("SAVE GAME", new Color(255, 0, 0), Color.WHITE);
+        loadGameButton = createButton("LOAD GAME", new Color(0, 128, 0), Color.WHITE);
         JButton newGameButton = createButton("NEW GAME", new Color(0, 0, 255), Color.WHITE);
 
         // Add the "SAVE GAME" button to the left 
@@ -48,6 +52,14 @@ public class AllMenuButtons extends JPanel {
 
         // Set the preferred size of the whole panel to fit everything nicely
         setPreferredSize(new Dimension(500, 80));
+    }
+
+    public JButton getSaveGameButton() {
+        return saveGameButton;
+    }
+
+    public JButton getLoadGameButton() {
+        return loadGameButton;
     }
 
     /**

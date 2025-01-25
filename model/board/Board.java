@@ -5,11 +5,16 @@ import model.game.Player;
 import model.listeners.BoardVerticalEdgeListener;
 import model.listeners.CaptureListener;
 import model.pieces.Piece;
+import model.pieces.PieceFactory;
 import model.pieces.Switchable;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Optional;
+
+import java.io.BufferedReader;
+import java.io.IOException;
 import java.util.Optional;
 
 /**
@@ -38,6 +43,54 @@ import java.util.Optional;
 public abstract class Board
 {
 
+
+    public String getBoardStateAsString() {
+        StringBuilder boardState = new StringBuilder();
+        for (int row = 0; row < cells.size(); row++) {
+            for (int col = 0; col < cells.get(row).size(); col++) {
+                Optional<Piece> piece = cells.get(row).get(col).getPiece();
+                if (piece.isPresent()) {
+                    String pieceName = piece.get().getClass().getSimpleName().toLowerCase();
+                    String color = piece.get().getOwner().id().equals("1") ? "blue" : "red";
+                    boardState.append(pieceName).append("_").append(color).append("_piece")
+                            .append(",").append(row)
+                            .append(",").append(col)
+                            .append("\n");
+                } else {
+                    boardState.append("Empty").append(",").append(row).append(",").append(col).append("\n");
+                }
+            }
+        }
+        return boardState.toString();
+    }
+
+    public void loadBoardStateFromString(BufferedReader reader) throws IOException {
+        String line;
+        while ((line = reader.readLine()) != null) {
+            String[] data = line.split(",");
+            if (data.length != 3) continue;
+
+            String pieceType = data[0].trim();
+            int row = Integer.parseInt(data[1].trim());
+            int col = Integer.parseInt(data[2].trim());
+
+            if (!pieceType.equalsIgnoreCase("Empty")) {
+                String[] parts = pieceType.split("_");
+                if (parts.length == 3) {
+                    String pieceName = parts[0];  // "ram"
+                    String color = parts[1];      // "blue"
+                    String playerId = color.equalsIgnoreCase("blue") ? "1" : "2";
+
+                    // Ensure correct piece creation with player ownership
+                    Piece newPiece = PieceFactory.createPiece(pieceName + "_" + color, new Player(playerId));
+                    cells.get(row).get(col).setPiece(newPiece);
+                }
+            } else {
+                cells.get(row).get(col).setPiece(null);
+            }
+        }
+        System.out.println("Board state loaded successfully.");
+    }
 
     /**
      * A list containing the players participating in the game. This field is

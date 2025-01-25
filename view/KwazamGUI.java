@@ -1,5 +1,6 @@
 package view;
 
+import java.awt.event.ActionListener;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
@@ -8,6 +9,8 @@ import java.awt.image.BufferedImage;
 
 public class KwazamGUI extends JFrame
 {
+    private JButton saveButton;
+    private JButton loadButton;
 
     private final JButton[][] boardCells = new JButton[8][5]; // 8x5 grid of
     // cells
@@ -37,6 +40,10 @@ public class KwazamGUI extends JFrame
     private JLabel winLabel; // Label for displaying the win message
     private boolean torXorSwitched = false;
 
+    // Action listeners for the Save and Load buttons
+    private ActionListener saveButtonListener;
+    private ActionListener loadButtonListener;
+
     public KwazamGUI()
     {
         setTitle("Kwazam Chess Game");
@@ -47,6 +54,20 @@ public class KwazamGUI extends JFrame
         AllMenuButtons menuButtons = new AllMenuButtons();
         // Set the Button Position on top of the Kwazam Chess game
         add(menuButtons, BorderLayout.NORTH);
+
+        saveButton = menuButtons.getSaveGameButton();
+        loadButton = menuButtons.getLoadGameButton();
+
+        // Attach listeners to buttons
+        saveButton.addActionListener(e -> {
+            System.out.println("Save button pressed in GUI");
+            if (saveButtonListener != null) saveButtonListener.actionPerformed(e);
+        });
+
+        loadButton.addActionListener(e -> {
+            System.out.println("Load button pressed in GUI");
+            if (loadButtonListener != null) loadButtonListener.actionPerformed(e);
+        });
 
         JPanel boardPanel = new JPanel(new GridLayout(8, 5));
         boardPanel.setBorder(new EmptyBorder(1, 50, 50, 50));
@@ -80,6 +101,14 @@ public class KwazamGUI extends JFrame
 
         add(winLabel, BorderLayout.SOUTH);
 
+    }
+
+    public void addSaveButtonListener(ActionListener listener) {
+        this.saveButtonListener = listener;
+    }
+
+    public void addLoadButtonListener(ActionListener listener) {
+        this.loadButtonListener = listener;
     }
 
     private static Timer getTimer(Color defaultColor, JButton cell)
@@ -180,6 +209,18 @@ public class KwazamGUI extends JFrame
                 }
             }
         }
+        repaint();
+    }
+
+
+    public void updatePieceStartingPositions(String[][] newPositions) {
+        for (int row = 0; row < newPositions.length; row++) {
+            System.arraycopy(newPositions[row], 0, initialPieceStartingPositions[row], 0, newPositions[row].length);
+        }
+        System.out.println("Updated internal board state after loading:");
+        for (String[] row : initialPieceStartingPositions) {
+            System.out.println(java.util.Arrays.toString(row));
+        }
     }
 
     /*
@@ -205,6 +246,11 @@ public class KwazamGUI extends JFrame
             ImageIcon rawIcon = new ImageIcon(imagePath);
             Image rawImage = rawIcon.getImage();
 
+            if (rawImage.getWidth(null) <= 0 || rawImage.getHeight(null) <= 0) {
+                System.err.println("Failed to load image or image is empty: " + imagePath);
+                return null;
+            }
+
             // Handling Padding
             int padding = 3;
             int paddedTargetWidth = targetWidth - 2 * padding;
@@ -220,7 +266,10 @@ public class KwazamGUI extends JFrame
             int scaledWidth = (int) (originalWidth * scale);
             int scaledHeight = (int) (originalHeight * scale);
 
-            // Create a transparent canvas to hold the chess piece icon This
+            System.out.println("Scaling image to: " + scaledWidth + "x" + scaledHeight);
+
+
+            // Create a transparent canvas to hold the chess piece icon
             // ensures the icon is centered and doesn't stretch.
             BufferedImage paddedImage = new BufferedImage(targetWidth,
                     targetHeight, BufferedImage.TYPE_INT_ARGB);
@@ -248,11 +297,13 @@ public class KwazamGUI extends JFrame
             }
 
             g2d.dispose();
+            System.out.println("Image successfully loaded and processed: " + imagePath);
             return new ImageIcon(paddedImage);
         }
         catch (Exception e)
         {
             System.err.println("Error loading image: " + imagePath);
+            e.printStackTrace();
             return null;
         }
     }
