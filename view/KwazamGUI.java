@@ -209,6 +209,18 @@ public class KwazamGUI extends JFrame
                 }
             }
         }
+        repaint();
+    }
+
+
+    public void updatePieceStartingPositions(String[][] newPositions) {
+        for (int row = 0; row < newPositions.length; row++) {
+            System.arraycopy(newPositions[row], 0, initialPieceStartingPositions[row], 0, newPositions[row].length);
+        }
+        System.out.println("Updated internal board state after loading:");
+        for (String[] row : initialPieceStartingPositions) {
+            System.out.println(java.util.Arrays.toString(row));
+        }
     }
 
     /*
