@@ -17,7 +17,8 @@ public class GameController implements CellClickListener, WinListener
 {
 
     private final KwazamGUI gui;
-    private final GameMaster gameMaster;
+    private final GameMaster<?> gameMaster;
+    private final PersistenceManager persistenceManager;
 
     private int selectedRow = -1;
     private int selectedCol = -1;
