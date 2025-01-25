@@ -55,6 +55,20 @@ public class KwazamGUI extends JFrame
         // Set the Button Position on top of the Kwazam Chess game
         add(menuButtons, BorderLayout.NORTH);
 
+        saveButton = menuButtons.getSaveGameButton();
+        loadButton = menuButtons.getLoadGameButton();
+
+        // Attach listeners to buttons
+        saveButton.addActionListener(e -> {
+            System.out.println("Save button pressed in GUI");
+            if (saveButtonListener != null) saveButtonListener.actionPerformed(e);
+        });
+
+        loadButton.addActionListener(e -> {
+            System.out.println("Load button pressed in GUI");
+            if (loadButtonListener != null) loadButtonListener.actionPerformed(e);
+        });
+
         JPanel boardPanel = new JPanel(new GridLayout(8, 5));
         boardPanel.setBorder(new EmptyBorder(1, 50, 50, 50));
 
