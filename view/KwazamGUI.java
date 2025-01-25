@@ -103,6 +103,14 @@ public class KwazamGUI extends JFrame
 
     }
 
+    public void addSaveButtonListener(ActionListener listener) {
+        this.saveButtonListener = listener;
+    }
+
+    public void addLoadButtonListener(ActionListener listener) {
+        this.loadButtonListener = listener;
+    }
+
     private static Timer getTimer(Color defaultColor, JButton cell)
     {
         final Timer flashTimer = new Timer(150, null);
