@@ -266,7 +266,10 @@ public class KwazamGUI extends JFrame
             int scaledWidth = (int) (originalWidth * scale);
             int scaledHeight = (int) (originalHeight * scale);
 
-            // Create a transparent canvas to hold the chess piece icon This
+            System.out.println("Scaling image to: " + scaledWidth + "x" + scaledHeight);
+
+
+            // Create a transparent canvas to hold the chess piece icon
             // ensures the icon is centered and doesn't stretch.
             BufferedImage paddedImage = new BufferedImage(targetWidth,
                     targetHeight, BufferedImage.TYPE_INT_ARGB);
