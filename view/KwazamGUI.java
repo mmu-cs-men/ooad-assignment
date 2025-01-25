@@ -246,6 +246,11 @@ public class KwazamGUI extends JFrame
             ImageIcon rawIcon = new ImageIcon(imagePath);
             Image rawImage = rawIcon.getImage();
 
+            if (rawImage.getWidth(null) <= 0 || rawImage.getHeight(null) <= 0) {
+                System.err.println("Failed to load image or image is empty: " + imagePath);
+                return null;
+            }
+
             // Handling Padding
             int padding = 3;
             int paddedTargetWidth = targetWidth - 2 * padding;
