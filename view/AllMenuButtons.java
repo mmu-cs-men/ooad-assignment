@@ -54,6 +54,14 @@ public class AllMenuButtons extends JPanel {
         setPreferredSize(new Dimension(500, 80));
     }
 
+    public JButton getSaveGameButton() {
+        return saveGameButton;
+    }
+
+    public JButton getLoadGameButton() {
+        return loadGameButton;
+    }
+
     /**
      * Helper method to create and configure a JButton with the given parameters.
      * It sets the size, colours, font, and adds hover effects for visual feedback.
