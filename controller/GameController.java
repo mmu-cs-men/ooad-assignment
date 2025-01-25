@@ -29,6 +29,7 @@ public class GameController implements CellClickListener, WinListener
         // Initialize the GUI
         this.gui = gui;
         this.gameMaster = gameMaster;
+        this.persistenceManager = new PersistenceManager(gameMaster);
 
         // Register this Controller as the listener for cell clicks
         this.gui.setCellClickListener(this);
