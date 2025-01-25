@@ -16,6 +16,10 @@ import java.awt.*;
 
 public class AllMenuButtons extends JPanel {
 
+    private final JButton saveGameButton;
+    private final JButton loadGameButton;
+
+
     /**
      * Constructor to initialize the AllMenuButtons panel with the necessary buttons.
      * It sets up the layout, creates buttons, and adds them to the panel with
