@@ -1,5 +1,6 @@
 package controller;
 
+import model.persistence.PersistenceManager;
 import model.board.CellPosition;
 import model.exceptions.NoPieceException;
 import model.exceptions.NotYourPieceException;
