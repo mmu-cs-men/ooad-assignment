@@ -40,6 +40,10 @@ public class KwazamGUI extends JFrame
     private JLabel winLabel; // Label for displaying the win message
     private boolean torXorSwitched = false;
 
+    // Action listeners for the Save and Load buttons
+    private ActionListener saveButtonListener;
+    private ActionListener loadButtonListener;
+
     public KwazamGUI()
     {
         setTitle("Kwazam Chess Game");
