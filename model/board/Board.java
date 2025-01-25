@@ -64,6 +64,34 @@ public abstract class Board
         return boardState.toString();
     }
 
+    public void loadBoardStateFromString(BufferedReader reader) throws IOException {
+        String line;
+        while ((line = reader.readLine()) != null) {
+            String[] data = line.split(",");
+            if (data.length != 3) continue;
+
+            String pieceType = data[0].trim();
+            int row = Integer.parseInt(data[1].trim());
+            int col = Integer.parseInt(data[2].trim());
+
+            if (!pieceType.equalsIgnoreCase("Empty")) {
+                String[] parts = pieceType.split("_");
+                if (parts.length == 3) {
+                    String pieceName = parts[0];  // "ram"
+                    String color = parts[1];      // "blue"
+                    String playerId = color.equalsIgnoreCase("blue") ? "1" : "2";
+
+                    // Ensure correct piece creation with player ownership
+                    Piece newPiece = PieceFactory.createPiece(pieceName + "_" + color, new Player(playerId));
+                    cells.get(row).get(col).setPiece(newPiece);
+                }
+            } else {
+                cells.get(row).get(col).setPiece(null);
+            }
+        }
+        System.out.println("Board state loaded successfully.");
+    }
+
     /**
      * A list containing the players participating in the game. This field is
      * initialized via the constructor; however, is not used in the
