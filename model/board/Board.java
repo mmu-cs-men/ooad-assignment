@@ -5,11 +5,16 @@ import model.game.Player;
 import model.listeners.BoardVerticalEdgeListener;
 import model.listeners.CaptureListener;
 import model.pieces.Piece;
+import model.pieces.PieceFactory;
 import model.pieces.Switchable;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Optional;
+
+import java.io.BufferedReader;
+import java.io.IOException;
 import java.util.Optional;
 
 /**
