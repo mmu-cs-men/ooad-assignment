@@ -2,6 +2,10 @@ package view;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.File;
+import java.io.IOException;
+import java.net.URISyntaxException;
+import java.util.ArrayList;
 
 /**
  * The AllMenuButtons class represents a panel containing the menu buttons for
@@ -48,6 +52,38 @@ public class AllMenuButtons extends JPanel {
 
         // Set the preferred size of the whole panel to fit everything nicely
         setPreferredSize(new Dimension(500, 80));
+
+        // Add action listener to "New Game" button
+        newGameButton.addActionListener(e -> {
+            try {
+                showNewGameConfirmation();
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            }
+        });
+    }
+
+    /**
+     * Displays a confirmation dialog when the "New Game" button is clicked.
+     * @author Sivananthan Seliyan
+     * If the user clicks "Yes", the logic to start a new game will be executed.
+     * @throws IOException 
+     */
+    private void showNewGameConfirmation() throws IOException {
+        int response = JOptionPane.showConfirmDialog(
+                this,
+                "Are you sure you want to start a new game? Your progress will be lost mate!",
+                "NEW GAME CONFIRMATION",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.WARNING_MESSAGE
+        );
+
+        if (response == JOptionPane.YES_OPTION) {
+            restartFromIDE();
+    }
+         else {
+            System.out.println("User canceled starting a new game.");
+        }
     }
 
     /**
@@ -95,5 +131,37 @@ public class AllMenuButtons extends JPanel {
         });
 
         return button; // Return the fully configured button
+    }
+
+    private static void restartFromIDE() {
+        try {
+            // Get the current Java executable path
+            String javaBin = System.getProperty("java.home") + "/bin/java";
+
+            // Get the classpath to include all dependencies
+            String classpath = System.getProperty("java.class.path");
+
+            // Get the main class name
+            String className = "Main";
+
+            // Build the command to relaunch
+            ArrayList<String> command = new ArrayList<>();
+            command.add(javaBin);
+            command.add("-cp");
+            command.add(classpath);
+            command.add(className);
+
+            // Print command for debugging
+            System.out.println("Restart command: " + command);
+
+            // Start the new process
+            new ProcessBuilder(command).inheritIO().start();
+
+            // Exit current application
+            System.exit(0);
+        } catch (IOException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Failed to restart: " + e.getMessage());
+        }
     }
 }
