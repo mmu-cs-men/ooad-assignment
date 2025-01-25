@@ -34,6 +34,10 @@ public class GameController implements CellClickListener, WinListener
         // Register this Controller as the listener for cell clicks
         this.gui.setCellClickListener(this);
 
+        // Register save/load button listeners
+        this.gui.addSaveButtonListener(e -> saveGame());
+        this.gui.addLoadButtonListener(e -> loadGame());
+
         // Register GUI as a listener to display the win message when a win occurs
         this.gameMaster.registerWinListener(this);
     }
