@@ -44,6 +44,26 @@ public abstract class Board
 {
 
 
+    public String getBoardStateAsString() {
+        StringBuilder boardState = new StringBuilder();
+        for (int row = 0; row < cells.size(); row++) {
+            for (int col = 0; col < cells.get(row).size(); col++) {
+                Optional<Piece> piece = cells.get(row).get(col).getPiece();
+                if (piece.isPresent()) {
+                    String pieceName = piece.get().getClass().getSimpleName().toLowerCase();
+                    String color = piece.get().getOwner().id().equals("1") ? "blue" : "red";
+                    boardState.append(pieceName).append("_").append(color).append("_piece")
+                            .append(",").append(row)
+                            .append(",").append(col)
+                            .append("\n");
+                } else {
+                    boardState.append("Empty").append(",").append(row).append(",").append(col).append("\n");
+                }
+            }
+        }
+        return boardState.toString();
+    }
+
     /**
      * A list containing the players participating in the game. This field is
      * initialized via the constructor; however, is not used in the
