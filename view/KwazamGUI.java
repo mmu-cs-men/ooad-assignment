@@ -297,6 +297,7 @@ public class KwazamGUI extends JFrame
             }
 
             g2d.dispose();
+            System.out.println("Image successfully loaded and processed: " + imagePath);
             return new ImageIcon(paddedImage);
         }
         catch (Exception e)
