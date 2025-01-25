@@ -1,5 +1,6 @@
 package view;
 
+import java.awt.event.ActionListener;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
@@ -8,6 +9,8 @@ import java.awt.image.BufferedImage;
 
 public class KwazamGUI extends JFrame
 {
+    private JButton saveButton;
+    private JButton loadButton;
 
     private final JButton[][] boardCells = new JButton[8][5]; // 8x5 grid of
     // cells
