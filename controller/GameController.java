@@ -42,6 +42,63 @@ public class GameController implements CellClickListener, WinListener
         this.gameMaster.registerWinListener(this);
     }
 
+    private void loadGame() {
+        System.out.println("Loading game...");
+        persistenceManager.loadGame();
+
+        // Synchronize the GUI with the loaded board state
+        String[][] updatedBoardState = convertBoardTo2DArray();
+        gui.updatePieceStartingPositions(updatedBoardState);
+        gui.renderPieceToBoard(updatedBoardState);
+
+        // Reset piece selection to avoid leftover state
+        selectedRow = -1;
+        selectedCol = -1;
+        isPieceSelected = false;
+
+        System.out.println("Game loaded successfully and ready to play.");
+    }
+
+    private void updateGuiBoard() {
+        String[][] updatedBoardState = convertBoardTo2DArray();
+
+        System.out.println("Updated Board State (after loading):");
+        for (int i = 0; i < updatedBoardState.length; i++) {
+            System.out.println(java.util.Arrays.toString(updatedBoardState[i]));
+        }
+
+        gui.renderPieceToBoard(updatedBoardState);
+        System.out.println("Board updated successfully after loading.");
+    }
+
+    /**
+     * Converts the board state into a 2D array for the GUI.
+     * Extracts the data from the model and maps it to the visual representation.
+     */
+    private String[][] convertBoardTo2DArray() {
+        String[][] boardState = new String[8][5];
+
+        for (int row = 0; row < boardState.length; row++) {
+            for (int col = 0; col < boardState[row].length; col++) {
+                int finalRow = row;
+                int finalCol = col;
+                gameMaster.getBoard().getPieceAt(new CellPosition(row, col))
+                        .ifPresent(piece -> {
+                            String pieceType = piece.getClass().getSimpleName().toLowerCase();
+                            String color = piece.getOwner().id().equals("1") ? "blue" : "red";
+                            boardState[finalRow][finalCol] = pieceType + "_" + color + "_piece";
+                        });
+            }
+        }
+        return boardState;
+    }
+
+
+    private void saveGame() {
+        System.out.println("Saving game...");
+        persistenceManager.saveGame();
+    }
+
     @Override
     public void onCellClicked(int row, int col)
     {
