@@ -303,6 +303,7 @@ public class KwazamGUI extends JFrame
         catch (Exception e)
         {
             System.err.println("Error loading image: " + imagePath);
+            e.printStackTrace();
             return null;
         }
     }
