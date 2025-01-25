@@ -24,7 +24,7 @@ public class GameController implements CellClickListener, WinListener
     private int selectedCol = -1;
     private boolean isPieceSelected = false;
 
-    public GameController(KwazamGUI gui, GameMaster gameMaster)
+    public GameController(KwazamGUI gui, GameMaster<?> gameMaster)
     {
         // Initialize the GUI
         this.gui = gui;
