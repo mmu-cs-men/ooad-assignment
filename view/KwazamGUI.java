@@ -443,6 +443,7 @@ public class KwazamGUI extends JFrame
     {
         this.flipped = !this.flipped;
         flipPiecesPosition();
+        renderPieceToBoard(initialPieceStartingPositions);
     }
 
     public boolean isFlipped()
