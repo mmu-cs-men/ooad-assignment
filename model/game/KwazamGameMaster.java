@@ -24,6 +24,7 @@ public class KwazamGameMaster extends GameMaster<KwazamBoard>
      *
      * @param board   the board for this game
      * @param players the list of players participating in this game
+     * @author Harris Majeed
      */
     public KwazamGameMaster(KwazamBoard board, CircularLinkedList<Player> players)
     {
@@ -33,6 +34,7 @@ public class KwazamGameMaster extends GameMaster<KwazamBoard>
     /**
      * Advances the turn to the next player and switches Tor/Xor every second
      * turn according to the assignment specification.
+     * @author Harris Majeed
      */
     @Override
     public void advanceTurn()
@@ -45,6 +47,16 @@ public class KwazamGameMaster extends GameMaster<KwazamBoard>
         }
     }
 
+
+    /**
+     * Returns a two dimensional list of string representations for each cell on the board,
+     * indicating the piece type, color, and orientation (if got).
+     * The first player's pieces are shown in blue, and the second player's pieces in red
+     * Pieces of type {@link Ram} include a flipped suffix when facing down.
+     *
+     * @return a 2D {@link List} of {@link String} objects describing each cell of the board
+     * @author Harris Majeed
+     */
     @Override
     public List<List<String>> getCellsStringRepresentation()
     {
