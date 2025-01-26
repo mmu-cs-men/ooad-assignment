@@ -7,21 +7,22 @@ import java.awt.*;
  * The AllMenuButtons class represents a panel containing the menu buttons for
  * the game. It includes buttons for saving the game, loading a game, and
  * starting a new game.
- * 
+ * <p>
  * This class sets up a flexible layout to accommodate the buttons and provides
  * a consistent styling for each button.
- * 
+ *
  * @author Sivananthan Seliyan
  */
 
-public class AllMenuButtons extends JPanel {
-
+public class AllMenuButtons extends JPanel
+{
     /**
-     * Constructor to initialize the AllMenuButtons panel with the necessary buttons.
-     * It sets up the layout, creates buttons, and adds them to the panel with
-     * appropriate positioning and styling.
+     * Constructor to initialize the AllMenuButtons panel with the necessary
+     * buttons. It sets up the layout, creates buttons, and adds them to the
+     * panel with appropriate positioning and styling.
      */
-    public AllMenuButtons() {
+    public AllMenuButtons()
+    {
         setLayout(new GridBagLayout()); // Using GridBagLayout for flexible component positioning
 
         // Configure GridBagConstraints for button positioning
@@ -51,15 +52,18 @@ public class AllMenuButtons extends JPanel {
     }
 
     /**
-     * Helper method to create and configure a JButton with the given parameters.
-     * It sets the size, colours, font, and adds hover effects for visual feedback.
+     * Helper method to create and configure a JButton with the given
+     * parameters. It sets the size, colours, font, and adds hover effects for
+     * visual feedback.
      *
      * @param text            The label of the button.
      * @param backgroundColor The background colour of the button.
      * @param foregroundColor The foreground (text) colour of the button.
-     * @return A fully configured JButton instance with applied styles and effects.
+     * @return A fully configured JButton instance with applied styles and
+     * effects.
      */
-    private JButton createButton(String text, Color backgroundColor, Color foregroundColor) {
+    private JButton createButton(String text, Color backgroundColor, Color foregroundColor)
+    {
         JButton button = new JButton(text); // Create button with the provided text
 
         // Set a fixed button size to ensure uniformity
@@ -82,14 +86,17 @@ public class AllMenuButtons extends JPanel {
         button.setFocusPainted(false);
 
         // Add a hover effect --> darken the button when the mouse is over it 
-        button.addMouseListener(new java.awt.event.MouseAdapter() {
+        button.addMouseListener(new java.awt.event.MouseAdapter()
+        {
             @Override
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
+            public void mouseEntered(java.awt.event.MouseEvent evt)
+            {
                 button.setBackground(backgroundColor.darker()); // Darken colour when hovering
             }
 
             @Override
-            public void mouseExited(java.awt.event.MouseEvent evt) {
+            public void mouseExited(java.awt.event.MouseEvent evt)
+            {
                 button.setBackground(backgroundColor); // Restore original colour when mouse leaves
             }
         });
