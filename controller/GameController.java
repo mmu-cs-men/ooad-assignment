@@ -156,7 +156,7 @@ public class GameController implements CellClickListener, WinListener
                 board.get(selectedRow).set(selectedCol, null); // Clear the original
                 // position
 
-                if ((row == 0 || row == 7) && board.get(row).get(col) != null && board.get(row).get(col).startsWith("Ram"))
+                if ((row == 0 || row == 7) && board.get(row).get(col) != null && board.get(row).get(col).startsWith("ram"))
                 {
                     gui.flipRamPiece(row, col);
                 }

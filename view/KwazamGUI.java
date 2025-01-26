@@ -401,7 +401,7 @@ public class KwazamGUI extends JFrame
         JButton cell = boardCells[row][col];
         String piece = initialPieceStartingPositions.get(row).get(col);
 
-        if (piece != null && piece.startsWith("Ram"))
+        if (piece != null && piece.startsWith("ram"))
         {
             String flippedPiece = piece.endsWith("_flipped") ? piece.replace("_flipped", "") : piece + "_flipped";
             String imagePath = "assets/" + flippedPiece + ".png";
