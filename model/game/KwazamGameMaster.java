@@ -1,7 +1,14 @@
 package model.game;
 
+import model.board.Cell;
 import model.board.KwazamBoard;
+import model.pieces.Piece;
+import model.pieces.Ram;
 import utils.CircularLinkedList;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 /**
  * Concrete implementation of {@code GameMaster} for Kwazam Chess.
@@ -36,5 +43,51 @@ public class KwazamGameMaster extends GameMaster<KwazamBoard>
         {
             this.board.switchPieces();
         }
+    }
+
+    @Override
+    public List<List<String>> getCellsStringRepresentation()
+    {
+        List<List<String>> formattedCells = new ArrayList<>();
+        List<Player> players = this.getPlayers();
+
+        for (List<Cell> row : this.board.getCells())
+        {
+            List<String> rowRepresentations = new ArrayList<>();
+            for (Cell cell : row)
+            {
+                Optional<Piece> pieceOptional = cell.getPiece();
+                if (pieceOptional.isEmpty())
+                {
+                    rowRepresentations.add(null);
+                    continue;
+                }
+
+                Piece piece = pieceOptional.get();
+                String pieceName = piece.getClass().getSimpleName().toLowerCase();
+
+                Player owner = piece.getOwner();
+                String color = "red";
+                if (players.getFirst().id().equals(owner.id()))
+                {
+                    color = "blue";
+                }
+
+                String flippedSuffix = "";
+                if (piece instanceof Ram)
+                {
+                    Ram ram = (Ram) piece;
+                    if (!ram.isFacingUp())
+                    {
+                        flippedSuffix = "_flipped";
+                    }
+                }
+
+                String representation = "%s_%s_piece%s".formatted(pieceName, color, flippedSuffix);
+                rowRepresentations.add(representation);
+            }
+            formattedCells.add(rowRepresentations);
+        }
+        return formattedCells;
     }
 }
