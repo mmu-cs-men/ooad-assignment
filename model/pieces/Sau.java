@@ -6,6 +6,11 @@ import model.game.Player;
 import java.util.LinkedList;
 import java.util.Optional;
 
+/**
+ * Represents a Sau piece in the game. This piece can move only one step in any direction,
+ * and it cannot jump over other pieces.
+ * @author Harris Majeed
+ */
 public class Sau extends Piece
 {
     public Sau(Player player)
