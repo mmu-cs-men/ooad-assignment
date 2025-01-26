@@ -65,6 +65,12 @@ public class Cell implements Stringable
         String pieceName = piece.getClass().getSimpleName().toUpperCase();
         String ownerId = piece.getOwner().id();
         String facingDirection = "";
+        String criticalPiece = "";
+
+        if (piece.isCriticalPiece())
+        {
+            criticalPiece = "_CRITICAL";
+        }
 
         // TODO: eww
         if (piece instanceof Ram)
@@ -72,6 +78,6 @@ public class Cell implements Stringable
             facingDirection = ((Ram) piece).isFacingUp() ? "_FACINGUP" : "_FACINGDOWN";
         }
 
-        return "%s_%s%s".formatted(pieceName, ownerId, facingDirection);
+        return "%s_%s%s%s".formatted(pieceName, ownerId, facingDirection, criticalPiece);
     }
 }
