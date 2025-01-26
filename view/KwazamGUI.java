@@ -154,24 +154,20 @@ public class KwazamGUI extends JFrame
             for (int col = 0; col < 5; col++)
             {
                 JButton cell = boardCells[row][col];
-                String piece = null;
-                if (row < positions.size() && col < positions.get(row).size())
-                {
-                    piece = positions.get(row).get(col);
-                }
+                String piece = positions.get(row).get(col);
 
                 if (piece != null)
                 {
                     // Swap Tor/Xor visually based on the toggle state
                     if (torXorSwitched)
                     {
-                        if (piece.startsWith("Tor"))
+                        if (piece.startsWith("tor"))
                         {
-                            piece = piece.replace("Tor", "Xor");
+                            piece = piece.replace("tor", "xor");
                         }
-                        else if (piece.startsWith("Xor"))
+                        else if (piece.startsWith("xor"))
                         {
-                            piece = piece.replace("Xor", "Tor");
+                            piece = piece.replace("xor", "tor");
                         }
                     }
                     String imagePath = "assets/" + piece + ".png";
