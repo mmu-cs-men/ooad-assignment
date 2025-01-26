@@ -93,20 +93,15 @@ public class GameController implements CellClickListener, WinListener
             File fileToLoad = fileChooser.getSelectedFile();
             GameState gameState = this.saveLoadSerializer.loadStateFromFile(fileToLoad.getAbsolutePath());
             this.saveLoadManager.loadGame(gameState);
+            gui.enableBoard();
+            gui.setBoard(gameMaster.getCellsStringRepresentation());
+            gui.setFlipped(false);
+            if (gameMaster.getTurnCount() % 2 != 0)
+            {
+                gui.flipBoard();
+            }
+            gui.disableWinMessage();
         }
-    }
-
-    // Add these methods and implement your save/load logic
-    private void saveGameToFile(String filePath)
-    {
-        // TODO: Implement your save functionality (function X)
-        System.out.println("Saving game to: " + filePath);
-    }
-
-    private void loadGameFromFile(String filePath)
-    {
-        // TODO: Implement your load functionality (function Y)
-        System.out.println("Loading game from: " + filePath);
     }
 
     @Override
