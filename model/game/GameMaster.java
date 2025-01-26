@@ -44,13 +44,6 @@ public abstract class GameMaster<T extends Board> implements CaptureListener
      * generic to support different types of boards for various games.
      */
     protected final T board;
-
-    /**
-     * An iterator for traversing through the list of players participating in
-     * the game.
-     */
-    private final Iterator<Player> playerIterator;
-
     /**
      * Stores a circularly linked list of Player objects representing the
      * participants in the game. This ensures that iteration over players cycles
@@ -71,7 +64,11 @@ public abstract class GameMaster<T extends Board> implements CaptureListener
      * 0.
      */
     protected int turnCount = 0;
-
+    /**
+     * An iterator for traversing through the list of players participating in
+     * the game.
+     */
+    private Iterator<Player> playerIterator;
     /**
      * Represents the player whose turn is currently active in the game. The
      * active player is updated during each turn of the gameplay.
