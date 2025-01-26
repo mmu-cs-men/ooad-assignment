@@ -204,7 +204,8 @@ public abstract class GameMaster<T extends Board> implements CaptureListener
         }
     }
 
-    public int getTurnCount(){
+    public int getTurnCount()
+    {
         return this.turnCount;
     }
 }
