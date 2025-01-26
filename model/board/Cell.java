@@ -1,6 +1,8 @@
 package model.board;
 
 import model.pieces.Piece;
+import model.pieces.Ram;
+import model.serialization.Stringable;
 
 import java.util.Optional;
 
@@ -14,7 +16,7 @@ import java.util.Optional;
  * @author Harris Majeed
  * @see Board
  */
-public class Cell
+public class Cell implements Stringable
 {
     /**
      * Represents the piece currently held by the cell. The piece might be null,
@@ -50,5 +52,26 @@ public class Cell
     public void setPiece(Piece piece)
     {
         this.piece = piece;
+    }
+
+    @Override
+    public String getStringRepresentation()
+    {
+        if (piece == null)
+        {
+            return "EMPTY";
+        }
+
+        String pieceName = piece.getClass().getSimpleName().toUpperCase();
+        String ownerId = piece.getOwner().id();
+        String facingDirection = "";
+
+        // TODO: eww
+        if (piece instanceof Ram)
+        {
+            facingDirection = ((Ram) piece).isFacingUp() ? "_FACINGUP" : "_FACINGDOWN";
+        }
+
+        return "%s_%s%s".formatted(pieceName, ownerId, facingDirection);
     }
 }
