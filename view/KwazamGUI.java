@@ -312,6 +312,17 @@ public class KwazamGUI extends JFrame
         }
     }
 
+    public void enableBoard()
+    {
+        for (JButton[] row : boardCells)
+        {
+            for (JButton cell : row)
+            {
+                cell.setEnabled(true);
+            }
+        }
+    }
+
     /**
      * @param message the text message to be displayed; cannot be {@code null}
      * @param color   the color of the displayed message; cannot be
@@ -330,6 +341,11 @@ public class KwazamGUI extends JFrame
         winLabel.setForeground(color);
         winLabel.setVisible(true);
         winLabel.setBorder(BorderFactory.createEmptyBorder(0, 0, 20, 0));
+    }
+
+    public void disableWinMessage()
+    {
+        winLabel.setText("");
     }
 
     /**
@@ -449,5 +465,11 @@ public class KwazamGUI extends JFrame
     public boolean isFlipped()
     {
         return flipped;
+    }
+
+    public void setFlipped(boolean flipped)
+    {
+        this.flipped = flipped;
+        renderPieceToBoard(initialPieceStartingPositions);
     }
 }
