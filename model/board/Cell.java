@@ -1,6 +1,7 @@
 package model.board;
 
 import model.pieces.Piece;
+import model.serialization.Stringable;
 
 import java.util.Optional;
 
@@ -14,7 +15,7 @@ import java.util.Optional;
  * @author Harris Majeed
  * @see Board
  */
-public class Cell
+public class Cell implements Stringable
 {
     /**
      * Represents the piece currently held by the cell. The piece might be null,
@@ -50,5 +51,16 @@ public class Cell
     public void setPiece(Piece piece)
     {
         this.piece = piece;
+    }
+
+    @Override
+    public String getStringRepresentation()
+    {
+        if (piece == null)
+        {
+            return "EMPTY";
+        }
+
+        return this.piece.getStringRepresentation();
     }
 }

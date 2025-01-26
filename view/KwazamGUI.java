@@ -4,38 +4,22 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import java.awt.*;
+import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
+import java.util.List;
 
 public class KwazamGUI extends JFrame
 {
 
-    private final JButton[][] boardCells = new JButton[8][5]; // 8x5 grid of
-    // cells
-    private final String[][] initialPieceStartingPositions =
-
-            {
-                    {"Tor_red_piece", "Biz_red_piece", "Sau_red_piece", "Biz_red_piece",
-                            "Xor_red_piece"}, // Row
-                    // 1
-                    {"Ram_red_piece", "Ram_red_piece", "Ram_red_piece", "Ram_red_piece",
-                            "Ram_red_piece"}, // Row
-                    // 2
-                    {null, null, null, null, null}, // Row 3
-                    {null, null, null, null, null}, // Row 4
-                    {null, null, null, null, null}, // Row 5
-                    {null, null, null, null, null}, // Row 6
-                    {"Ram_blue_piece", "Ram_blue_piece", "Ram_blue_piece",
-                            "Ram_blue_piece", "Ram_blue_piece"}, // Row
-                    // 7
-                    {"Xor_blue_piece", "Biz_blue_piece", "Sau_blue_piece",
-                            "Biz_blue_piece", "Tor_blue_piece"} // Row
-                    // 8
-            };
+    private final JButton[][] boardCells = new JButton[8][5]; // 8x5 grid of cells
+    private List<List<String>> initialPieceStartingPositions = new ArrayList<>();
     private boolean flipped = false;
     private int prevRowClicked = -1, prevColClicked = -1;
     private CellClickListener cellClickListener;
     private JLabel winLabel; // Label for displaying the win message
     private boolean torXorSwitched = false;
+    private AllMenuButtons menuButtons;
 
     public KwazamGUI()
     {
@@ -44,7 +28,7 @@ public class KwazamGUI extends JFrame
         setLayout(new BorderLayout());
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        AllMenuButtons menuButtons = new AllMenuButtons();
+        menuButtons = new AllMenuButtons();
         // Set the Button Position on top of the Kwazam Chess game
         add(menuButtons, BorderLayout.NORTH);
 
@@ -57,7 +41,6 @@ public class KwazamGUI extends JFrame
             for (int col = 0; col < 5; col++)
             {
                 JButton cell = createCellButton(row, col);
-
                 boardPanel.add(cell);
                 boardCells[row][col] = cell;
             }
@@ -66,20 +49,13 @@ public class KwazamGUI extends JFrame
         add(boardPanel, BorderLayout.CENTER);
         setVisible(true);
 
-        // Now that the layout is done, re-render the board in the next event cycle
-        SwingUtilities.invokeLater(() -> {
-            renderPieceToBoard(initialPieceStartingPositions);
-        });
-
         // Add label for win message at the bottom
         winLabel = new JLabel("", SwingConstants.CENTER);
         winLabel.setFont(new Font("Arial", Font.BOLD, 20));
 
         //Reserve space for the label from the start
         winLabel.setPreferredSize(new Dimension(0, 50));
-
         add(winLabel, BorderLayout.SOUTH);
-
     }
 
     private static Timer getTimer(Color defaultColor, JButton cell)
@@ -114,6 +90,31 @@ public class KwazamGUI extends JFrame
         return flashTimer;
     }
 
+    public void setBoard(List<List<String>> cells)
+    {
+        initialPieceStartingPositions = new ArrayList<>();
+        for (List<String> row : cells)
+        {
+            initialPieceStartingPositions.add(new ArrayList<>(row));
+        }
+        renderPieceToBoard(initialPieceStartingPositions);
+    }
+
+    public void addSaveGameListener(ActionListener listener)
+    {
+        menuButtons.addSaveGameListener(listener);
+    }
+
+    public void addLoadGameListener(ActionListener listener)
+    {
+        menuButtons.addLoadGameListener(listener);
+    }
+
+    public void addNewGameListener(ActionListener listener)
+    {
+        menuButtons.addNewGameListener(listener);
+    }
+
     private JButton createCellButton(int row, int col)
     {
         JButton cell = new JButton();
@@ -146,32 +147,31 @@ public class KwazamGUI extends JFrame
         renderPieceToBoard(initialPieceStartingPositions);
     }
 
-    public void renderPieceToBoard(String[][] positions)
+    public void renderPieceToBoard(List<List<String>> positions)
     {
-        for (int row = 0; row < positions.length; row++)
+        for (int row = 0; row < 8; row++)
         {
-            for (int col = 0; col < positions[row].length; col++)
+            for (int col = 0; col < 5; col++)
             {
                 JButton cell = boardCells[row][col];
-                String piece = positions[row][col];
+                String piece = positions.get(row).get(col);
 
                 if (piece != null)
                 {
                     // Swap Tor/Xor visually based on the toggle state
                     if (torXorSwitched)
                     {
-                        if (piece.startsWith("Tor"))
+                        if (piece.startsWith("tor"))
                         {
-                            piece = piece.replace("Tor", "Xor");
+                            piece = piece.replace("tor", "xor");
                         }
-                        else if (piece.startsWith("Xor"))
+                        else if (piece.startsWith("xor"))
                         {
-                            piece = piece.replace("Xor", "Tor");
+                            piece = piece.replace("xor", "tor");
                         }
                     }
                     String imagePath = "assets/" + piece + ".png";
-                    ImageIcon icon = loadScaledToCellIcon(imagePath,
-                            cell.getWidth(), cell.getHeight());
+                    ImageIcon icon = loadScaledToCellIcon(imagePath, cell.getWidth(), cell.getHeight());
                     cell.setIcon(icon);
                 }
                 else
@@ -228,8 +228,7 @@ public class KwazamGUI extends JFrame
             // Enable smooth scaling for the icon (avoids pixelation)
             // Bilinear interpolation blends pixels for a smoother appearance.
             Graphics2D g2d = paddedImage.createGraphics();
-            g2d.setRenderingHint(RenderingHints.KEY_INTERPOLATION,
-                    RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+            g2d.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
 
             // Center the scaled image
             int x = (targetWidth - scaledWidth) / 2;
@@ -259,11 +258,9 @@ public class KwazamGUI extends JFrame
 
     private void handleCellClick(int row, int col)
     {
-
         if (prevRowClicked != -1 && prevColClicked != -1)
         {
-            boardCells[prevRowClicked][prevColClicked]
-                    .setBorder(new LineBorder(Color.BLACK, 2));
+            boardCells[prevRowClicked][prevColClicked].setBorder(new LineBorder(Color.BLACK, 2));
         }
 
         // Highlight newly clicked cell
@@ -273,15 +270,13 @@ public class KwazamGUI extends JFrame
         prevColClicked = col;
         prevRowClicked = row;
 
-        System.out.println(
-                "Button clicked at position: (" + row + ", " + col + ")");
+        System.out.println("Button clicked at position: (" + row + ", " + col + ")");
 
         // Notify the listener (Controller)
         if (cellClickListener != null)
         {
             cellClickListener.onCellClicked(row, col);
         }
-
     }
 
     public void setCellClickListener(CellClickListener listener)
@@ -289,8 +284,7 @@ public class KwazamGUI extends JFrame
         this.cellClickListener = listener;
     }
 
-    // Getter for initial piece starting positions
-    public String[][] getInitialPieceStartingPositions()
+    public List<List<String>> getInitialPieceStartingPositions()
     {
         return initialPieceStartingPositions;
     }
@@ -314,6 +308,17 @@ public class KwazamGUI extends JFrame
         }
     }
 
+    public void enableBoard()
+    {
+        for (JButton[] row : boardCells)
+        {
+            for (JButton cell : row)
+            {
+                cell.setEnabled(true);
+            }
+        }
+    }
+
     /**
      * @param message the text message to be displayed; cannot be {@code null}
      * @param color   the color of the displayed message; cannot be
@@ -332,6 +337,11 @@ public class KwazamGUI extends JFrame
         winLabel.setForeground(color);
         winLabel.setVisible(true);
         winLabel.setBorder(BorderFactory.createEmptyBorder(0, 0, 20, 0));
+    }
+
+    public void disableWinMessage()
+    {
+        winLabel.setText("");
     }
 
     /**
@@ -361,7 +371,6 @@ public class KwazamGUI extends JFrame
         }
 
         final Timer flashTimer = getTimer(defaultColor, cell);
-
         flashTimer.start();
     }
 
@@ -392,67 +401,51 @@ public class KwazamGUI extends JFrame
     public void flipRamPiece(int row, int col)
     {
         JButton cell = boardCells[row][col];
-        String piece = initialPieceStartingPositions[row][col];
+        String piece = initialPieceStartingPositions.get(row).get(col);
 
         if (piece != null && piece.startsWith("Ram"))
         {
-            // Check current orientation and flip accordingly
-            String flippedPiece = piece.endsWith("_flipped")
-                    ? piece.replace("_flipped", "")  // Switch back to normal
-                    : piece + "_flipped";  // Switch to flipped
-
+            String flippedPiece = piece.endsWith("_flipped") ? piece.replace("_flipped", "") : piece + "_flipped";
             String imagePath = "assets/" + flippedPiece + ".png";
-
-            int cellWidth = cell.getWidth();
-            int cellHeight = cell.getHeight();
-
-            ImageIcon flippedIcon = loadScaledToCellIcon(imagePath, cellWidth, cellHeight);
+            ImageIcon flippedIcon = loadScaledToCellIcon(imagePath, cell.getWidth(), cell.getHeight());
 
             if (flippedIcon != null)
             {
                 cell.setIcon(flippedIcon);
-                initialPieceStartingPositions[row][col] = flippedPiece;
+                initialPieceStartingPositions.get(row).set(col, flippedPiece);
             }
             else
             {
                 System.err.println("Error: Could not load image: " + imagePath);
             }
         }
-
-
     }
 
     private void flipPiecesPosition()
     {
-        // Reverse each row
-        for (String[] row : this.initialPieceStartingPositions)
+        for (List<String> row : initialPieceStartingPositions)
         {
-            if (row == null)
-            {
-                continue;
-            }
             reverseRow(row);
         }
 
-        // Reverse the order of the rows
-        int numRows = this.initialPieceStartingPositions.length;
+        int numRows = initialPieceStartingPositions.size();
         for (int i = 0; i < numRows / 2; i++)
         {
-            String[] temp = this.initialPieceStartingPositions[i];
-            this.initialPieceStartingPositions[i] = this.initialPieceStartingPositions[numRows - 1 - i];
-            this.initialPieceStartingPositions[numRows - 1 - i] = temp;
+            List<String> temp = initialPieceStartingPositions.get(i);
+            initialPieceStartingPositions.set(i, initialPieceStartingPositions.get(numRows - 1 - i));
+            initialPieceStartingPositions.set(numRows - 1 - i, temp);
         }
     }
 
-    private void reverseRow(String[] row)
+    private void reverseRow(List<String> row)
     {
         int start = 0;
-        int end = row.length - 1;
+        int end = row.size() - 1;
         while (start < end)
         {
-            String temp = row[start];
-            row[start] = row[end];
-            row[end] = temp;
+            String temp = row.get(start);
+            row.set(start, row.get(end));
+            row.set(end, temp);
             start++;
             end--;
         }
@@ -461,11 +454,18 @@ public class KwazamGUI extends JFrame
     public void flipBoard()
     {
         this.flipped = !this.flipped;
-        this.flipPiecesPosition();
+        flipPiecesPosition();
+        renderPieceToBoard(initialPieceStartingPositions);
     }
 
     public boolean isFlipped()
     {
         return flipped;
+    }
+
+    public void setFlipped(boolean flipped)
+    {
+        this.flipped = flipped;
+        renderPieceToBoard(initialPieceStartingPositions);
     }
 }

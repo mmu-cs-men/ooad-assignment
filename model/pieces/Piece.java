@@ -2,6 +2,7 @@ package model.pieces;
 
 import model.board.CellPosition;
 import model.game.Player;
+import model.serialization.Stringable;
 
 import java.util.LinkedList;
 import java.util.Optional;
@@ -21,7 +22,7 @@ import java.util.Optional;
  *
  * @author Harris Majeed
  */
-public abstract class Piece
+public abstract class Piece implements Stringable
 {
     /**
      * The player this piece belongs to.
@@ -99,4 +100,19 @@ public abstract class Piece
      */
     public abstract Optional<LinkedList<CellPosition>> getPotentialPath(
             CellPosition fromCellPos, CellPosition toCellPos);
+
+    @Override
+    public String getStringRepresentation()
+    {
+        String pieceName = this.getClass().getSimpleName().toUpperCase();
+        String ownerId = this.owner.id();
+        String criticalPiece = "";
+
+        if (this.isCriticalPiece())
+        {
+            criticalPiece = "_CRITICAL";
+        }
+
+        return "%s_%s%s".formatted(pieceName, ownerId, criticalPiece);
+    }
 }

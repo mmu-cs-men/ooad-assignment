@@ -93,6 +93,33 @@ public abstract class Board
         return cell.getPiece();
     }
 
+    public List<List<Cell>> getCells()
+    {
+        return List.copyOf(this.cells);
+    }
+
+    public void setCells(List<List<Cell>> newCells)
+    {
+        if (newCells == null || newCells.size() != this.cells.size())
+        {
+            throw new IllegalArgumentException("Invalid newCells size for setCells.");
+        }
+
+        for (int i = 0; i < newCells.size(); i++)
+        {
+            if (newCells.get(i).size() != this.cells.get(i).size())
+            {
+                throw new IllegalArgumentException("Invalid row size in newCells for setCells.");
+            }
+        }
+
+        this.cells.clear();
+        for (List<Cell> row : newCells)
+        {
+            this.cells.add(new ArrayList<>(row));
+        }
+    }
+
     /**
      * Moves a piece from one cell position to another on the board. If there is
      * an existing piece at the destination position, a capture event is

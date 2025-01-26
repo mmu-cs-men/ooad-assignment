@@ -1,6 +1,7 @@
 package model.game;
 
 import model.board.Board;
+import model.board.Cell;
 import model.board.CellPosition;
 import model.exceptions.NoPieceException;
 import model.exceptions.NotYourPieceException;
@@ -13,6 +14,7 @@ import utils.CircularLinkedList;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.List;
 
 /**
  * The GameMaster class is an abstract class responsible for managing the core
@@ -43,13 +45,6 @@ public abstract class GameMaster<T extends Board> implements CaptureListener
      * generic to support different types of boards for various games.
      */
     protected final T board;
-
-    /**
-     * An iterator for traversing through the list of players participating in
-     * the game.
-     */
-    private final Iterator<Player> playerIterator;
-
     /**
      * Stores a circularly linked list of Player objects representing the
      * participants in the game. This ensures that iteration over players cycles
@@ -70,7 +65,11 @@ public abstract class GameMaster<T extends Board> implements CaptureListener
      * 0.
      */
     protected int turnCount = 0;
-
+    /**
+     * An iterator for traversing through the list of players participating in
+     * the game.
+     */
+    private Iterator<Player> playerIterator;
     /**
      * Represents the player whose turn is currently active in the game. The
      * active player is updated during each turn of the gameplay.
@@ -126,6 +125,28 @@ public abstract class GameMaster<T extends Board> implements CaptureListener
         }
 
         this.board.movePiece(fromCellPos, toCellPos);
+    }
+
+    public Player getCurrentPlayer()
+    {
+        return this.currentPlayer;
+    }
+
+    public void setCurrentPlayer(Player currentPlayer)
+    {
+        this.currentPlayer = currentPlayer;
+    }
+
+    public List<Player> getPlayers()
+    {
+        return List.copyOf(this.players);
+    }
+
+    public void setPlayers(CircularLinkedList<Player> newPlayers)
+    {
+        this.players.clear();
+        this.players.addAll(newPlayers);
+        this.playerIterator = this.players.circularIterator();
     }
 
     /**
@@ -194,7 +215,27 @@ public abstract class GameMaster<T extends Board> implements CaptureListener
         }
     }
 
-    public int getTurnCount(){
+    public int getTurnCount()
+    {
         return this.turnCount;
+    }
+
+    public void setTurnCount(int turnCount)
+    {
+        this.turnCount = turnCount;
+    }
+
+    public List<List<String>> getCellsStringRepresentation()
+    {
+        List<List<String>> formattedCells = new ArrayList<>();
+
+        for (List<Cell> row : this.board.getCells())
+        {
+            for (Cell cell : row)
+            {
+                formattedCells.add(List.of(cell.getStringRepresentation()));
+            }
+        }
+        return formattedCells;
     }
 }
