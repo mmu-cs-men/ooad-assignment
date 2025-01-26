@@ -55,12 +55,14 @@ public abstract class Board
     /**
      * A list that holds all registered listeners which respond when a piece
      * reaches one of the vertical edges of the board.
+     *
      */
     private final ArrayList<BoardVerticalEdgeListener> verticalEdgeListeners = new ArrayList<>();
 
     /**
      * A list that holds all registered listeners which respond when a piece is
      * captured.
+     *
      */
     private final ArrayList<CaptureListener> captureListeners = new ArrayList<>();
 
@@ -69,6 +71,8 @@ public abstract class Board
      * are initialized by calling the {@code populateCells} method.
      *
      * @param players the list of players participating in the game
+     *
+     *  @author Harris Majeed
      */
     public Board(List<Player> players)
     {
@@ -86,6 +90,8 @@ public abstract class Board
      * @return an Optional containing the piece located at the specified cell
      * position, or an empty Optional if the cell is unoccupied
      * @throws IllegalArgumentException if {@code cellPos} is out of bounds.
+     *
+     *  @author Harris Majeed
      */
     public Optional<Piece> getPieceAt(CellPosition cellPos)
     {
@@ -135,6 +141,8 @@ public abstract class Board
      *                                  friendly piece.
      * @throws IllegalArgumentException if either {@code fromPos} or
      *                                  {@code toPos} is out of bounds.
+     *
+     *  @author Harris Majeed
      */
     public void movePiece(CellPosition fromPos, CellPosition toPos)
     {
@@ -164,6 +172,8 @@ public abstract class Board
      * reached the topmost or bottommost row of the board.
      *
      * @param piece the piece that has reached the vertical edge of the board
+     *
+     * @author Harris Majeed
      */
     private void notifyVerticalEdgeListeners(Piece piece)
     {
@@ -178,6 +188,8 @@ public abstract class Board
      * captured.
      *
      * @param piece the piece that has was captured
+     *
+     * @author Harris Majeed
      */
     private void notifyCaptureListeners(Piece piece)
     {
@@ -197,6 +209,8 @@ public abstract class Board
      * @param cellPos the position of the cell from which the piece is to be
      *                removed; must be within the bounds of the board
      * @throws IllegalArgumentException if {@code cellPos} is out of bounds
+     *
+     * @author Harris Majeed
      */
     public void removePiece(CellPosition cellPos)
     {
@@ -212,6 +226,8 @@ public abstract class Board
      *                bounds of the board
      * @return {@code true} if a piece is present in the specified cell,
      * {@code false} otherwise
+     *
+     *  @author Harris Majeed
      */
     public boolean isCellOccupied(CellPosition cellPos)
     {
@@ -228,6 +244,7 @@ public abstract class Board
      * {@code false} otherwise.
      * @throws IllegalArgumentException if any cell position in the linked list
      *                                  is out of bounds.
+     *  @author Harris Majeed
      */
     public boolean isPathObstructed(LinkedList<CellPosition> path)
     {
@@ -251,6 +268,8 @@ public abstract class Board
      * @return {@code true} if the cell contains a piece owned by the given
      * player, {@code false} otherwise
      * @throws IllegalArgumentException if {@code cellPos} is out of bounds
+     *
+     *  @author Harris Majeed
      */
     public boolean hasFriendlyPieceAt(CellPosition cellPos, Player player)
     {
@@ -264,6 +283,8 @@ public abstract class Board
      * of the board.
      *
      * @param listener the listener to be registered for vertical edge events
+     *
+     * @author Harris Majeed
      */
     public void registerVerticalEdgeListener(BoardVerticalEdgeListener listener)
     {
@@ -275,6 +296,8 @@ public abstract class Board
      * notified when a piece has been captured during the game.
      *
      * @param listener the listener to be registered for capture events
+     *
+     * @author Harris Majeed
      */
     public void registerCaptureListener(CaptureListener listener)
     {
@@ -289,6 +312,8 @@ public abstract class Board
      * any game (not just Kwazam Chess) where pieces can switch.
      *
      * @see Switchable
+     *
+     *  @author Harris Majeed
      */
     public void switchPieces()
     {
@@ -315,6 +340,8 @@ public abstract class Board
      *
      * @return a 2D ArrayList where each inner ArrayList represents a row of
      * cells and each Cell represents an individual square on the chess board
+     *
+     *  @author Harris Majeed
      */
     protected abstract ArrayList<ArrayList<Cell>> populateCells();
 
@@ -322,6 +349,8 @@ public abstract class Board
      * Retrieves the number of rows in the board. Up to the implementing class.
      *
      * @return the number of rows in the board
+     *
+     *  @author Harris Majeed
      */
     protected abstract int getBoardRows();
 
@@ -330,6 +359,8 @@ public abstract class Board
      * class.
      *
      * @return the total number of columns in the board
+     *
+     *  @author Harris Majeed
      */
     protected abstract int getBoardColumns();
 
@@ -342,6 +373,8 @@ public abstract class Board
      * @return the {@code Cell} object located at the specified position
      * @throws IllegalArgumentException if the given cell position is out of
      *                                  bounds
+     *
+     *  @author Harris Majeed
      */
     private Cell getCell(CellPosition cellPos)
     {
@@ -360,6 +393,7 @@ public abstract class Board
      * @param pos the cell position to check
      * @return {@code true} if the specified cell position is within the board's
      * boundaries, {@code false} otherwise
+     *  @author Harris Majeed
      */
     private boolean isCellWithinBounds(CellPosition pos)
     {
