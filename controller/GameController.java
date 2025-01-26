@@ -102,6 +102,10 @@ public class GameController implements CellClickListener, WinListener
             {
                 gui.flipBoard();
             }
+            if (gui.isTorXorSwitched())
+            {
+                gui.toggleTorXorVisuals();
+            }
             gui.disableWinMessage();
         }
     }
@@ -116,6 +120,10 @@ public class GameController implements CellClickListener, WinListener
         if (gameMaster.getTurnCount() % 2 != 0)
         {
             gui.flipBoard();
+        }
+        if (gui.isTorXorSwitched())
+        {
+            gui.toggleTorXorVisuals();
         }
         gui.disableWinMessage();
     }

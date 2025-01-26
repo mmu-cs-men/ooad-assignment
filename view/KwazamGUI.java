@@ -466,4 +466,9 @@ public class KwazamGUI extends JFrame
         this.flipped = flipped;
         renderPieceToBoard(initialPieceStartingPositions);
     }
+
+    public boolean isTorXorSwitched()
+    {
+        return torXorSwitched;
+    }
 }
