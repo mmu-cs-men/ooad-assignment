@@ -141,6 +141,14 @@ public abstract class GameMaster<T extends Board> implements CaptureListener
         return List.copyOf(this.players);
     }
 
+    public void setPlayers(CircularLinkedList<Player> newPlayers)
+    {
+        this.players.clear();
+        this.players.addAll(newPlayers);
+        this.playerIterator = this.players.circularIterator();
+        this.currentPlayer = this.playerIterator.next();
+    }
+
     /**
      * Advances the turn to the next player and increments the turn count.
      */
