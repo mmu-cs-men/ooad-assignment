@@ -1,6 +1,7 @@
 package model.game;
 
 import model.board.Board;
+import model.board.Cell;
 import model.board.CellPosition;
 import model.exceptions.NoPieceException;
 import model.exceptions.NotYourPieceException;
@@ -223,5 +224,19 @@ public abstract class GameMaster<T extends Board> implements CaptureListener
     public void setTurnCount(int turnCount)
     {
         this.turnCount = turnCount;
+    }
+
+    public List<List<String>> getCellsStringRepresentation()
+    {
+        List<List<String>> formattedCells = new ArrayList<>();
+
+        for (List<Cell> row : this.board.getCells())
+        {
+            for (Cell cell : row)
+            {
+                formattedCells.add(List.of(cell.getStringRepresentation()));
+            }
+        }
+        return formattedCells;
     }
 }
