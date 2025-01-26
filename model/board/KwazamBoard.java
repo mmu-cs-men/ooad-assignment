@@ -33,6 +33,8 @@ public class KwazamBoard extends Board
      * @return a 2D {@code ArrayList} representing the board, where each element
      * contains a {@code Cell} object. Cells are pre-configured with the
      * corresponding pieces for the game.
+     *
+     * @author Harris Majeed
      */
     @Override
     protected ArrayList<ArrayList<Cell>> populateCells()
@@ -87,6 +89,8 @@ public class KwazamBoard extends Board
      * Retrieves the number of rows in the board for Kwazam Chess.
      *
      * @return 8
+     *
+     * @author Harris Majeed
      */
     @Override
     protected int getBoardRows()
@@ -98,6 +102,8 @@ public class KwazamBoard extends Board
      * Retrieves the number of columns in the board for Kwazam Chess.
      *
      * @return 5
+     *
+     * @author Harris Majeed
      */
     @Override
     protected int getBoardColumns()
