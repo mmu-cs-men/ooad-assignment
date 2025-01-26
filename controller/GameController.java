@@ -4,7 +4,7 @@ import model.board.CellPosition;
 import model.exceptions.NoPieceException;
 import model.exceptions.NotYourPieceException;
 import model.exceptions.PieceMoveException;
-import model.game.GameMaster;
+import model.game.KwazamGameMaster;
 import model.game.Player;
 import model.listeners.WinListener;
 import model.serialization.GameState;
@@ -23,7 +23,7 @@ public class GameController implements CellClickListener, WinListener
 {
 
     private final KwazamGUI gui;
-    private final GameMaster gameMaster;
+    private final KwazamGameMaster gameMaster;
     private final SaveLoadSerializer saveLoadSerializer;
     private final SaveLoadManager saveLoadManager;
 
@@ -31,7 +31,7 @@ public class GameController implements CellClickListener, WinListener
     private int selectedCol = -1;
     private boolean isPieceSelected = false;
 
-    public GameController(KwazamGUI gui, GameMaster gameMaster, SaveLoadSerializer saveLoadSerializer, SaveLoadManager saveLoadManager)
+    public GameController(KwazamGUI gui, KwazamGameMaster gameMaster, SaveLoadSerializer saveLoadSerializer, SaveLoadManager saveLoadManager)
     {
         // Initialize the GUI
         this.gui = gui;
