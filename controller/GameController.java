@@ -58,6 +58,8 @@ public class GameController implements CellClickListener, WinListener
 
         // Load Game button handler
         gui.addLoadGameListener(e -> handleLoadGame());
+
+        gui.addNewGameListener(e -> handleNewGame());
     }
 
     private void handleSaveGame()
@@ -102,6 +104,20 @@ public class GameController implements CellClickListener, WinListener
             }
             gui.disableWinMessage();
         }
+    }
+
+    private void handleNewGame()
+    {
+        GameState gameState = this.saveLoadSerializer.loadStateFromFile("assets/new-game.txt");
+        this.saveLoadManager.loadGame(gameState);
+        gui.enableBoard();
+        gui.setBoard(gameMaster.getCellsStringRepresentation());
+        gui.setFlipped(false);
+        if (gameMaster.getTurnCount() % 2 != 0)
+        {
+            gui.flipBoard();
+        }
+        gui.disableWinMessage();
     }
 
     @Override
