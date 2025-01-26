@@ -1,7 +1,6 @@
 package model.board;
 
 import model.pieces.Piece;
-import model.pieces.Ram;
 import model.serialization.Stringable;
 
 import java.util.Optional;
@@ -62,22 +61,6 @@ public class Cell implements Stringable
             return "EMPTY";
         }
 
-        String pieceName = piece.getClass().getSimpleName().toUpperCase();
-        String ownerId = piece.getOwner().id();
-        String facingDirection = "";
-        String criticalPiece = "";
-
-        if (piece.isCriticalPiece())
-        {
-            criticalPiece = "_CRITICAL";
-        }
-
-        // TODO: eww
-        if (piece instanceof Ram)
-        {
-            facingDirection = ((Ram) piece).isFacingUp() ? "_FACINGUP" : "_FACINGDOWN";
-        }
-
-        return "%s_%s%s%s".formatted(pieceName, ownerId, facingDirection, criticalPiece);
+        return this.piece.getStringRepresentation();
     }
 }

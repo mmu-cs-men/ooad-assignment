@@ -61,4 +61,20 @@ public class Ram extends Piece implements BoardVerticalEdgeListener
         facingUp = !facingUp;
     }
 
+    @Override
+    public String getStringRepresentation()
+    {
+        String pieceName = this.getClass().getSimpleName().toUpperCase();
+        String ownerId = this.getOwner().id();
+        String facingDirection = isFacingUp() ? "_FACINGUP" : "_FACINGDOWN";
+        String criticalPiece = "";
+
+        if (this.isCriticalPiece())
+        {
+            criticalPiece = "_CRITICAL";
+        }
+
+        return "%s_%s%s%s".formatted(pieceName, ownerId, facingDirection, criticalPiece);
+    }
+
 }
