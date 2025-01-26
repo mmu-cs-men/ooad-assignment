@@ -9,6 +9,20 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The KwazamGUI class sets up and manages a graphical user interface for a
+ * Kwazam-themed board game. It displays an 8×5 grid of buttons for each cell,
+ * along with control buttons that let you perform common game actions.
+ * <p>
+ * This class uses a simple observer-like approach where it notifies an
+ * external listener (if set) when a cell is clicked. Through this pattern,
+ * classes that implement {@code CellClickListener} can react to user input
+ * (e.g., moving pieces, validating clicks, etc.) without tightly coupling the
+ * GUI code to the rest of the application's logic.
+ * @author Laxman Pillai
+ * @author Siva
+ * @author Abdullah Hawash
+ */
 public class KwazamGUI extends JFrame
 {
 
@@ -21,6 +35,14 @@ public class KwazamGUI extends JFrame
     private boolean torXorSwitched = false;
     private AllMenuButtons menuButtons;
 
+    /**
+     * Constructs the KwazamGUI, setting up the main window, creating the board
+     * of cells, and placing the menu buttons at the top.
+     * <p>
+     * The layout is organized so that the grid takes up the main area, and a
+     * status label for win messages is placed at the bottom.
+     * @author Siva Seliyan
+     */
     public KwazamGUI()
     {
         setTitle("Kwazam Chess Game");
@@ -58,6 +80,16 @@ public class KwazamGUI extends JFrame
         add(winLabel, BorderLayout.SOUTH);
     }
 
+    /**
+     * Creates and returns a timer that flashes a given cell a few times.
+     * This is useful for indicating an invalid move or drawing attention to
+     * a particular cell.
+     *
+     * @param defaultColor the original background color of the cell
+     * @param cell         the cell to be flashed
+     * @return a {@link Timer} that animates the flashing effect
+     * @author Abdullah Hawash
+     */
     private static Timer getTimer(Color defaultColor, JButton cell)
     {
         final Timer flashTimer = new Timer(150, null);
@@ -90,6 +122,16 @@ public class KwazamGUI extends JFrame
         return flashTimer;
     }
 
+    /**
+     * Updates the internal board representation and visually displays the given
+     * pieces in each cell.
+     * <p>
+     * This method is typically called to initialize or reset the board with
+     * a fresh state of piece positions.
+     *
+     * @param cells a 2D list of strings indicating the piece in each cell
+     * @author Siva Seliyan
+     */
     public void setBoard(List<List<String>> cells)
     {
         initialPieceStartingPositions = new ArrayList<>();

@@ -39,6 +39,7 @@ public abstract class Piece implements Stringable
      * Creates a new chess piece owned by the specified player.
      *
      * @param owner the player who will control this piece
+     * @author Harris Majeed
      */
     public Piece(Player owner)
     {
@@ -49,6 +50,7 @@ public abstract class Piece implements Stringable
      * Gets the player that owns this piece.
      *
      * @return the owning player
+     * @author Harris Majeed
      */
     public Player getOwner()
     {
@@ -60,6 +62,7 @@ public abstract class Piece implements Stringable
      * a participant).
      *
      * @return true if the piece is critical, false otherwise
+     * @author Harris Majeed
      */
     public boolean isCriticalPiece()
     {
@@ -70,6 +73,7 @@ public abstract class Piece implements Stringable
      * Sets the critical status of this piece.
      *
      * @param criticalPiece true to mark as critical, false otherwise
+     * @author Harris Majeed
      */
     public void setCriticalPiece(boolean criticalPiece)
     {
@@ -81,6 +85,7 @@ public abstract class Piece implements Stringable
      *
      * @return true if the piece can move over obstructing pieces, false
      * otherwise
+     * @author Harris Majeed
      */
     public abstract boolean canJump();
 
@@ -97,10 +102,27 @@ public abstract class Piece implements Stringable
      * of CellPosition objects if the move is valid for this piece type. Returns
      * empty Optional if the move pattern is invalid (note: does not check for
      * obstructions, bounds, or game rules).
+     * @author Harris Majeed
      */
     public abstract Optional<LinkedList<CellPosition>> getPotentialPath(
             CellPosition fromCellPos, CellPosition toCellPos);
 
+    /**
+     * Returns a string-based identifier for this piece, which includes
+     * the piece's type name, the owner's ID, and an indication if the
+     * piece is marked as critical.
+     * <p>
+     * The format of this representation is:
+     * <pre>
+     * [PIECE_NAME]_[OWNER_ID][_CRITICAL]
+     * </pre>
+     *
+     * @return a string representation of this piece that includes the
+     *         type name, the owner ID, and a "_CRITICAL" suffix if
+     *         applicable
+     *
+     * @author Harris Majeed
+     */
     @Override
     public String getStringRepresentation()
     {

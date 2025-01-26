@@ -13,12 +13,30 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * Handles saving and loading game states to and from files.
+ * Provides methods to serialize the current state and reconstruct it.
+ * @author Harris Majeed
+ * @author Abdullah Hawash
+ */
 public class SaveLoadSerializer
 {
+    /**
+     * Constructs a new instance of this serializer.
+     * @author Abdullah Hawash
+     */
     public SaveLoadSerializer()
     {
     }
 
+    /**
+     * Saves the specified game state to a file at the given path.
+     *
+     * @param gameState the game state to be saved
+     * @param path the file path where the state should be saved
+     * @throws RuntimeException if an I/O error occurs during save
+     * @author Harris Majeed
+     */
     public void saveStateToFile(GameState gameState, String path)
     {
         String content = gameState.getStringRepresentation();
@@ -32,6 +50,16 @@ public class SaveLoadSerializer
         }
     }
 
+
+    /**
+     * Loads a game state from the specified file path.
+     *
+     * @param path the file path from which to load the game state
+     * @return the reconstructed game state
+     * @throws RuntimeException if an I/O error occurs during load
+     * @throws IllegalArgumentException if the file format is invalid
+     * @author Harris Majeed
+     */
     public GameState loadStateFromFile(String path)
     {
         try
@@ -87,22 +115,55 @@ public class SaveLoadSerializer
         }
     }
 
+    /**
+     * Extracts the turn count from the provided line.
+     *
+     * @param line a line containing the turn count information
+     * @return the parsed turn count
+     * @throws NumberFormatException if the turn count cannot be parsed
+     * @author Abdullah Hawash
+     */
     private int parseTurnCount(String line)
     {
         return Integer.parseInt(line.split(": ")[1]);
     }
 
+    /**
+     * Converts a line into a list of player identifiers.
+     *
+     * @param line a line containing comma-separated player IDs
+     * @return a list of player ID strings
+     * @author Abdullah Hawash
+     */
     private List<String> parsePlayers(String line)
     {
         String playersStr = line.split(": ")[1];
         return Arrays.asList(playersStr.split(", "));
     }
 
+    /**
+     * Parses the current player identifier from the given line.
+     *
+     * @param line a line containing the current player's ID
+     * @return the current player's identifier
+     * @author Abdullah Hawash
+     */
     private String parseCurrentPlayer(String line)
     {
         return line.split(": ")[1];
     }
 
+
+    /**
+     * Creates a new {@link Cell} based on a line describing either an empty cell
+     * or a cell occupied by a specific piece.
+     *
+     * @param line a string describing the cell contents
+     * @param players list of possible owners identified by their IDs
+     * @return a new cell containing any appropriate piece
+     * @throws IllegalArgumentException if the described player is not found
+     * @author Abdullah Hawash
+     */
     private Cell parseCell(String line, List<Player> players)
     {
         if (line.equals("EMPTY"))
@@ -126,6 +187,16 @@ public class SaveLoadSerializer
         return cell;
     }
 
+    /**
+     * Constructs a {@link Piece} instance based on its type and optional modifiers.
+     *
+     * @param type the piece type (e.g., RAM, BIZ, SAU, TOR, XOR)
+     * @param owner the player who owns the piece
+     * @param modifiers additional attributes such as orientation or special flags
+     * @return the created piece instance
+     * @throws IllegalArgumentException if the piece type is unknown
+     * @author Harris Majeed
+     */
     private Piece createPiece(String type, Player owner, List<String> modifiers)
     {
         Piece piece;

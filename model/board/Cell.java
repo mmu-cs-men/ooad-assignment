@@ -20,6 +20,7 @@ public class Cell implements Stringable
     /**
      * Represents the piece currently held by the cell. The piece might be null,
      * meaning the cell is empty.
+     *
      */
     private Piece piece = null;
 
@@ -27,6 +28,7 @@ public class Cell implements Stringable
      * Empty constructor.
      * <p>
      * The cell will initially hold a null piece indicating that it is empty.
+     * @author Harris Majeed
      */
     public Cell()
     {
@@ -36,6 +38,7 @@ public class Cell implements Stringable
      * Retrieves the piece currently held by the cell, if any.
      *
      * @return an {@code Optional} containing the piece if the cell is occupied
+     * @author Harris Majeed
      */
     public Optional<Piece> getPiece()
     {
@@ -47,6 +50,8 @@ public class Cell implements Stringable
      *
      * @param piece the piece to be placed in the cell, or {@code null} to clear
      *              the cell
+     *
+     * @author Harris Majeed
      */
     public void setPiece(Piece piece)
     {

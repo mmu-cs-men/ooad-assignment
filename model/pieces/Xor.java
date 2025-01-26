@@ -6,8 +6,19 @@ import model.game.Player;
 import java.util.LinkedList;
 import java.util.Optional;
 
+/**
+ * Represents an Xor piece, which moves diagonally on the board.
+ * It does not have the ability to jump over other pieces.
+ * @author Harris Majeed
+ */
 public class Xor extends Piece implements Switchable
 {
+    /**
+     * Creates a new Xor piece with the specified owner.
+     *
+     * @param player the owner of this piece.
+     * @author Harris Majeed
+     */
     public Xor(Player player)
     {
         super(player);

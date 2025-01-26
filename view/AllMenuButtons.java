@@ -22,9 +22,22 @@ public class AllMenuButtons extends JPanel
     private JButton newGameButton;
 
     /**
-     * Constructor to initialize the AllMenuButtons panel with the necessary
-     * buttons. It sets up the layout, creates buttons, and adds them to the
-     * panel with appropriate positioning and styling.
+     * The AllMenuButtons class represents a panel containing the menu buttons for
+     * a game application. It includes buttons for saving the game, loading a game,
+     * and starting a new game.
+     * <p>
+     * This class sets up a layout to hold the buttons (using {@link GridBagLayout})
+     * and provides styling along with hover effects for a visually appealing
+     * interface.
+     * <p>
+     * Usage:
+     * <ul>
+     *     <li>Create an instance of AllMenuButtons to get a panel with three
+     *         buttons (SAVE, LOAD, NEW).</li>
+     *     <li>Register action listeners for each button to handle user
+     *         interactions.</li>
+     * </ul>
+     * @author Sivanathan Seliyan
      */
     public AllMenuButtons()
     {
@@ -56,16 +69,38 @@ public class AllMenuButtons extends JPanel
         setPreferredSize(new Dimension(500, 80));
     }
 
+    /**
+     * Adds an ActionListener to the "SAVE GAME" button to handle save-related
+     * user actions.
+     *
+     * @param listener the {@link ActionListener} to be invoked when the
+     *                 "SAVE GAME" button is clicked.
+     * @author Abdullah Hawash
+     */
     public void addSaveGameListener(ActionListener listener)
     {
         saveGameButton.addActionListener(listener);
     }
-
+    /**
+     * Adds an ActionListener to the "LOAD GAME" button to handle load-related
+     * user actions.
+     *
+     * @param listener the {@link ActionListener} to be invoked when the
+     *                 "LOAD GAME" button is clicked.
+     * @author Abdullah Hawash
+     */
     public void addLoadGameListener(ActionListener listener)
     {
         loadGameButton.addActionListener(listener);
     }
-
+    /**
+     * Adds an ActionListener to the "NEW GAME" button to handle new-game-related
+     * user actions.
+     *
+     * @param listener the {@link ActionListener} to be invoked when the
+     *                 "NEW GAME" button is clicked.
+     * @author Abdullah Hawash
+     */
     public void addNewGameListener(ActionListener listener)
     {
         newGameButton.addActionListener(listener);
@@ -81,6 +116,7 @@ public class AllMenuButtons extends JPanel
      * @param foregroundColor The foreground (text) colour of the button.
      * @return A fully configured JButton instance with applied styles and
      * effects.
+     * @author Sivananthan Seliyan
      */
     private JButton createButton(String text, Color backgroundColor, Color foregroundColor)
     {

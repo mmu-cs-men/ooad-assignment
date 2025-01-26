@@ -19,6 +19,15 @@ import java.awt.*;
 import java.io.File;
 import java.util.List;
 
+/**
+ * Represents the Controller our MVC design pattern, managing user interactions from the GUI
+ * and coordinating with the KwazamGameMaster. This class also listens for cell clicks and
+ * responds to game win events.
+ * @author Laxman Pillai
+ * @author Harris Majeed
+ * @author Abdullah Hawash
+ * @author Sivanathan
+ */
 public class GameController implements CellClickListener, WinListener
 {
 
@@ -30,6 +39,17 @@ public class GameController implements CellClickListener, WinListener
     private int selectedRow = -1;
     private int selectedCol = -1;
     private boolean isPieceSelected = false;
+
+
+    /**
+     * Constructs a new GameController, initializing the GUI and registering various listeners.
+     *
+     * @param gui                the graphical user interface to control
+     * @param gameMaster         the main controller coordinating the game logic
+     * @param saveLoadSerializer serializer for reading and writing game states
+     * @param saveLoadManager    manager responsible for saving and loading the core game state
+     * @author Laxman Pillai
+     */
 
     public GameController(KwazamGUI gui, KwazamGameMaster gameMaster, SaveLoadSerializer saveLoadSerializer, SaveLoadManager saveLoadManager)
     {
@@ -51,6 +71,12 @@ public class GameController implements CellClickListener, WinListener
         setupMenuListeners();
     }
 
+    /**
+     * Adds action listeners to GUI menu items like our "Save Game", "Load Game", and "New Game".
+     * Establishes the connection between the GUI menu actions and the corresponding handlers
+     *
+     * @author Sivanathan
+     */
     private void setupMenuListeners()
     {
         // Save Game button handler
@@ -61,6 +87,13 @@ public class GameController implements CellClickListener, WinListener
 
         gui.addNewGameListener(e -> handleNewGame());
     }
+
+    /**
+     * Opens a save dialog to allow the user to persist the current game state to a chosen file.
+     * Demonstrates file operations and usage of the SaveLoadManager and SaveLoadSerializer.
+     *
+     * @author Abdullah Hawash
+     */
 
     private void handleSaveGame()
     {
@@ -80,6 +113,12 @@ public class GameController implements CellClickListener, WinListener
         }
     }
 
+    /**
+     * Opens a dialog to select and load a previously saved game state from a file.
+     * Updates the board and relevant GUI components to reflect the loaded state.
+     *
+     * @author Abdullah Hawash
+     */
     private void handleLoadGame()
     {
         JFileChooser fileChooser = new JFileChooser();
@@ -110,6 +149,14 @@ public class GameController implements CellClickListener, WinListener
         }
     }
 
+
+
+    /**
+     * Initializes a new game session by loading a predefined game state from a "new-game" file.
+     * Reconfigures the board and resets the relevant GUI components to start fresh.
+     *
+     * @author Abdullah Hawash
+     */
     private void handleNewGame()
     {
         GameState gameState = this.saveLoadSerializer.loadStateFromFile("assets/new-game.txt");
@@ -128,6 +175,16 @@ public class GameController implements CellClickListener, WinListener
         gui.disableWinMessage();
     }
 
+
+    /**
+     * Handles cell click interactions. Depending on whether a piece is already selected,
+     * it either selects a piece or attempts to move the selected piece to the clicked cell.
+     *
+     * @param row the row index of the clicked cell
+     * @param col the column index of the clicked cell
+     * @author Laxman Pillai
+     * @author Sivanathan
+     */
     @Override
     public void onCellClicked(int row, int col)
     {
@@ -203,6 +260,18 @@ public class GameController implements CellClickListener, WinListener
             }
         }
     }
+
+
+    /**
+     * Flips the given cell position to accommodate a rotated board. Useful when the board
+     * is inverted for the next player view.
+     *
+     * @param cellPos      the original cell position
+     * @param boardRows    the total number of rows on the board
+     * @param boardColumns the total number of columns on the board
+     * @return a new {@link CellPosition} representing the flipped position
+     * @author Sivanathan
+     */
 
     private CellPosition flipCellPos(CellPosition cellPos, int boardRows, int boardColumns)
     {

@@ -22,21 +22,40 @@ import java.util.List;
  * condition notifications, and interactions with the game board.
  * <p>
  * This class acts as the interface or intermediary between the low-level Model
- * code. In this way, this class implements the Facade pattern, and abstracts
- * the interaction with the Model and the outside world. If any GUI or
- * application wants to interact with the game, it must go through the
- * {@code GameMaster}.
+ * code, implementing the Facade pattern to abstract away complex operations.
+ * When an external user (such as a GUI) needs to interact with the game—moving
+ * pieces, checking for a winner, or maintaining turns—it can do so through
+ * this class without addressing details like piece ownership, path calculations,
+ * or obstructed routes.
+ * <p>
+ * In many game implementations, this class heavily utilizes the Observer
+ * pattern to notify subscribers of noteworthy gameplay events, such as piece
+ * captures and win conditions. By doing so, it preserves proper separation
+ * of concerns: interested parts of the system can simply subscribe to be
+ * alerted when significant actions arise, rather than requiring direct
+ * interaction with the {@code GameMaster} or the underlying board. Without
+ * this pattern, pieces might need direct knowledge of the board or other
+ * components, resulting in tightly coupled structures that are harder to
+ * maintain.
  * <p>
  * One way to think about this class is to imagine a game of chess with players,
- * a referee, and a board. The player cannot touch the board or pieces directly.
- * They must ask the referee (GameMaster) to move it for them. The referee,
- * using his knowledge of the game, will do so if legal.
+ * a referee, and a board. The player cannot touch the board or pieces directly;
+ * they must ask the referee (GameMaster) to make the moves. The referee, using
+ * knowledge of the game’s rules, will approve and act on the requests. Games
+ * with unique functionality can inherit from this class and extend its
+ * capabilities for specialized gameplay or tracking needs.
  * <p>
- * Specific games like Kwazam Chess must inherit this class, which is useful if
- * extra game-specific functionality/tracking is needed.
+ * <strong>Facade Pattern in movePiece:</strong> By invoking {@link #movePiece},
+ * users simply specify a start and end position, and let the GameMaster
+ * handle the details—validating piece ownership, calculating possible paths,
+ * checking for obstructions, and ensuring moves comply with the rules. This
+ * centralizes the complex operation, allowing users to interact with the
+ * game on a higher level without delving into the internal intricacies.
  *
  * @param <T> The type of the game board, which must extend the Board class.
- * @author Harris Majeed
+ *
+ * @author
+ * @see Board
  */
 public abstract class GameMaster<T extends Board> implements CaptureListener
 {
@@ -49,6 +68,7 @@ public abstract class GameMaster<T extends Board> implements CaptureListener
      * Stores a circularly linked list of Player objects representing the
      * participants in the game. This ensures that iteration over players cycles
      * continuously, providing a loop mechanism.
+     *
      */
     private final CircularLinkedList<Player> players;
 
@@ -81,6 +101,8 @@ public abstract class GameMaster<T extends Board> implements CaptureListener
      *
      * @param board   The specific game board to use.
      * @param players The circular list of players in the game.
+     *
+     * @author Harris Majeed
      */
     public GameMaster(T board, CircularLinkedList<Player> players)
     {
@@ -94,13 +116,20 @@ public abstract class GameMaster<T extends Board> implements CaptureListener
 
     /**
      * Attempts to move a piece from one cell position to another.
+     * <p>
+     * This method heavily uses each piece’s own Strategy to determine its
+     * movement path, which is provided by {@code getPotentialPath()}. By
+     * delegating path computation to the piece itself, the GameMaster avoids
+     * having detailed knowledge of the piece’s movement logic.
      *
      * @param fromCellPos The starting cell position.
      * @param toCellPos   The target cell position.
+     *
      * @throws NoPieceException      If there is no piece at the starting cell.
      * @throws NotYourPieceException If the piece does not belong to the current
      *                               player.
      * @throws PieceMoveException    If the move path is obstructed or invalid.
+     * @author Harris Majeed
      */
     public void movePiece(CellPosition fromCellPos, CellPosition toCellPos)
     {
@@ -127,21 +156,55 @@ public abstract class GameMaster<T extends Board> implements CaptureListener
         this.board.movePiece(fromCellPos, toCellPos);
     }
 
+    /**
+     * Retrieves the player whose turn is currently active in the game.
+     * <p>
+     *
+     * @return The player currently taking a turn in the game.
+     *
+     * @author Harris Majeed
+     */
     public Player getCurrentPlayer()
     {
         return this.currentPlayer;
     }
 
+    /**
+     * Sets the specified player as the current player.
+     *
+     * @param currentPlayer The player who will become the active participant.
+     *
+     * @author Harris Majeed
+     */
     public void setCurrentPlayer(Player currentPlayer)
     {
         this.currentPlayer = currentPlayer;
     }
 
+    /**
+     * Retrieves an unmodifiable list of all players participating in the game.
+     * <p>
+     *
+     * @return An unmodifiable list of the current players.
+     *
+     * @author Harris Majeed
+     */
     public List<Player> getPlayers()
     {
         return List.copyOf(this.players);
     }
 
+    /**
+     * Sets the players participating in the game to a new collection of players.
+     * <p>
+     * This method clears the existing player list, adds the new players, and
+     * reinitializes the circular iterator. If the turn count is even, the
+     * currently active player is updated according to the new list.
+     *
+     * @param newPlayers The new circular list of players to cycle through.
+     *
+     * @author Harris Majeed
+     */
     public void setPlayers(CircularLinkedList<Player> newPlayers)
     {
         this.players.clear();
@@ -156,6 +219,8 @@ public abstract class GameMaster<T extends Board> implements CaptureListener
 
     /**
      * Advances the turn to the next player and increments the turn count.
+     *
+     * @author Harris Majeed
      */
     public void advanceTurn()
     {
@@ -167,6 +232,8 @@ public abstract class GameMaster<T extends Board> implements CaptureListener
      * Registers a {@link WinListener} to be notified when a player wins.
      *
      * @param listener The win listener to register.
+     *
+     *  @author Harris Majeed
      */
     public void registerWinListener(WinListener listener)
     {
@@ -178,6 +245,8 @@ public abstract class GameMaster<T extends Board> implements CaptureListener
      * won.
      *
      * @param player The winning player.
+     *
+     * @author Harris Majeed
      */
     public void notifyWinListeners(Player player)
     {

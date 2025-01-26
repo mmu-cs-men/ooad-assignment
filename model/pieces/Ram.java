@@ -7,10 +7,22 @@ import model.listeners.BoardVerticalEdgeListener;
 import java.util.LinkedList;
 import java.util.Optional;
 
+/**
+ * Represents a Ram piece that moves vertically and changes its facing direction
+ *                                              when it reaches a vertical edge.
+ * @author Harris majeed
+ */
 public class Ram extends Piece implements BoardVerticalEdgeListener
 {
     private boolean facingUp;
 
+    /**
+     * Constructs a new Ram with the specified owner and initial facing direction.
+     *
+     * @param player   the owner of this piece
+     * @param facingUp true if the piece is initially facing up, false if facing down
+     * @author Harris Majeed
+     */
     public Ram(Player player, boolean facingUp)
     {
         super(player);
@@ -28,6 +40,16 @@ public class Ram extends Piece implements BoardVerticalEdgeListener
         return false;
     }
 
+
+    /**
+     * Determines the potential path this Ram can take when moving from one cell to another.
+     * This piece can only move one row vertically in its facing direction, and it cannot change columns.
+     *
+     * @param fromCellPos the current cell position
+     * @param toCellPos   the target cell position
+     * @return an Optional containing the path if valid, or an empty Optional if the move is invalid
+     * @author Harris Majeed
+     */
     @Override
     public Optional<LinkedList<CellPosition>> getPotentialPath(
             CellPosition fromCellPos, CellPosition toCellPos)
@@ -50,6 +72,12 @@ public class Ram extends Piece implements BoardVerticalEdgeListener
         return Optional.empty();
     }
 
+    /**
+     * Reverses the Ram's facing direction when it reaches any vertical edge of the board.
+     *
+     * @param piece the piece that has reached the edge
+     * @author Harris Majeed
+     */
     @Override
     public void onBoardVerticalEdgeReached(Piece piece)
     {
