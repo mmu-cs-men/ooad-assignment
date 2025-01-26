@@ -93,6 +93,11 @@ public abstract class Board
         return cell.getPiece();
     }
 
+    public List<List<Cell>> getCells()
+    {
+        return List.copyOf(this.cells);
+    }
+
     /**
      * Moves a piece from one cell position to another on the board. If there is
      * an existing piece at the destination position, a capture event is
