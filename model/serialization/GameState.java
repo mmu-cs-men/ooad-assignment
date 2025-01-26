@@ -21,8 +21,8 @@ public record GameState(int turnCount, List<Player> players,
             for (Cell cell : row)
             {
                 formattedCells.append(cell.getStringRepresentation());
+                formattedCells.append("\n");
             }
-            formattedCells.append("\n");
         }
 
         return """
