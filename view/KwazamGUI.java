@@ -4,6 +4,7 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import java.awt.*;
+import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 
 public class KwazamGUI extends JFrame
@@ -36,6 +37,7 @@ public class KwazamGUI extends JFrame
     private CellClickListener cellClickListener;
     private JLabel winLabel; // Label for displaying the win message
     private boolean torXorSwitched = false;
+    private AllMenuButtons menuButtons;
 
     public KwazamGUI()
     {
@@ -44,7 +46,7 @@ public class KwazamGUI extends JFrame
         setLayout(new BorderLayout());
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        AllMenuButtons menuButtons = new AllMenuButtons();
+        menuButtons = new AllMenuButtons();
         // Set the Button Position on top of the Kwazam Chess game
         add(menuButtons, BorderLayout.NORTH);
 
@@ -112,6 +114,21 @@ public class KwazamGUI extends JFrame
             }
         });
         return flashTimer;
+    }
+
+    public void addSaveGameListener(ActionListener listener)
+    {
+        menuButtons.addSaveGameListener(listener);
+    }
+
+    public void addLoadGameListener(ActionListener listener)
+    {
+        menuButtons.addLoadGameListener(listener);
+    }
+
+    public void addNewGameListener(ActionListener listener)
+    {
+        menuButtons.addNewGameListener(listener);
     }
 
     private JButton createCellButton(int row, int col)
