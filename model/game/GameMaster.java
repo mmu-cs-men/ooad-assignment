@@ -13,6 +13,7 @@ import utils.CircularLinkedList;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.List;
 
 /**
  * The GameMaster class is an abstract class responsible for managing the core
@@ -126,6 +127,15 @@ public abstract class GameMaster<T extends Board> implements CaptureListener
         }
 
         this.board.movePiece(fromCellPos, toCellPos);
+    }
+
+    public Player getCurrentPlayer()
+    {
+        return this.currentPlayer;
+    }
+
+    public List<Player> getPlayers() {
+        return List.copyOf(this.players);
     }
 
     /**
