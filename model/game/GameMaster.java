@@ -134,7 +134,13 @@ public abstract class GameMaster<T extends Board> implements CaptureListener
         return this.currentPlayer;
     }
 
-    public List<Player> getPlayers() {
+    public void setCurrentPlayer(Player currentPlayer)
+    {
+        this.currentPlayer = currentPlayer;
+    }
+
+    public List<Player> getPlayers()
+    {
         return List.copyOf(this.players);
     }
 
