@@ -5,14 +5,14 @@ import model.game.Player;
 
 import java.util.List;
 
-public record GameState(int turnCount, List<String> playerIds,
+public record GameState(int turnCount, List<Player> players,
                         Player currentPlayer,
                         List<List<Cell>> cells) implements Stringable
 {
     @Override
     public String getStringRepresentation()
     {
-        String formattedPlayerIds = String.join(", ", playerIds);
+        String formattedPlayerIds = String.join(", ", players.stream().map(Player::id).toList());
         String currentPlayerId = this.currentPlayer.id();
 
         StringBuilder formattedCells = new StringBuilder();
