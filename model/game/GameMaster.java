@@ -49,6 +49,7 @@ public abstract class GameMaster<T extends Board> implements CaptureListener
      * Stores a circularly linked list of Player objects representing the
      * participants in the game. This ensures that iteration over players cycles
      * continuously, providing a loop mechanism.
+     *
      */
     private final CircularLinkedList<Player> players;
 
@@ -81,6 +82,8 @@ public abstract class GameMaster<T extends Board> implements CaptureListener
      *
      * @param board   The specific game board to use.
      * @param players The circular list of players in the game.
+     *
+     * @author Harris Majeed
      */
     public GameMaster(T board, CircularLinkedList<Player> players)
     {
@@ -101,6 +104,8 @@ public abstract class GameMaster<T extends Board> implements CaptureListener
      * @throws NotYourPieceException If the piece does not belong to the current
      *                               player.
      * @throws PieceMoveException    If the move path is obstructed or invalid.
+     *
+     * @author Harris Majeed
      */
     public void movePiece(CellPosition fromCellPos, CellPosition toCellPos)
     {
@@ -127,21 +132,55 @@ public abstract class GameMaster<T extends Board> implements CaptureListener
         this.board.movePiece(fromCellPos, toCellPos);
     }
 
+    /**
+     * Retrieves the player whose turn is currently active in the game.
+     * <p>
+     *
+     * @return The player currently taking a turn in the game.
+     *
+     * @author Harris Majeed
+     */
     public Player getCurrentPlayer()
     {
         return this.currentPlayer;
     }
 
+    /**
+     * Sets the specified player as the current player.
+     *
+     * @param currentPlayer The player who will become the active participant.
+     *
+     * @author Harris Majeed
+     */
     public void setCurrentPlayer(Player currentPlayer)
     {
         this.currentPlayer = currentPlayer;
     }
 
+    /**
+     * Retrieves an unmodifiable list of all players participating in the game.
+     * <p>
+     *
+     * @return An unmodifiable list of the current players.
+     *
+     * @author Harris Majeed
+     */
     public List<Player> getPlayers()
     {
         return List.copyOf(this.players);
     }
 
+    /**
+     * Sets the players participating in the game to a new collection of players.
+     * <p>
+     * This method clears the existing player list, adds the new players, and
+     * reinitializes the circular iterator. If the turn count is even, the
+     * currently active player is updated according to the new list.
+     *
+     * @param newPlayers The new circular list of players to cycle through.
+     *
+     * @author Harris Majeed
+     */
     public void setPlayers(CircularLinkedList<Player> newPlayers)
     {
         this.players.clear();
@@ -156,6 +195,8 @@ public abstract class GameMaster<T extends Board> implements CaptureListener
 
     /**
      * Advances the turn to the next player and increments the turn count.
+     *
+     * @author Harris Majeed
      */
     public void advanceTurn()
     {
@@ -167,6 +208,8 @@ public abstract class GameMaster<T extends Board> implements CaptureListener
      * Registers a {@link WinListener} to be notified when a player wins.
      *
      * @param listener The win listener to register.
+     *
+     *  @author Harris Majeed
      */
     public void registerWinListener(WinListener listener)
     {
@@ -178,6 +221,8 @@ public abstract class GameMaster<T extends Board> implements CaptureListener
      * won.
      *
      * @param player The winning player.
+     *
+     * @author Harris Majeed
      */
     public void notifyWinListeners(Player player)
     {
