@@ -45,6 +45,8 @@ public class GameController implements CellClickListener, WinListener
 
         this.saveLoadSerializer = saveLoadSerializer;
         this.saveLoadManager = saveLoadManager;
+        
+        gui.setBoard(gameMaster.getCellsStringRepresentation());
 
         setupMenuListeners();
     }
