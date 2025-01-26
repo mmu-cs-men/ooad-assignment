@@ -6,8 +6,18 @@ import model.game.Player;
 import java.util.LinkedList;
 import java.util.Optional;
 
+/**
+ * Represents a Tor piece. This piece can move in straight lines horizontally or vertically.
+ * It does not have the ability to jump over other pieces.
+ * @author Harris Majeed
+ */
 public class Tor extends Piece implements Switchable
 {
+    /**
+     * Creates a new Tor piece associated with the specified player.
+     *
+     * @param player the owner of this piece.
+     */
     public Tor(Player player)
     {
         super(player);
