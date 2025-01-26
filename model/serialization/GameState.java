@@ -5,10 +5,22 @@ import model.game.Player;
 
 import java.util.List;
 
+/**
+ * Represents the state of the game, including the current turn count,
+ * participating players, the active player, and the cells on the board.
+ * @author Harris Majeed
+ */
 public record GameState(int turnCount, List<Player> players,
                         Player currentPlayer,
                         List<List<Cell>> cells) implements Stringable
 {
+    /**
+     * Returns a textual representation of the current game state,
+     * including the turn count, active player, and the layout of cells.
+     *
+     * @return a string describing the overall game state
+     * @author Harris Majeed
+     */
     @Override
     public String getStringRepresentation()
     {
