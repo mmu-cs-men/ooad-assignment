@@ -6,6 +6,32 @@ import model.game.Player;
 import java.util.List;
 
 public record GameState(int turnCount, List<String> playerIds,
-                        Player currentPlayer, List<List<Cell>> cells)
+                        Player currentPlayer,
+                        List<List<Cell>> cells) implements Stringable
 {
+    @Override
+    public String getStringRepresentation()
+    {
+        String formattedPlayerIds = String.join(", ", playerIds);
+        String currentPlayerId = this.currentPlayer.id();
+
+        StringBuilder formattedCells = new StringBuilder();
+        for (List<Cell> row : cells)
+        {
+            for (Cell cell : row)
+            {
+                formattedCells.append(cell.getStringRepresentation());
+            }
+            formattedCells.append("\n");
+        }
+
+        return """
+                Game: Kwazam Chess
+                Turn Count: %d
+                Players: %s
+                Current Player: %s
+                
+                %s
+                """.formatted(turnCount, formattedPlayerIds, currentPlayerId, formattedCells);
+    }
 }
