@@ -270,8 +270,6 @@ public class KwazamGUI extends JFrame
         prevColClicked = col;
         prevRowClicked = row;
 
-        System.out.println("Button clicked at position: (" + row + ", " + col + ")");
-
         // Notify the listener (Controller)
         if (cellClickListener != null)
         {
