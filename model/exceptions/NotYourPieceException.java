@@ -7,7 +7,7 @@ package model.exceptions;
  * Use this if the player tries to move an opponent's piece (e.g. blue trying to
  * move red's pieces).
  *
- * @author Harris Majeed
+ * @author Siva
  */
 public class NotYourPieceException extends RuntimeException
 {

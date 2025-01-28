@@ -7,7 +7,7 @@ package model.exceptions;
  * Use this if you need a piece to exist before performing some action like
  * moving.
  *
- * @author Harris Majeed
+ * @author Siva
  */
 public class NoPieceException extends RuntimeException
 {

@@ -24,6 +24,12 @@ public class Sau extends Piece
         return false;
     }
 
+    /**
+     *
+     * @param fromCellPos The starting position of the piece
+     * @param toCellPos   The target position for the move
+     * @author Sivanathan
+     */
     @Override
     public Optional<LinkedList<CellPosition>> getPotentialPath(
             CellPosition fromCellPos, CellPosition toCellPos)

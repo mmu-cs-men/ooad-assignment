@@ -7,6 +7,9 @@ import model.serialization.SaveLoadSerializer;
 import utils.CircularLinkedList;
 import view.KwazamGUI;
 
+/**
+ * @author Laxman Pillai -> creator
+ */
 public class Main
 {
     public static void main(String[] args)
