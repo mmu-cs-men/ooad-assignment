@@ -54,7 +54,7 @@ import java.util.List;
  *
  * @param <T> The type of the game board, which must extend the Board class.
  *
- * @author
+ * @author Harris Majeed
  * @see Board
  */
 public abstract class GameMaster<T extends Board> implements CaptureListener

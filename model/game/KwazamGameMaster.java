@@ -14,6 +14,7 @@ import java.util.Optional;
  * Concrete implementation of {@code GameMaster} for Kwazam Chess.
  *
  * @author Harris Majeed
+ * @author Abdullah Hawash -> get cell representation
  * @see GameMaster
  * @see KwazamBoard
  */
@@ -55,7 +56,7 @@ public class KwazamGameMaster extends GameMaster<KwazamBoard>
      * Pieces of type {@link Ram} include a flipped suffix when facing down.
      *
      * @return a 2D {@link List} of {@link String} objects describing each cell of the board
-     * @author Harris Majeed
+     * @author Abdullah Hawash
      */
     @Override
     public List<List<String>> getCellsStringRepresentation()

@@ -19,9 +19,10 @@ import java.util.List;
  * classes that implement {@code CellClickListener} can react to user input
  * (e.g., moving pieces, validating clicks, etc.) without tightly coupling the
  * GUI code to the rest of the application's logic.
- * @author Laxman Pillai
+ * @author Laxman Pillai -> creator
  * @author Siva
  * @author Abdullah Hawash
+ * @author Harris Majeed -> changed from arrays to list
  */
 public class KwazamGUI extends JFrame
 {
@@ -41,7 +42,7 @@ public class KwazamGUI extends JFrame
      * <p>
      * The layout is organized so that the grid takes up the main area, and a
      * status label for win messages is placed at the bottom.
-     * @author Siva Seliyan
+     * @author Laxman Pillai ->constructor creator
      */
     public KwazamGUI()
     {
@@ -130,7 +131,7 @@ public class KwazamGUI extends JFrame
      * a fresh state of piece positions.
      *
      * @param cells a 2D list of strings indicating the piece in each cell
-     * @author Siva Seliyan
+     * @author Laxman Pillai -> creator
      */
     public void setBoard(List<List<String>> cells)
     {
@@ -142,21 +143,38 @@ public class KwazamGUI extends JFrame
         renderPieceToBoard(initialPieceStartingPositions);
     }
 
+    /**
+     * @author Siva
+     * @author Abdullah
+     * @param listener
+     */
     public void addSaveGameListener(ActionListener listener)
     {
         menuButtons.addSaveGameListener(listener);
     }
 
+    /**
+     * @author Siva
+     * @author Abdullah
+     * @param listener
+     */
     public void addLoadGameListener(ActionListener listener)
     {
         menuButtons.addLoadGameListener(listener);
     }
 
+    /**
+     * @author Siva
+     * @param listener
+     */
     public void addNewGameListener(ActionListener listener)
     {
         menuButtons.addNewGameListener(listener);
     }
 
+    /**
+     * @author Laxman Pillai -> creator
+     */
     private JButton createCellButton(int row, int col)
     {
         JButton cell = new JButton();
@@ -182,6 +200,9 @@ public class KwazamGUI extends JFrame
         return cell;
     }
 
+    /**
+     * @author Laxman Pillai -> creator
+     */
     // Method to visually toggle Tor/Xor pieces after 2 turns
     public void toggleTorXorVisuals()
     {
@@ -189,6 +210,9 @@ public class KwazamGUI extends JFrame
         renderPieceToBoard(initialPieceStartingPositions);
     }
 
+    /**
+     * @author Laxman Pillai -> creator
+     */
     public void renderPieceToBoard(List<List<String>> positions)
     {
         for (int row = 0; row < 8; row++)
@@ -224,7 +248,7 @@ public class KwazamGUI extends JFrame
         }
     }
 
-    /*
+    /**
      * Image Scaling Logic: This section calculates the dimensions to scale the
      * original image such that: 1. The image fits within the padded target
      * area(cell dimensions minus padding). 2. The aspect ratio (width-to-height
@@ -234,6 +258,8 @@ public class KwazamGUI extends JFrame
      * then wse the SMALLER ratio to scale the image, ensuring it fits entirely
      * within both the target width and height constraints and finally we derive
      * the final scaled width/height using this ratio.
+     *
+     * @author Laxman Pillai -> creator (big ting)
      */
     private ImageIcon loadScaledToCellIcon(String imagePath, int targetWidth,
                                            int targetHeight)
@@ -298,6 +324,11 @@ public class KwazamGUI extends JFrame
         }
     }
 
+    /**
+     * @author Laxman Pillai -> creator
+     * @param row
+     * @param col
+     */
     private void handleCellClick(int row, int col)
     {
         if (prevRowClicked != -1 && prevColClicked != -1)
@@ -319,11 +350,17 @@ public class KwazamGUI extends JFrame
         }
     }
 
+    /**
+     * @author Laxman Pillai
+     */
     public void setCellClickListener(CellClickListener listener)
     {
         this.cellClickListener = listener;
     }
 
+    /**
+     * @author Laxman Pillai
+     */
     public List<List<String>> getInitialPieceStartingPositions()
     {
         return initialPieceStartingPositions;
@@ -348,6 +385,9 @@ public class KwazamGUI extends JFrame
         }
     }
 
+    /**
+     * @author Abdullah Hawash -> for saving and loading; after loading the game
+     */
     public void enableBoard()
     {
         for (JButton[] row : boardCells)
@@ -461,6 +501,9 @@ public class KwazamGUI extends JFrame
         }
     }
 
+    /**
+     * @author siva
+     */
     private void flipPiecesPosition()
     {
         for (List<String> row : initialPieceStartingPositions)
@@ -477,6 +520,9 @@ public class KwazamGUI extends JFrame
         }
     }
 
+    /**
+     * @author siva
+     */
     private void reverseRow(List<String> row)
     {
         int start = 0;
@@ -491,6 +537,9 @@ public class KwazamGUI extends JFrame
         }
     }
 
+    /**
+     * @author siva
+     */
     public void flipBoard()
     {
         this.flipped = !this.flipped;
@@ -498,17 +547,26 @@ public class KwazamGUI extends JFrame
         renderPieceToBoard(initialPieceStartingPositions);
     }
 
+    /**
+     * @author siva
+     */
     public boolean isFlipped()
     {
         return flipped;
     }
 
+    /**
+     * @author siva
+     */
     public void setFlipped(boolean flipped)
     {
         this.flipped = flipped;
         renderPieceToBoard(initialPieceStartingPositions);
     }
 
+    /**
+     * @author Laxman Pillai
+     */
     public boolean isTorXorSwitched()
     {
         return torXorSwitched;

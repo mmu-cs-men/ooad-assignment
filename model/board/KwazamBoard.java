@@ -34,7 +34,7 @@ public class KwazamBoard extends Board
      * contains a {@code Cell} object. Cells are pre-configured with the
      * corresponding pieces for the game.
      *
-     * @author Harris Majeed
+     * @author Laxman Pillai
      */
     @Override
     protected ArrayList<ArrayList<Cell>> populateCells()

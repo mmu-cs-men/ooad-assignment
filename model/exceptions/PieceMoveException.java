@@ -9,7 +9,7 @@ package model.exceptions;
  * two cells ahead). This exception is also thrown if a piece that can't jump
  * tries to move to a cell that is obstructed.
  *
- * @author Harris Majeed
+ * @author Siva
  */
 public class PieceMoveException extends RuntimeException
 {

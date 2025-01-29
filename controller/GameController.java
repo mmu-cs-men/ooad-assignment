@@ -23,7 +23,7 @@ import java.util.List;
  * Represents the Controller our MVC design pattern, managing user interactions from the GUI
  * and coordinating with the KwazamGameMaster. This class also listens for cell clicks and
  * responds to game win events.
- * @author Laxman Pillai
+ * @author Laxman Pillai -> creator
  * @author Harris Majeed
  * @author Abdullah Hawash
  * @author Sivanathan
@@ -48,9 +48,10 @@ public class GameController implements CellClickListener, WinListener
      * @param gameMaster         the main controller coordinating the game logic
      * @param saveLoadSerializer serializer for reading and writing game states
      * @param saveLoadManager    manager responsible for saving and loading the core game state
-     * @author Laxman Pillai
+     * @author Laxman Pillai -> creator; GUI, gamemaster and cellclick listener
+     * @author Abdullah Hawash -> save, load and setboard
+     * @author Sivanathan -> Allmenubuttons listeners
      */
-
     public GameController(KwazamGUI gui, KwazamGameMaster gameMaster, SaveLoadSerializer saveLoadSerializer, SaveLoadManager saveLoadManager)
     {
         // Initialize the GUI
@@ -94,7 +95,6 @@ public class GameController implements CellClickListener, WinListener
      *
      * @author Abdullah Hawash
      */
-
     private void handleSaveGame()
     {
         JFileChooser fileChooser = new JFileChooser();
@@ -155,7 +155,7 @@ public class GameController implements CellClickListener, WinListener
      * Initializes a new game session by loading a predefined game state from a "new-game" file.
      * Reconfigures the board and resets the relevant GUI components to start fresh.
      *
-     * @author Abdullah Hawash
+     * @author Siva
      */
     private void handleNewGame()
     {
@@ -182,8 +182,8 @@ public class GameController implements CellClickListener, WinListener
      *
      * @param row the row index of the clicked cell
      * @param col the column index of the clicked cell
-     * @author Laxman Pillai
-     * @author Sivanathan
+     * @author Laxman Pillai -> creator and also did the xor tor visual swapping
+     * @author Sivanathan -> try catch for the exceptions only
      */
     @Override
     public void onCellClicked(int row, int col)
@@ -272,7 +272,6 @@ public class GameController implements CellClickListener, WinListener
      * @return a new {@link CellPosition} representing the flipped position
      * @author Sivanathan
      */
-
     private CellPosition flipCellPos(CellPosition cellPos, int boardRows, int boardColumns)
     {
         return new CellPosition(boardRows - 1 - cellPos.row(), boardColumns - 1 - cellPos.column());

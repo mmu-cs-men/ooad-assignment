@@ -52,7 +52,7 @@ public class Biz extends Piece
      * @param fromCellPos the starting cell position
      * @param toCellPos   the destination cell position
      * @return an Optional containing the path of positions if valid; otherwise an empty optional
-     * @author Harris Majeed
+     * @author Sivanathan
      */
     @Override
     public Optional<LinkedList<CellPosition>> getPotentialPath(
